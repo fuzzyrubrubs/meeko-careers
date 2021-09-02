@@ -1,0 +1,10 @@
+.dashboard {
+    height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 5fr 2fr;
+}
+
+.right {
+    display: grid;
+    grid-template-rows: 1.5fr 1fr;
+}

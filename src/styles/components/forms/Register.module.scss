@@ -1,0 +1,38 @@
+.register {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 85vh;
+    width: 65vw;
+    background-color: #fff;
+    z-index: 20;
+}
+
+.image {
+    background-image: url('../../../assets/landing-full.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.content {
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 70%;
+    gap: 1rem;
+    & h2 {
+        margin-bottom: 2rem;
+    }
+}
+
+.second_content {
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    width: 70%;
+    text-align: center;
+}

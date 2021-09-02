@@ -1,0 +1,27 @@
+
+
+$primary: #fd8567;
+
+$background: #F9F9FB;
+
+
+
+.white { color: var(--white) !important };
+.medium { color: var(--text_light_medium) !important };
+.light { color: var(--text_light) !important };
+.bold { font-weight: 500; };
+
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3a3a3a9b;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+

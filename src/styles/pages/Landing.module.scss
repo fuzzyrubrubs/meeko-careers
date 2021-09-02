@@ -1,0 +1,251 @@
+.header {
+    height: 92vh;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    &__content {
+        padding-right: 15%;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        position: relative;
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        width: 65%;
+        padding-top: 3%;
+    }
+    &__action {
+        background-color: var(--primary);
+        height: 8rem;
+        width: 130%;
+        margin-top: 8rem;
+        display: grid;
+        grid-template-columns: 1.2fr 1.2fr 1fr 0.1fr 1fr;
+        justify-items: center;
+        align-items: center;
+        &__button {
+            background-color: #fff;
+            font-size: 1.8rem;
+            height: 5rem;
+            width: 13rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text_dark);
+            cursor: pointer;
+        }
+        &__input {
+            height: 100%;
+            width: 100%;
+            background-color: var(--primary);
+            border: 0;
+            color: #fff;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 200;
+            border-right: 1px solid #fff;
+            &::placeholder {
+                color: #fff;
+                text-transform: capitalize; 
+                font-weight: 200; 
+            }
+            &:first-of-type {
+            }
+        }
+        &__or {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 300;
+        }
+    }
+    &__image {
+        height: 100%;
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        & img {
+            height: 97%;
+            width: 85%;
+            object-fit: cover;
+            padding-top: 4rem;
+        }
+        &:after {
+            content: "";
+            background-color: var(--background_primary);
+            height: 70%;
+            width: 20%;
+            position: absolute;
+            bottom: 0;
+            right: 0;           
+            z-index: -1;
+
+        }
+    }
+};
+
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    height: 100vh;
+    &__image {
+        background-image: url('../../assets/landing-about.jpg');
+        background-position: center;
+        background-size: cover;
+        height: 35rem;
+        width: 35rem;
+        border-radius: 35rem;
+        position: relative;
+        &:after {
+            content: "";
+            border: 1.5rem solid #fff;
+            border-radius: 50rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 22rem;
+            width: 22rem;
+        }
+        &__icon {
+            position: absolute;
+            bottom: 50px;
+            right: -50px;
+            box-shadow: 0 10px 16px #3635352c; 
+            height: 10rem;
+            width: 10rem;
+            border-radius: 10rem;
+            z-index: 10;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__text {
+                border: 1px dashed var(--text_light);
+                height: 8.5rem;
+                width: 8.5rem;
+                border-radius: 8.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                &__number {
+                    color: var(--primary);
+                    font-size: 3rem;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+    &__content {
+        width: 70%;
+        justify-self: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        justify-content: center;
+    }
+};
+
+
+.community {
+    height: 100vh;
+    background-color: var(--background_primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 2rem;
+    text-align: center;
+    & h5 {
+        width: 50%;
+    }
+    &__image {
+        height: 7rem;
+        width: 7rem;
+        border-radius: 7rem;
+        position: absolute;
+        background-position: center;
+        background-size: cover;
+        &__1 {
+            background-color: orange;
+            background-image: url('../../assets/about/1.png');
+            top: 20rem;
+            left: 10rem; 
+        }
+        &__2 {
+            background-color: orange;
+            background-image: url('../../assets/about/2.png');
+            top: 10rem;
+            left: 30rem; 
+        }
+        &__3 {
+            background-color: orange;
+            background-image: url('../../assets/about/3.png');
+            top: 10rem;
+            right: 25rem; 
+        }
+        &__4 {
+            background-color: orange;
+            background-image: url('../../assets/about/4.png');
+            top: 20rem;
+            right: 10rem; 
+        }
+        &__5 {
+            background-color: orange;
+            background-image: url('../../assets/about/5.png');
+            bottom: 15rem;
+            left: 10rem; 
+        }
+        &__6 {
+            background-color: orange;
+            background-image: url('../../assets/about/6.png');
+            bottom: 10rem;
+            left: 35rem; 
+        }
+        &__7 {
+            background-color: orange;
+            background-image: url('../../assets/about/7.png');
+            bottom: 8rem;
+            right: 35rem; 
+        }
+        &__8 {
+            background-color: orange;
+            background-image: url('../../assets/about/8.png');
+            bottom: 20rem;
+            right: 10rem; 
+        }
+    }
+};
+
+.training {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--background_light);
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        justify-self: center;
+    }
+    &__image {
+        background-image: url('../../assets/landing-training-2.png');
+        height: 100%;
+        width: auto;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
