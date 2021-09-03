@@ -15,3 +15,15 @@
     background-color: var(--background_light);
     padding: 0 1rem;
 }
+
+.edit_input {
+    border: 0;
+    width: 100%;
+    height: inherit;
+    background-color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: 'Jost';
+    text-align: center;
+    color: var(--text_medium);
+}

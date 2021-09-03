@@ -1,0 +1,11 @@
+.icon {
+    font-size: inherit;
+    position: relative;
+    & svg {
+        font-size: inherit;
+        color: var(--text_light_medium);
+        position: absolute;
+        top: 3px;
+        cursor: pointer;
+    }
+}
