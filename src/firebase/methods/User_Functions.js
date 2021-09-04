@@ -66,8 +66,8 @@ const create_user_profile = async (user_id, user_info) => {
         website: null,
         resume: null,
         summary: "",
-        experience: [{}],
-        education: [{}],
+        experience: [],
+        education: [],
     }).then(() => {
         auth.currentUser.sendEmailVerification();
         return true;

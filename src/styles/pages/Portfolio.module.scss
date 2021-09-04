@@ -24,9 +24,10 @@
         }
     }
     &__avatar {
-        height: 8rem;
-        width: 8rem;
-        border-radius: 8rem;
+        height: 9rem;
+        width: 9rem;
+        border-radius: 9rem;
+        object-fit: cover;
     }
     &__details {
         text-align: left;
@@ -41,9 +42,13 @@
             gap: 1rem;
         }
     }
+    &__action {
+        width: 10rem;
+    }
 }
 
 .resume {
     display: flex;
     flex-direction: column;
+    gap: 5rem;
 }
