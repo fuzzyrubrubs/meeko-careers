@@ -1,4 +1,4 @@
-import { db, auth } from '../Firebase';
+import { firebase, db, auth } from '../Firebase';
 
 const register_user = (main, profile) => {
     var status = async () => {
@@ -82,14 +82,24 @@ const get_user_data = async (user_id) => {
   
 
 const update_my_profile = (user_id, new_info) => {
-    try { db.collection("users").doc(user_id).update(new_info); return true }
-    catch(error) { return error.message }
+    db.collection("users").doc(user_id).update(new_info); 
 }
+
+const delete_portfolio_entry = (user_id, entry, type) => {
+    db.collection("users").doc(user_id).update({[type]: firebase.firestore.FieldValue.arrayRemove(entry)})
+}
+
+const get_applications = async (user_id) => {
+    return await db.collectionGroup("candidates").where('user_id', '==', user_id).get().then(querySnapshot => {
+       return querySnapshot.docs.map(doc => doc.data());
+    });
+};
+
 
 
 export {
-    register_user, sign_in,
+    register_user, sign_in, sign_out,
     verify_user_email, change_my_password, reset_password, authenticate_me,
-    get_user_data, 
-    create_user_profile, update_my_profile
+    get_user_data, get_applications,
+    create_user_profile, update_my_profile, delete_portfolio_entry,
 }

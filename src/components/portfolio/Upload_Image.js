@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCamera } from "react-icons/fa";
-import styles from '../../styles/components/items/Uploads.module.scss';
+import styles from '../../styles/components/portfolio/Uploads.module.scss';
 
 function Upload_Image(props) {
 

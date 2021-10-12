@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import styles from '../../styles/components/UI/Navigation.module.scss';
 
 import Register from "../forms/Register";
@@ -7,12 +7,12 @@ import Login from "../forms/Login";
 import { AuthContext } from "../../contexts/Auth.context";
 
 function Navigation (props) {
+    const history = useHistory();
     const { user, user_data } = useContext(AuthContext);
     const [login_open, set_login_open] = useState(false);
     const [register_open, set_register_open] = useState(false);
-    const history = useHistory();
     
-    const url = history.location.pathname;
+    const url = props.location.pathname;
 
     const open_handler = (num) => {
         document.body.style.overflow = "hidden";
@@ -32,7 +32,7 @@ function Navigation (props) {
         <Link to="/dashboard" className={`${styles.navigation__menu__item} ${url === "/dashboard" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}>Dashboard</Link>
         <Link to="/portfolio" className={`${styles.navigation__menu__avatar} ${url === "/portfolio" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}><img src={user_data.avatar} /></Link>
         </>
-    )
+    );
 
 
 
@@ -52,4 +52,4 @@ function Navigation (props) {
     );
 };
 
-export default Navigation;
+export default withRouter(Navigation);

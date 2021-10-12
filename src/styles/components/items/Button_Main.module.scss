@@ -15,4 +15,10 @@
     color: var(--white);
     align-self: stretch;
     box-shadow: 0 5px 5px rgba(51, 51, 51, 0.15);
+    &__hollow {
+        border: 2px solid var(--primary);
+        background-color: var(--white);
+        color: var(--primary);
+        box-shadow: none;
+    }
 }

@@ -2,9 +2,10 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
     min-height: 92vh;
-    padding: 5rem 5rem 0 5rem;
+    padding: 5rem 20rem 10rem 5rem;
     gap: 8rem;
 }
+
 
 .profile {
     display: flex;
@@ -41,6 +42,19 @@
             align-items: center;
             gap: 1rem;
         }
+    }
+    &__download {
+        border: 1.5px solid var(--primary);
+        color: var(--primary);
+        height: 3.5rem;
+        width: 15rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 500;
+        cursor: pointer;
     }
     &__action {
         width: 10rem;

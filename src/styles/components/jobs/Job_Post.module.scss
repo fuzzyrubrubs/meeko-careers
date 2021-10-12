@@ -1,0 +1,32 @@
+.preview {
+    background-color: var(--white);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 6px #3635352c; 
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    &__details {
+        display: flex;
+        gap: 1.5rem;
+        & p > svg {
+            color: var(--primary);
+        }
+    }
+    &__action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & button {
+            width: 10rem;
+            height: 3rem;
+            margin: 1rem 0 0 0;
+            border-radius: 2px;
+        }
+    }
+}
+
+.active {
+    border: 2px solid var(--primary);
+}

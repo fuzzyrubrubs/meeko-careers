@@ -1,4 +1,4 @@
-import styles from '../../styles/components/items/Text_Input.module.scss';
+import styles from '../../styles/components/inputs/Inputs.module.scss';
 
 function Text_Input (props) {
 

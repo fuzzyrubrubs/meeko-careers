@@ -1,16 +1,18 @@
 import styles from '../../styles/components/forms/Register.module.scss';
 import Button_Main from '../items/Button_Main';
-import Text_Input from '../items/Text_Input';
+import Text_Input from '../inputs/Text_Input';
 
 function Login (props) {
-    const close_modal = () => {
-        document.body.style.overflow = 'unset';
-        props.close();
+    const close_modal = (e) => {
+        if(e.target.className == "modal") {
+            document.body.style.overflow = 'unset';
+            props.close();
+        }
     }
 
     return (
         <main className="modal" onClick={close_modal}>
-            <section className={styles.register} onClick={{}}>
+            <section className={styles.register} onClick={null}>
                 <section className={styles.content}>
                     <p>Meeko</p>
                     <h2>Login</h2>

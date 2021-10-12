@@ -1,3 +1,98 @@
 .profile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5rem;
     background-color: var(--background_light);
+    border-top-left-radius: 2rem;
+}
+
+.wrapper {
+    flex: 1;
+    border-top: 1px solid var(--text_light_medium);
+    position: relative;
+}
+
+.icon {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 4.5rem;
+    background-color: var(--primary);
+    box-shadow: 0 10px 16px #3635352c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -2rem;
+    right: 3rem;
+    & svg {
+        font-size: 3rem;
+        color: var(--white);
+    }
+}
+
+.job {
+    
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow: auto;
+    height: 57vh;
+    flex: 1;
+    &::-webkit-scrollbar {
+        height: 3px;              /* height of horizontal scrollbar ← You're missing this */
+        width: 3px;               /* width of vertical scrollbar */
+        border-radius: 20px;
+      }
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px var(--text_light);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--text_light_medium);
+        border-radius: 20px;
+      }
+};
+
+.status {
+    position: relative;
+    border-radius: 10px;
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 3rem;
+    margin-right: 2rem;
+    &__image {
+        position: absolute;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 5rem;
+        background-color: var(--primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 3px 6px #3635352c;
+        top: -15%;
+        & svg {
+            color: var(--white);
+            font-size: 3rem;
+        }
+    }
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 8rem;
+        & h5 {
+            text-align: center;
+        }
+    }
 }

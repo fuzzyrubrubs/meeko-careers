@@ -1,9 +1,9 @@
 import { useState } from "react";
-import styles from '../../styles/components/items/Portfolio_Entry.module.scss';
-import Button_Main from "./Button_Main";
+import styles from '../../styles/components/portfolio/Portfolio_Entry.module.scss';
+import Button_Main from "../items/Button_Main";
 
 function Portfolio_Edit_Summary (props) {
-    const [summary, set_summary] = useState(props.summary);
+    const [summary, set_summary] = useState(props.value.summary);
 
     const add_handler = () => {
         props.input({...props.value, summary: summary })

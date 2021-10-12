@@ -2,8 +2,8 @@ import { useState } from 'react';
 import styles from '../../styles/components/forms/Register.module.scss';
 import { useHistory } from 'react-router-dom';
 import Button_Main from '../items/Button_Main';
-import Text_Input from '../items/Text_Input';
-import Password_Input from '../items/Password_Input';
+import Text_Input from '../inputs/Text_Input';
+import Password_Input from '../inputs/Password_Input';
 import { register_user } from '../../firebase/methods/User_Functions';
 
 function Register (props) {
@@ -26,7 +26,6 @@ function Register (props) {
         if(loader === false) {
             set_loader(true);
             const user_main = {email, password};
-            console.log(user_main);
             const user_profile = {name};
             register_user(user_main, user_profile).then(result => {
                 if(result === true) {

@@ -6,14 +6,14 @@ import Edit_Icon from '../components/items/Edit_Icon';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/Auth.context';
 import Edit_Input from '../components/items/Edit_Input';
-import Portfolio_Add_Entry from '../components/items/Portfolio_Add_Entry';
-import Portfolio_Entry from '../components/items/Portfolio_Entry';
 import { update_my_profile } from '../firebase/methods/User_Functions';
 import Button_Main from '../components/items/Button_Main';
-import Portfolio_Edit_Summary from '../components/items/Portfolio_Edit_Summary';
 import { upload_avatar, get_avatar, upload_resume, get_resume } from '../firebase/methods/Storage_Functions';
-import Upload_Image from '../components/items/Upload_Image';
-import Upload_Resume from '../components/items/Upload_Resume';
+import Portfolio_Add_Entry from '../components/portfolio/Portfolio_Add_Entry';
+import Portfolio_Entry from '../components/portfolio/Portfolio_Entry';
+import Portfolio_Edit_Summary from '../components/portfolio/Portfolio_Edit_Summary';
+import Upload_Image from '../components/portfolio/Upload_Image';
+import Upload_Resume from '../components/portfolio/Upload_Resume';
 
 
 function Portfolio (props) {
@@ -63,23 +63,23 @@ function Portfolio (props) {
                     {edit_profile || user_info.linkedIn ? <p><FaLinkedin /> {edit_profile ? <Edit_Input value={user_info} placeholder="Add linkedIn" input={set_user_info} name="linkedIn" /> : user_info.linkedIn }</p> : null}
                     {edit_profile || user_info.website ? <p><MdWebAsset /> {edit_profile ? <Edit_Input value={user_info} placeholder="Add website" input={set_user_info} name="website" /> : user_info.website || "Add website" }</p> : null}
                 </div>
-                {edit_profile ? <Upload_Resume file={set_resume} /> : <a href={resume} download>Resume</a>}
+                {edit_profile ? <Upload_Resume file={set_resume} /> : <a className={styles.profile__download} href={resume} download>Download Resume</a>}
                 {edit_profile ? <div className={styles.profile__action}><Button_Main action={() => {save_profile(); set_edit_profile(false)}}>Save</Button_Main></div> : null}
             </section>
             <section className={styles.resume}>
                 <div>
-                    <h3>Professional Summary<Edit_Icon value={edit_summary} toggle={set_edit_summary} /></h3>
+                    <h2>Professional Summary<Edit_Icon value={edit_summary} toggle={set_edit_summary} /></h2>
                     {edit_summary ? <Portfolio_Edit_Summary close={set_edit_summary} save={save_summary} value={user_info} input={set_user_info}  /> : <p>{user_info.summary}</p>}
                 </div>
                 <div>
-                    <h3>Work Experience<Edit_Icon value={edit_experience} toggle={set_edit_experience} /></h3>
+                    <h2>Work Experience<Edit_Icon value={edit_experience} toggle={set_edit_experience} /></h2>
                     {edit_experience ? <Portfolio_Add_Entry save={save_experience} value={user_info} input={set_user_info} type={'experience'} /> : null}
-                    {user_info.experience.map(item => <Portfolio_Entry data={item} type={'experience'} />)}
+                    {user_info.experience.map((item, index) => <Portfolio_Entry user_id={user_data.id} value={user_info} index={index} input={set_user_info} allow_delete={edit_experience} data={item} type={'experience'} />).reverse()}
                 </div>
                 <div>
-                    <h3>Education<Edit_Icon value={edit_education} toggle={set_edit_education} /></h3>
+                    <h2>Education<Edit_Icon value={edit_education} toggle={set_edit_education} /></h2>
                     {edit_education ? <Portfolio_Add_Entry save={save_education} value={user_info} input={set_user_info} type={'education'} /> : null}
-                    {user_info.education.map(item => <Portfolio_Entry data={item} type={'education'} />)}
+                    {user_info.education.map((item, index) => <Portfolio_Entry user_id={user_data.id} value={user_info} index={index} input={set_user_info} allow_delete={edit_education} data={item} data={item} type={'education'} />).reverse()}
                 </div>
             </section>
         </main>

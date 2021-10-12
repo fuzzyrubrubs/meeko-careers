@@ -1,5 +1,73 @@
 .menu {
-    background-color: var(--primary);
+    background-color: var(--background_light);
     height: 100%;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 12rem auto 1fr 10rem;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+};
+
+.logo {
+    background-image: url('../../../assets/logo.png');
+    background-position: center;
+    background-size: cover;
+    width: 9rem;
+    height: 2rem;
+};
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & img {
+        height: 7rem;
+        width: 7rem;
+        border-radius: 7rem;
+        object-fit: cover;
+    }
 }
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-self: start;
+    padding-top: 5rem;
+    align-items: flex-start;
+    & p {
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+    }
+
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    & svg {
+        color: var(--primary);
+        font-size: 2rem;
+    }
+};
+
+.block {
+    position: absolute;
+    height: 15rem;
+    width: 15rem;
+    background-color: var(--background_primary);
+    top: 63%;
+    left: -2.5rem;
+    transform: rotate(35deg);
+};
+
+.selected {
+    border-bottom: 2px solid var(--primary) !important;
+}
+

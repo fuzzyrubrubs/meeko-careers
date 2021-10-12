@@ -23,5 +23,25 @@ $background: #F9F9FB;
     justify-content: center;
     align-items: center;
     z-index: 10;
+};
+
+.between-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+};
+
+.highlight {
+    padding: 0.5px 1rem;
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 2px;
+    font-size: 1.2rem;
+}
+
+.underlined {
+    border-bottom: 2px solid var(--primary);
+    margin-bottom: 1rem;
+    display: inline-block;
 }
 
