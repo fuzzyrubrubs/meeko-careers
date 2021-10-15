@@ -10,14 +10,16 @@ import Portfolio from './pages/Portfolio';
 
 import Navigation from './components/UI/Navigation';
 import Footer from './components/UI/Footer';
+import Loader_Page from './components/UI/Loader_Page';
 
 import { AuthContext } from './contexts/Auth.context';
+import Overview from './pages/Dashboard/Manage/Overview';
 
 
 function Router(){  
     const { user, user_data } = useContext(AuthContext);
 
-    const app = user === null ? ( <h1>Loading</h1> ) : (
+    const app = user === null ? ( <Loader_Page /> ) : (
         <>
             <Navigation />
                 <Switch>     
@@ -25,6 +27,8 @@ function Router(){
                 <Route exact path="/jobs" render={(props) => <Jobs {...props} /> } /> 
                 <Route exact path="/dashboard" render={(props) => <Dashboard {...props} /> } /> 
                 <Route exact path="/portfolio" render={(props) => <Portfolio user_data={user_data} {...props} /> } /> 
+                {/* <Route exact path="/job/:id" render={(props) => <Portfolio {...props} /> } />  */}
+                <Route exact path="/manage/:id" render={(props) => <Overview {...props} /> } /> 
                 <Route render={() => <Error404 /> } />
                 </Switch>
             <Footer />

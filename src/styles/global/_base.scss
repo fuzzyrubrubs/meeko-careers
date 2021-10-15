@@ -8,6 +8,8 @@
     --text_light_medium: #9A9A9A;
     --primary: #fd8567;
     --background_primary: #fdebe8;
+    --orange: #ffc846;
+    --orange_dark: #f5a002;
 };
 
 *,
@@ -32,7 +34,7 @@ html {
 };
 
 body {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: 300;
     line-height: 1.6;
     background-size: cover;

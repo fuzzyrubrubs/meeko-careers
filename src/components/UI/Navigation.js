@@ -7,7 +7,6 @@ import Login from "../forms/Login";
 import { AuthContext } from "../../contexts/Auth.context";
 
 function Navigation (props) {
-    const history = useHistory();
     const { user, user_data } = useContext(AuthContext);
     const [login_open, set_login_open] = useState(false);
     const [register_open, set_register_open] = useState(false);
@@ -39,7 +38,7 @@ function Navigation (props) {
     return (
         <>
         <div className={styles.navigation}>
-            <div className={styles.navigation__logo}></div>
+            <div className={url === "/dashboard" ? null : styles.navigation__logo}></div>
             <div className={styles.navigation__menu}>
                 <Link to="/" className={`${styles.navigation__menu__item} ${url === "/" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}>Home</Link>
                 <Link to="/jobs" className={`${styles.navigation__menu__item} ${url === "/jobs" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}>Find Jobs</Link>

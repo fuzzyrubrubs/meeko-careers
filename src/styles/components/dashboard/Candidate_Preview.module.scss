@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 0.5px solid var(--text_light)
+};
+
+.image {
+    background-image: url('../../../assets/about/1.png');
+    background-position: center;
+    background-size: cover;
+    height: 6rem;
+    width: 6rem;
+    border-radius: 6rem;
+    background-color: orange;
+};
+
+.wrapper {
+    flex: 1;
+    margin-left: 2rem;
+    & div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

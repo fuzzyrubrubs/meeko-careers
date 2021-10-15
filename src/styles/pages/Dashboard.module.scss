@@ -1,17 +1,17 @@
 .dashboard {
-    height: 92vh;
+    height: 91vh;
     display: grid;
-    grid-template-columns: 1.2fr 3.5fr 1.5fr;
-    gap: 5rem;
+    grid-template-columns: 8rem 1fr;
+    gap: 10%;
 };
 
 .menu {
     margin-top: -10vh;
 };
 
+
 .content {
-    padding-top: 3rem;
-    overflow-y: auto;
+    padding-right: 10%;
     &::-webkit-scrollbar {
         height: 3px;              /* height of horizontal scrollbar ← You're missing this */
         width: 3px;               /* width of vertical scrollbar */
@@ -39,7 +39,6 @@
         justify-content: space-between;
         gap: 3rem;
     }
-}
-
+};
 
 

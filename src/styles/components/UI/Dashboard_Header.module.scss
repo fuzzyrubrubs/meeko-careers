@@ -1,0 +1,19 @@
+.header {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    border-bottom: 0.5px solid var(--text_light_medium);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 4rem;
+    & div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        & svg {
+            font-size: 2.5rem;
+            color: var(--text_dark);
+            margin-right: 2rem;
+        }
+    }
+}

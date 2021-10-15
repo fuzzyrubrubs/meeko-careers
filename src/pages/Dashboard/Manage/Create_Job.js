@@ -1,15 +1,16 @@
-import styles from '../../styles/pages/Dashboard.module.scss';
-import Text_Input from '../../components/inputs/Text_Input';
-import Button_Main from '../../components/items/Button_Main';
-import Radio_Input from '../../components/inputs/Radio_Input';
-import Salary_Input from '../../components/inputs/Salary_Input';
-import Textarea_Input from '../../components/inputs/Textarea_Input';
+import styles from '../../../styles/pages/Dashboard.module.scss';
+import Text_Input from '../../../components/inputs/Text_Input';
+import Button_Main from '../../../components/items/Button_Main';
+import Radio_Input from '../../../components/inputs/Radio_Input';
+import Salary_Input from '../../../components/inputs/Salary_Input';
+import Textarea_Input from '../../../components/inputs/Textarea_Input';
 import { useState } from 'react';
-import Requirements from '../../components/dashboard/Requirements';
-import Selection from '../../components/inputs/Selection';
-import { job_categories, job_hours, job_location } from '../../tools/global_variables';
-import { create_job } from '../../firebase/methods/Job_Functions';
-import generatePushID from '../../tools/IDGenerator';
+import Requirements from '../../../components/dashboard/Requirements';
+import Selection from '../../../components/inputs/Selection';
+import { job_categories, job_hours, job_location } from '../../../tools/global_variables';
+import { create_job } from '../../../firebase/methods/Job_Functions';
+import generatePushID from '../../../tools/IDGenerator';
+import Dashboard_Header from '../../../components/UI/Dashboard_Header';
 
 
 function Create_Job (props) {
@@ -41,7 +42,7 @@ function Create_Job (props) {
 
     return (
         <main>
-             <h2>Create Job</h2>
+        <Dashboard_Header back_handler={() => props.go_back()}>Create Job</Dashboard_Header>
              <section className={styles.form}>
                  <div className={styles.form__wrapper}>
                     <Text_Input value={title} input={set_title}>Job title</Text_Input>
@@ -58,7 +59,7 @@ function Create_Job (props) {
                 <Button_Main loader={loader} action={save_handler}>Create</Button_Main>
                 <p>{status}</p>
                 </section>
-        </main>
+            </main>
     )
 }
 

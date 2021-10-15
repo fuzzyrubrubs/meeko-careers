@@ -37,11 +37,21 @@ $background: #F9F9FB;
     color: var(--white);
     border-radius: 2px;
     font-size: 1.2rem;
-}
+};
 
 .underlined {
     border-bottom: 2px solid var(--primary);
     margin-bottom: 1rem;
     display: inline-block;
+};
+
+.small_button {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    font-weight: 500;
+    color: var(--primary);
+    border-radius: 2rem;
+    padding: 0 1rem;
+    border: 2px solid var(--primary);
 }
 

@@ -4,9 +4,9 @@
     align-items: center;
     // box-shadow: 0 3px 6px #3635352c;
     // border-radius: 10px;
-    height: 8rem;
-    gap: 2rem;
-    padding: 1rem 2rem;
+    // height: 7rem;
+    gap: 1.5rem;
+    padding: 1rem 1rem;
     border-bottom: 0.5px solid var(--text_light);
     cursor: pointer;
 
@@ -14,20 +14,26 @@
 
 .image {
     background-color: var(--primary);
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5rem;
-    width: 5rem;
-    min-width: 5rem;
+    border-radius: 3.5rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    min-width: 3.5rem;
     & svg {
         color: var(--white);
-        font-size: 3rem;
+        font-size: 2rem;
     }
 }
 
 .content {
    width: 100%;
+   & p small {
+       line-height: 1;
+   }
+   & small:last-of-type {
+       font-size: 1rem;
+   }
 
 }

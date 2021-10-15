@@ -1,39 +1,33 @@
 import styles from '../styles/pages/Dashboard.module.scss';
-import Profile from './Dashboard/Profile';
-import Menu from './Dashboard/Menu';
+import Menu from '../components/dashboard/Menu';
 import { useState, useEffect } from 'react';
-import Job_Posts from './Dashboard/Job_Posts';
-import Company_List from './Dashboard/Company_List';
-import Create_Job from './Dashboard/Create_Job';
-import Create_Company from './Dashboard/Create_Company';
-import { get_companies } from '../firebase/methods/Company_Functions';
-import { get_jobs } from '../firebase/methods/Job_Functions';
+import Dash_Home from './Dashboard/Dash_Home';
+import Manage from './Dashboard/Manage';
+import Tasks from './Dashboard/Tasks';
+import Messages from './Dashboard/Messages';
+import Applications from './Dashboard/Applications';
 
 
 function Dashboard () {
     const [selected, set_selected] = useState(0);
-    const [companies, set_companies] = useState([]);
-    const [jobs, set_jobs] = useState([]);
     const [loader, set_loader] = useState(true);
+
+
+    const go_home = () =>  set_selected(0);
     
-    useEffect(() => {
-        const fetch_data = async () => {
-            const companies = await get_companies();
-            const jobs = await get_jobs();
-            set_companies(companies);
-            set_jobs(jobs);
-            set_loader(false);
-        }
-        fetch_data();
-    }, []);
     
-    const content = [<Job_Posts jobs={jobs} />, <Company_List companies={companies} />, <Create_Job companies={companies} />, <Create_Company />];
+    const content = [
+        <Dash_Home set_selected={set_selected} />, 
+        <Tasks go_home={go_home} />, 
+        <Applications go_home={go_home} />, 
+        <Messages go_home={go_home} />, 
+        <Manage go_home={go_home} />
+    ];
 
     return (
         <main className={styles.dashboard}>
             <section className={styles.menu}><Menu selected={selected} select={set_selected} /></section>
             <section className={styles.content}>{content[selected]}</section>
-            <section className={styles.profile}><Profile /></section>
         </main>
     )
 }

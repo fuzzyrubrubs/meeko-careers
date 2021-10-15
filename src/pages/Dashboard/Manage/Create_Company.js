@@ -1,12 +1,13 @@
-import styles from '../../styles/pages/Dashboard.module.scss';
-import Text_Input from '../../components/inputs/Text_Input';
-import Button_Main from '../../components/items/Button_Main';
-import { create_company } from '../../firebase/methods/Company_Functions';
+import styles from '../../../styles/pages/Dashboard.module.scss';
+import Text_Input from '../../../components/inputs/Text_Input';
+import Button_Main from '../../../components/items/Button_Main';
+import { create_company } from '../../../firebase/methods/Company_Functions';
 import { useState } from 'react';
-import generatePushID from '../../tools/IDGenerator';
+import generatePushID from '../../../tools/IDGenerator';
+import Dashboard_Header from '../../../components/UI/Dashboard_Header';
 
 
-function Create_Company () {
+function Create_Company (props) {
     const [name, set_name] = useState("");
     const [status, set_status] = useState("");
     const [loader, set_loader] = useState(false);
@@ -27,7 +28,7 @@ function Create_Company () {
 
     return (
         <main>
-             <h2>Create Company</h2>
+            <Dashboard_Header back_handler={() => props.go_back()}>Create Company</Dashboard_Header>
              <section className={styles.content}>
                     <Text_Input value={name} input={set_name}>Company name</Text_Input>
                     <Button_Main loader={loader} action={save_handler}>Create</Button_Main>
