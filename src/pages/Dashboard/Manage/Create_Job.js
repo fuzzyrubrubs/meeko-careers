@@ -48,6 +48,7 @@ function Create_Job (props) {
                     <Text_Input value={title} input={set_title}>Job title</Text_Input>
                     <Salary_Input value={salary} input={set_salary}>Salary</Salary_Input>
                  </div>
+                 <Text_Input>Number of interviews</Text_Input>
                 <Selection value={company} input={set_company} options={props.companies}></Selection>
                 <Radio_Input value={category} input={set_category} options={job_categories}>Category</Radio_Input>
                 <Radio_Input value={location} input={set_location} options={job_location}>Location</Radio_Input>

@@ -31,6 +31,13 @@ $background: #F9F9FB;
     align-items: center;
 };
 
+.centered-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .highlight {
     padding: 0.5px 1rem;
     background-color: var(--primary);

@@ -15,9 +15,7 @@ function Job_Posts (props) {
         set_selected(true);
     }
 
-    const go_back = () => {
-        set_selected(false);
-    }
+    const go_back = () => set_selected(false);
 
     const main = (
         <main>

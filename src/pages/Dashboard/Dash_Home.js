@@ -20,7 +20,7 @@ function Dash_Home (props) {
                 <div className={styles.home__header__image}></div>
             </section>
             <section className={styles.home__main}>
-                <div onClick={() => props.set_selected(1)} className={`${styles.home__main__box} ${styles.home__main__box_0}`}><span><h3>Setup Tasks</h3> <FaChevronRight /></span></div>
+                <div onClick={() => props.set_selected(1)} className={`${styles.home__main__box} ${styles.home__main__box_0}`}><span><h3>Tasks</h3> <FaChevronRight /></span></div>
                 <div onClick={() => props.set_selected(2)} className={`${styles.home__main__box} ${styles.home__main__box_1}`}><span><h3>Applications</h3> <FaChevronRight /></span></div>
                 <div onClick={() => props.set_selected(3)} className={`${styles.home__main__box} ${styles.home__main__box_2}`}><span><h3>Messages</h3> <FaChevronRight /></span></div>
                 <div onClick={() => props.set_selected(4)} className={`${styles.home__main__box} ${styles.home__main__box_3}`}><span><h3>Manage</h3> <FaChevronRight /></span></div>

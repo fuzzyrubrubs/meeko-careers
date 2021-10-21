@@ -15,7 +15,7 @@ function Jobs () {
     useEffect(() => {
         const fetch_data = async () => {
             const jobs_data = await get_jobs();
-            set_jobs(jobs_data);
+            set_jobs([...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data]);
         }
         fetch_data();
     }, []);
@@ -27,28 +27,29 @@ function Jobs () {
         <main className={styles.jobs}>
             <section className={styles.body}>
                 <section className={styles.category}>
-                    <div>
-                        <small className="underlined">Lorem ipsum</small>
-                        <p>Donec mollis fermentum metus, nec euismod risus placerat sed.</p>
-                    </div>
                     <div className={styles.category__list}>
-                        <div>
-                            <small>Work type</small>
-                            {job_hours.map(item => <Check_Box>{item}</Check_Box>)}
+                        <div className={styles.category__list__item}>
+                            <div>
+                                <p className={styles.category__list__item__name}>Work type</p>
+                                {job_hours.map(item => <Check_Box>{item}</Check_Box>)}
+                            </div>
                         </div>
-                        <div>
-                            <small>Location</small>
-                            {job_location.map(item => <Check_Box>{item}</Check_Box>)}
+                        <div className={styles.category__list__item}>
+                            <div>
+                                <p className={styles.category__list__item__name}>Location</p>
+                                {job_location.map(item => <Check_Box>{item}</Check_Box>)}
+                            </div>
                         </div>
-                        <div>
-                            <small>Category</small>
-                            {job_categories.map(item => <Check_Box>{item}</Check_Box>)}
+                        <div className={styles.category__list__item}>
+                            <div>
+                                <p className={styles.category__list__item__name}>Category</p>
+                                {job_categories.map(item => <Check_Box>{item}</Check_Box>)}
+                            </div>
                         </div>
                     </div>
                 </section>
                 <section className={styles.main}>
                     <div className={styles.header}>
-                        <small className="underlined">Adipiscing elit</small>
                         <h2>Lorem ipsum</h2>
                         <p>Ut tristique eros ut elit dignissim placerat. Fusce feugiat ante augue. r in Aenean vel porttitor purue.</p>
                     </div>

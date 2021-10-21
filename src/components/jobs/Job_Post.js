@@ -36,7 +36,7 @@ function Job_Post (props) {
                 <small>{data.about}</small>
             </div>
             <div className={styles.preview__action}> 
-                {props.applied ?<Button_Main hollow={true}>Applied</Button_Main> : <Button_Main action={open_handler}>Apply</Button_Main>}
+                {props.applied ? <Button_Main hollow={true}>Applied</Button_Main> : <Button_Main action={open_handler}>Apply</Button_Main>}
                 <h5><FaRegBookmark /></h5>
             </div>
         </div>

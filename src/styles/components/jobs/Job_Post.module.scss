@@ -1,11 +1,11 @@
 .preview {
-    background-color: var(--white);
-    padding: 2.5rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 3px 6px #3635352c; 
-    border-radius: 10px;
+    // background-color: var(--white);
+    // box-shadow: 0 3px 6px #3635352c; 
     border: 2px solid transparent;
+    border-radius: 2rem;
     cursor: pointer;
     &__details {
         display: flex;
@@ -29,4 +29,15 @@
 
 .active {
     border: 2px solid var(--primary);
+    background-color: var(--primary);
+    & h3, p, small, svg {
+        color: var(--white);
+    }
+    & button {
+        background-color: var(--white);
+        color: var(--primary);
+    }
+    & > .preview__details svg {
+        color: var(--white);
+    }
 }
