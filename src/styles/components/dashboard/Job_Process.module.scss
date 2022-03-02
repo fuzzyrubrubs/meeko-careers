@@ -39,3 +39,44 @@
         background-color: var(--text_light);
     }
 }
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    height: 100%;
+    &__step {
+        min-height: 3.5rem;
+        min-width: 3.5rem;
+        border-radius: 3.5rem;
+        background-color: var(--text_light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        & p {
+            color: var(--text_light_medium);
+        }
+        & small {
+            position: absolute;
+            left: 4.5rem;        
+            width: 8rem;
+
+        }
+    }
+    &__active {
+        background-color: var(--primary) !important;
+        & p {
+            color: var(--white);
+        }
+        & small {
+            color: var(--text_dark);
+        }
+    }
+    &__divider {
+        width: 2px;
+        flex: 1;
+        background-color: var(--text_light);
+    }
+}

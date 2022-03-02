@@ -9,7 +9,7 @@ import { job_categories, job_hours, job_location } from '../tools/global_variabl
 
 function Jobs () {
     const { applications } = useContext(AuthContext);
-    const [selected, set_selected] = useState(null);
+    const [selected, set_selected] = useState(0);
     const [jobs, set_jobs] = useState([]);
     
     useEffect(() => {
@@ -58,7 +58,7 @@ function Jobs () {
                     </div>
                 </section>
                 <section className={styles.preview}>
-                    {selected === null ? null : <Job_Preview data={jobs[selected]} applied={check_status(jobs[selected].id)} />}
+                    {jobs.length === 0 ? null : <Job_Preview data={jobs[selected]} applied={check_status(jobs[selected].id)} />}
                 </section>
             </section>
         </main>

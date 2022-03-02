@@ -1,0 +1,84 @@
+.panel {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    justify-content: space-evenly;
+
+    &__user {
+        align-self: center;
+        & img {
+            width: 7rem;
+            height: 7rem;
+            border-radius: 7rem;
+            object-fit: cover;
+        }
+    }
+    &__options {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__menu {
+        & div {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 1.5rem;
+            gap: 1rem;
+            border-radius: 1.2rem;
+            cursor: pointer;
+            & svg, p {
+                color: rgba(255, 255, 255, 0.781);
+            }
+            & p {
+                font-weight: 500;
+                margin-right: auto;
+            }
+            & svg {
+                font-size: 2rem;
+            }
+            & svg:last-child {
+                font-size: 1.5rem;
+            }
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.219);
+                & p { color: var(--white);}
+                & svg { color: var(--white);}
+            }
+        }
+        & li {
+            list-style: none;
+            padding: 0 1rem;
+            border-left: 1.2px solid rgba(255, 255, 255, 0.781);
+            margin-left: 2.5rem;
+            & p {
+                color: rgba(255, 255, 255, 0.781);
+                padding: 0.6rem 1.5rem;
+                border-radius: 1.2rem;
+                font-weight: 500;
+                cursor: pointer;
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.219);
+                }
+            }
+        }
+    }
+    &__list {
+        & div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        &__block {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 1rem;
+        }
+    }
+
+};
+
+.active {
+    background-color: rgba(255, 255, 255, 0.219);
+    & p { color: var(--white);}
+    & svg { color: var(--white);}
+}

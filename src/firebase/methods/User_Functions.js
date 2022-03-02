@@ -1,4 +1,5 @@
 import { firebase, db, auth } from '../Firebase';
+import { get_job, get_user_interviews } from './Job_Functions';
 
 const register_user = (main, profile) => {
     var status = async () => {
@@ -68,6 +69,10 @@ const create_user_profile = async (user_id, user_info) => {
         summary: "",
         experience: [],
         education: [],
+        account_type: 0,
+        last_seen: null,
+        tasks: [],
+        job: null
     }).then(() => {
         auth.currentUser.sendEmailVerification();
         return true;
@@ -89,9 +94,91 @@ const delete_portfolio_entry = (user_id, entry, type) => {
     db.collection("users").doc(user_id).update({[type]: firebase.firestore.FieldValue.arrayRemove(entry)})
 }
 
+
 const get_applications = async (user_id) => {
-    return await db.collectionGroup("candidates").where('user_id', '==', user_id).get().then(querySnapshot => {
+    return await db.collectionGroup("candidates").where('user_id', '==', user_id).get().then(async (querySnapshot) => {
+        return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const interview_data = await get_user_interviews(doc.data().job_id, user_id);
+            const job_data = await get_job(doc.data().job_id);
+            return {...doc.data(), interview_data, job_data}
+        }))
+    });
+};
+
+const get_employements = async (user_id) => {
+    return await db.collectionGroup("employee").where("user_id", "==", user_id).get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data());
+    });
+  }
+
+const get_recruitments = async (user_id) => {
+    return await db.collectionGroup("recruiters").where("user_id", "==", user_id).get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data().job_id);
+    });
+  }
+
+  const get_managements = async (user_id) => {
+    return await db.collectionGroup("managers").where("user_id", "==", user_id).get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data().company_id);
+    });
+  }
+
+const query_user_email = async (email) => {
+    return await db.collection("users").where("email", ">=", email).where('email', '<=', email+ '\uf8ff').get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data());
+    });
+  }
+
+const create_user_message = async (user_id, chat_id, job_id, manager_id, anonymous, content) => {
+    return db.collection("users").doc(user_id).collection("messages").doc(job_id).set({
+        chat_id: chat_id,
+        user_id: user_id,
+        job_id: job_id,
+        manager_id: manager_id,
+        anonymous: anonymous,
+        content: content,
+        timestamp: firebase.firestore.Timestamp.fromDate(new Date())
+    });
+  };
+
+  const get_messages = async (user_id) => {
+    return await db.collection("users").doc(user_id).collection("messages").get().then(querySnapshot => {
        return querySnapshot.docs.map(doc => doc.data());
+    });
+};
+
+  const create_task = async (user_id, task_id, task, expire) => {
+    return db.collection("users").doc(user_id).collection("tasks").doc(task_id).set({
+        user_id: user_id,
+        task_id: task_id,
+        task: task,
+        opened: false,
+        completed: false,
+        expire: expire,
+        timestamp: firebase.firestore.Timestamp.fromDate(new Date())
+    });
+  };
+
+const get_tasks = async (user_id) => {
+    return await db.collection("users").doc(user_id).collection("tasks").get().then(querySnapshot => {
+       return querySnapshot.docs.map(doc => doc.data());
+    });
+};
+
+const get_all_tasks = async (ids) => {
+    return await db.collectionGroup("tasks").where("id", "in", ids).orderBy('timestamp', 'desc').get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data());
+    });
+};
+
+const get_all_messages = async (ids) => {
+    return await db.collectionGroup("messages").where("id", "in", ids).orderBy('timestamp', 'desc').get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data());
+    });
+};
+const get_all_notifications = async (ids) => {
+    return await db.collectionGroup("notifications").where("id", "in", ids).orderBy('timestamp', 'desc').get().then(querySnapshot => {
+        return querySnapshot.docs.map(doc => doc.data());
     });
 };
 
@@ -100,6 +187,10 @@ const get_applications = async (user_id) => {
 export {
     register_user, sign_in, sign_out,
     verify_user_email, change_my_password, reset_password, authenticate_me,
-    get_user_data, get_applications,
+    get_user_data, query_user_email,
     create_user_profile, update_my_profile, delete_portfolio_entry,
+    get_applications, get_employements, get_recruitments, get_managements,
+    get_tasks, get_all_tasks, create_task,
+    get_messages, get_all_messages,
+    get_all_notifications
 }

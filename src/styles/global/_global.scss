@@ -25,6 +25,11 @@ $background: #F9F9FB;
     z-index: 10;
 };
 
+.modal-v {
+    background-color: var(--white);
+    border-radius: 2rem;
+}
+
 .between-row {
     display: flex;
     justify-content: space-between;
@@ -60,5 +65,32 @@ $background: #F9F9FB;
     border-radius: 2rem;
     padding: 0 1rem;
     border: 2px solid var(--primary);
+    cursor: pointer;
+};
+
+.shape_pink {
+    background-color: pink;
+    position: relative;
+    overflow: hidden;
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 35%;
+        left: 20%;
+        height: 30%;
+        border-radius: 50rem;
+        background-color: rgb(255, 163, 179);
+        aspect-ratio: 1;
+    }
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: -10%;
+        left: -50%;
+        height: 75%;
+        border-radius: 50rem;
+        background-color: rgb(255, 221, 227);
+        aspect-ratio: 1;
+    }
 }
 

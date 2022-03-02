@@ -1,20 +1,25 @@
 .dashboard {
-    height: 91vh;
+    height: 100vh;
     display: grid;
-    grid-template-columns: 8rem 1fr;
-    gap: 7%;
+    grid-template-columns: 1fr 30rem;
+    background: linear-gradient(180deg, var(--primary), var(--primary_light))  
 };
 
-.menu {
-    margin-top: -10vh;
-};
+.container {
+    background-color: var(--white);
+    border-radius: 0 3rem 3rem 0;
+    padding: 3rem;
+    gap: 3rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
 
 
-.content {
-    padding-right: 10%;
-    &::-webkit-scrollbar {
-        height: 3px;              /* height of horizontal scrollbar ← You're missing this */
-        width: 3px;               /* width of vertical scrollbar */
+.main {
+    overflow-y: auto;
+    max-height: 83vh;
+    &::-webkit-scrollbar {            
+        width: 0px;              
         border-radius: 20px;
       }
     &::-webkit-scrollbar-track {
@@ -27,18 +32,12 @@
       }
 };
 
-.form {
-    padding-right: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    &__wrapper {
-        display: flex;
-        justify-content: space-between;
-        gap: 3rem;
-    }
-};
+
+
+
+
+
+
+
 
 

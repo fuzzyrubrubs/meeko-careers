@@ -1,7 +1,7 @@
 import styles from '../../styles/components/dashboard/Menu.module.scss';
 import { IoMdLogOut, IoIosCheckmarkCircleOutline, IoMdCheckboxOutline } from "react-icons/io";
 import { sign_out } from '../../firebase/methods/User_Functions';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { AiOutlineHome } from "react-icons/ai";
 import { FaTasks, FaUsers } from "react-icons/fa";
@@ -23,7 +23,7 @@ function Menu (props) {
 
     return (
         <section className={styles.menu}>
-            <div className={styles.logo}></div>
+            <Link to="/" className={styles.logo}></Link>
         
             <div className={styles.list}>
                {options.map((item, index) => <p className={props.selected === index ? styles.selected : null} onClick={() => props.select(index)}>{item}</p>)}
@@ -33,7 +33,6 @@ function Menu (props) {
                 <IoMdLogOut />
                 <small>Logout</small>
             </div>
-            {/* <div className={styles.block}></div> */}
         </section>
     )
 }

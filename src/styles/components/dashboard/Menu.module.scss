@@ -48,20 +48,4 @@
     }
 };
 
-.block {
-    position: absolute;
-    height: 15rem;
-    width: 15rem;
-    background-color: var(--background_primary);
-    top: 63%;
-    left: -2.5rem;
-    transform: rotate(35deg);
-};
-
-.selected {
-    //border-bottom: 2px solid var(--primary) !important;
-    & svg {
-        color: var(--primary);
-    }
-}
 

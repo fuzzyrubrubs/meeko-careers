@@ -5,7 +5,7 @@ import styles from '../../styles/components/UI/Footer.module.scss';
 function Footer (props) {
     const url = props.location.pathname;
 
-    return url === "/dashboard" ? null : <section className={styles.footer}></section>;
+    return url.includes("dashboard") ? null : <section className={styles.footer}></section>;
 }
 
 export default withRouter(Footer);

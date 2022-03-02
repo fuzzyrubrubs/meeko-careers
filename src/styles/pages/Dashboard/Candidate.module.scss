@@ -1,17 +1,19 @@
 
-.candidate {
+.main {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 74vh;
-    border-bottom: 0.5px solid var(--text_light);;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 85vh;
+    gap: 5rem;
+    // border-bottom: 0.5px solid var(--text_light);;
 }
 
 .profile {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 3rem 3rem;
-    border-left: 0.5px solid var(--text_light);
+    padding: 3rem 15%;
+    background-color: var(--background_light);
+    border-radius: 2rem;
     & h4 {line-height: 1;}
     &__header {
         display: flex;
@@ -41,9 +43,12 @@
     &__actions {
         display: flex;
         width: 100%;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
-        gap: 3rem;
+        background-color: var(--primary);
+        height: 100%;
+        border-radius: 2rem;
+
         & svg {
             font-size: 8rem;
             color: rgb(255, 71, 71);
@@ -59,11 +64,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
-    padding: 0 2rem;
-    border-left: 0.5px solid var(--text_light);
-    border-right: 0.5px solid var(--text_light);
+    padding: 2rem 2rem;
     overflow-y: auto;
+    gap: 3rem;
 
     & h5 {
         margin-bottom: 1rem;
@@ -71,19 +74,25 @@
 
     &__urls {
         display: flex;
-        justify-content: space-evenly;
-        width: 100%;
+        justify-content: flex-start;
+        gap: 5rem;
+        align-items: center;
+        width: 100%; 
+        & div {
+            margin-left: auto;
+        }
     }
     
     &__summary {
-        text-align: center;
     }
     &__history {
         width: 100%;
-        text-align: center;
         &__item {
             display: flex;
             justify-content: space-between;
+            & p {
+                flex: 1;
+            }
         }
     }
     &::-webkit-scrollbar {
@@ -102,43 +111,28 @@
 }
 
 
-.list {
-    border-right: 0.5px solid var(--text_light);
-    padding: 0 2rem;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-        height: 1px;              /* height of horizontal scrollbar ← You're missing this */
-        width: 1px;               /* width of vertical scrollbar */
-        border-radius: 20px;
-      }
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px var(--text_light);
-        border-radius: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: var(--text_light_medium);
-        border-radius: 20px;
-      }
-}
-
-.preview {
+.header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding-bottom: 1rem;
-
-    & p {
-        margin-right: auto;
-        margin-left: 1rem;
-    }
-
-    &__image {
-        background-image: url('../../../assets/about/1.png');
-        background-position: center;
-        background-size: cover;
-        height: 3rem;
-        width: 3rem;
-        border-radius: 3rem;
-        background-color: orange;
-    };
+    align-items: center;
+    & div { 
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        & svg {
+            font-size: 2.5rem;
+            color: var(--text_dark);
+            margin-right: 2rem;
+        }
+     }
+     & span {
+         background-color: var(--background_light);
+         padding: 0.5rem 1rem;
+         border-radius: 1rem;
+         display: flex;
+         cursor: pointer;
+         gap: 1rem;
+         & p { color: var(--primary); font-weight: 600;}
+         & svg { color: var(--primary); font-size: 2rem;}
+     }
 }

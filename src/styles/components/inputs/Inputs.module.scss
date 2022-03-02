@@ -33,7 +33,7 @@
     background-color: inherit;
     font-size: inherit;
     font-weight: inherit;
-    font-family: 'Jost';
+    font-family: inherit;
     text-align: center;
     color: var(--text_medium);
 }
@@ -71,4 +71,122 @@
     display: flex;
     align-items: center;
     gap: 3rem;
+};
+
+.requirements {
+    &__action {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        & button {
+            margin: 0 !important;
+        }
+    }
+}
+
+
+.managers {
+    &__action {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        position: relative;
+        & button {
+            margin: 0 !important;
+        }
+    }
+    &__added {
+        &_wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        display: flex;
+        gap: 2rem;
+        height: 6rem;
+        background-color: var(--background_primary);
+        border-radius: 1rem;
+        padding: 0 2rem;
+        width: auto;
+        align-items: center;
+        & div {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 3rem;
+            background-position: center;
+            background-size: cover;
+            background-color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            & svg {
+                font-size: 2rem;
+                color: var(--background_primary);
+            }
+        }
+        & small { cursor: pointer; color: var(--text_dark); }
+    }
+    &__found {
+        position: absolute;
+        top: 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        box-shadow: 0 5px 5px rgba(51, 51, 51, 0.15);
+        background-color: var(--white);
+        &__user {
+            display: flex;
+            gap: 2rem;
+            height: 5rem;
+            padding: 0 2rem;
+            width: auto;
+            align-items: center;
+            cursor: pointer;
+            &:hover { background-color: var(--background_light); }
+            & small { cursor: pointer; }
+            & div {
+                height: 3rem;
+                width: 3rem;
+                border-radius: 3rem;
+                background-position: center;
+                background-size: cover;
+            }
+        }
+    }
+};
+
+.interviews {
+    &__icon {
+        font-size: 5rem;       
+        & svg {
+            color: var(--text_medium);
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover {
+                background-color: var(--background_light);
+            }
+        }
+    }
+    &__modal {
+        height: 90%;
+        width: 80%;
+        background-color: var(--white);
+        border-radius: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    &__form {
+        border-left: 1px solid var(--text_light);
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__display {
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 }

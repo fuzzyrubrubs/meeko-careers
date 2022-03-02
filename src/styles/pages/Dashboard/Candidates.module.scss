@@ -1,5 +1,5 @@
 .main {
-    height: 84vh;
+    height: 70vh;
 };
 
 .header {
@@ -16,19 +16,23 @@
 }
 
 .wrapper {
-    height: 84vh;
+    height: 70vh;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 84vh;
-    border-top: 0.5px solid var(--text_light);
-    border-bottom: 0.5px solid var(--text_light);
-
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 70vh;
+    gap: 5rem;
 };
+
+.menu {
+    background-color: var(--background_light);
+    border-radius: 2rem;
+    display: flex;
+    padding: 2rem 0 2rem 22%;
+}
 
 
 .candidates {
     overflow-y: auto;
-    border-right: 0.5px solid var(--text_light);
     &::-webkit-scrollbar {
         height: 1px;              /* height of horizontal scrollbar ← You're missing this */
         width: 1px;               /* width of vertical scrollbar */
@@ -49,7 +53,12 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-bottom: 1rem;
+        border-radius: 2rem;
+        padding: 1rem 2rem;
+        cursor: pointer;
+        &:hover {
+            background-color: var(--background_light);
+        }
     
     &__image {
         background-image: url('../../../assets/about/1.png');
@@ -62,5 +71,7 @@
     };
     & span {
         display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 }

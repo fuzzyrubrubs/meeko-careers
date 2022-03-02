@@ -13,6 +13,8 @@ function Navigation (props) {
     
     const url = props.location.pathname;
 
+    if(url.includes("dashboard")) return null
+
     const open_handler = (num) => {
         document.body.style.overflow = "hidden";
         if(num === 0) { set_login_open(true); return }

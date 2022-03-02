@@ -4,6 +4,7 @@ import './styles/main.scss';
 import Router from './Router';
 
 import { AuthProvider } from './contexts/Auth.context';
+import { MenuProvider } from './contexts/Menu.context';
 
 
 function App(){  
@@ -11,9 +12,11 @@ function App(){
     return (
         <>
         <AuthProvider>
-            <BrowserRouter>
-                <Router />
-            </BrowserRouter>
+            <MenuProvider>
+                <BrowserRouter>
+                    <Router />
+                </BrowserRouter>
+            </MenuProvider>
         </AuthProvider>
         </>
     );

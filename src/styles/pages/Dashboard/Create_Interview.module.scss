@@ -1,0 +1,17 @@
+.container {
+    background-color: var(--white);
+    border-radius: 2rem;
+    height: 90%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form {
+    border-left: 1px solid var(--text_light);
+    padding: 3rem;
+}
+
+.display {
+    padding: 3rem;
+}

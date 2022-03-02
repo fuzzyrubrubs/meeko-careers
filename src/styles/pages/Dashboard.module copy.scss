@@ -1,0 +1,44 @@
+.dashboard {
+    height: 91vh;
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 7%;
+};
+
+.menu {
+    margin-top: -10vh;
+};
+
+
+.content {
+    padding-right: 10%;
+    &::-webkit-scrollbar {
+        height: 3px;              /* height of horizontal scrollbar ← You're missing this */
+        width: 3px;               /* width of vertical scrollbar */
+        border-radius: 20px;
+      }
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px var(--text_light);
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--text_light_medium);
+        border-radius: 20px;
+      }
+};
+
+.form {
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 3rem;
+    }
+};
+
+

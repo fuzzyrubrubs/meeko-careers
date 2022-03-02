@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../../styles/components/dashboard/Requirements.module.scss';
+import styles from '../../styles/components/inputs/Inputs.module.scss';
 import Text_Input from '../inputs/Text_Input';
 import Button_Main from '../items/Button_Main';
 
@@ -11,7 +11,7 @@ function Requirements (props) {
     const add_handler = () => {
         props.input([...data, skill]);
         set_skill("");
-    }
+    };
 
     return (
         <div className={styles.requirements}>
@@ -22,7 +22,7 @@ function Requirements (props) {
             </div>
             {data.map(item => <p>- {item}</p>)}
         </div>
-    )
-}
+    );
+};
 
 export default Requirements;

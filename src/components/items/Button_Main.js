@@ -10,7 +10,7 @@ function Button_Main(props){
         return
     }
     return (
-        <button className={`${styles.button} ${props.hollow ? styles.button__hollow : null}`} style={props.size ? {width: props.size} : null} onClick={() => action_handler()} >
+        <button className={`${styles.button} ${props.hollow ? styles.button__hollow : null} ${props.active === false ? styles.button__inactive : null}`} style={props.size ? {width: props.size} : null} onClick={() => action_handler()} >
             {props.loader ? <Item_Loader /> : props.children}
         </button>
     )

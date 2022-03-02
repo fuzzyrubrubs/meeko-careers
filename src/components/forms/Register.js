@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Button_Main from '../items/Button_Main';
 import Text_Input from '../inputs/Text_Input';
 import Password_Input from '../inputs/Password_Input';
-import { register_user } from '../../firebase/methods/User_Functions';
+import { create_task, register_user } from '../../firebase/methods/User_Functions';
 
 function Register (props) {
     const history = useHistory();
@@ -22,6 +22,10 @@ function Register (props) {
         }
     }
 
+    const add_starter_tasks = () => {
+        create_task()
+    };
+
     const submit_handler = () => {
         if(loader === false) {
             set_loader(true);
@@ -30,6 +34,7 @@ function Register (props) {
             register_user(user_main, user_profile).then(result => {
                 if(result === true) {
                     set_stage(1);
+                    add_starter_tasks(user_main, user_profile);
                 } else {
                     set_loader(false);
                     set_status(result);

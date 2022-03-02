@@ -7,6 +7,7 @@ import { get_resume, upload_resume } from '../../firebase/methods/Storage_Functi
 import { update_my_profile } from '../../firebase/methods/User_Functions';
 import Upload_Resume from '../portfolio/Upload_Resume';
 import { apply_job } from '../../firebase/methods/Job_Functions';
+import { interview_types } from '../../tools/global_variables';
 
 function Apply (props) {
     const data = props.data;
@@ -42,11 +43,13 @@ function Apply (props) {
         set_selected(1)
     }
 
+
     const apply_handler = async () => {
         set_loader(true);
+        const interviews = data.interviews.map(item =>  interview_types[item.type])
         try {
-            apply_job(data.id, user_data.id, {email: email, phone: phone});
-            set_applications(prev => [...prev, {user_id: user_data.id, job_id: data.id, status: 0, email: email, phone: phone}])
+            apply_job(data.job_id, interviews, user_data.id, {email: email, phone: phone});
+            set_applications(prev => [...prev, {user_id: user_data.id, job_id: data.id, status: 0, interviews: interviews, email: email, phone: phone}])
             set_loader(false);
             set_selected(2);
         } catch(error) {

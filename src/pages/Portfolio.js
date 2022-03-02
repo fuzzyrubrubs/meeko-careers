@@ -63,7 +63,7 @@ function Portfolio (props) {
                     {edit_profile || user_info.linkedIn ? <p><FaLinkedin /> {edit_profile ? <Edit_Input value={user_info} placeholder="Add linkedIn" input={set_user_info} name="linkedIn" /> : user_info.linkedIn }</p> : null}
                     {edit_profile || user_info.website ? <p><MdWebAsset /> {edit_profile ? <Edit_Input value={user_info} placeholder="Add website" input={set_user_info} name="website" /> : user_info.website || "Add website" }</p> : null}
                 </div>
-                {edit_profile ? <Upload_Resume file={set_resume} /> : <a className={styles.profile__download} href={resume} download>Download Resume</a>}
+                {edit_profile ? <Upload_Resume file={set_resume} /> : <a className={styles.profile__download} href={resume} download>View Resume</a>}
                 {edit_profile ? <div className={styles.profile__action}><Button_Main action={() => {save_profile(); set_edit_profile(false)}}>Save</Button_Main></div> : null}
             </section>
             <section className={styles.resume}>

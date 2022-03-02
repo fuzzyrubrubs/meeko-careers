@@ -24,7 +24,7 @@ function Job_Post (props) {
         <div className={`${styles.preview} ${props.selected ? styles.active : null}`} onClick={() => props.select()}>
             <div className="between-row">
                 <small>{job_categories[data.category]}</small>
-                <small>{time_since(data.timestamp.seconds)}</small>
+                <small>{time_since(data.timestamp)}</small>
             </div>
             <h3>{data.title}</h3>
             <div className={styles.preview__details}>
@@ -33,7 +33,7 @@ function Job_Post (props) {
                 <p><GoLocation /> {job_location[data.location]}</p>
             </div>
             <div>
-                <small>{data.about}</small>
+                <small>{data.about.slice(0, 200)}...</small>
             </div>
             <div className={styles.preview__action}> 
                 {props.applied ? <Button_Main hollow={true}>Applied</Button_Main> : <Button_Main action={open_handler}>Apply</Button_Main>}
