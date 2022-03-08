@@ -58,7 +58,7 @@ const create_user_profile = async (user_id, user_info) => {
         id: user_id,
         email: user_info.email,
         name: user_info.name,
-        avatar: "", 
+        avatar: "https://firebasestorage.googleapis.com/v0/b/meeko-careers.appspot.com/o/avatars%2Fuser-icon-grey.png?alt=media&token=02790319-4309-435f-a1d8-8793b9edd8c4", 
         title: null,
         location: null, 
         phone: null,
@@ -69,7 +69,7 @@ const create_user_profile = async (user_id, user_info) => {
         summary: "",
         experience: [],
         education: [],
-        account_type: 0,
+        account_type: user_info.type,
         last_seen: null,
         tasks: [],
         job: null
@@ -107,7 +107,7 @@ const get_applications = async (user_id) => {
 
 const get_employements = async (user_id) => {
     return await db.collectionGroup("employee").where("user_id", "==", user_id).get().then(querySnapshot => {
-        return querySnapshot.docs.map(doc => doc.data());
+        return querySnapshot.docs.map(doc => doc.data().company_id);
     });
   }
 

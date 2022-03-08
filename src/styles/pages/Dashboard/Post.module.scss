@@ -8,7 +8,7 @@
 .content {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 4rem 2fr 3rem 2fr 3rem 5rem;
+    grid-template-rows: 20rem 5rem auto;
     row-gap: 2rem;
     height: 84vh;
 }
@@ -94,7 +94,7 @@
     grid-row: 1 / 4;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 4rem 1fr 3rem 50vh;
+    grid-template-rows: 20rem 1fr;
     gap: 2rem;
     height: 84vh;
 }

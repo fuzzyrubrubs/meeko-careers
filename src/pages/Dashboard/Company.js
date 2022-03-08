@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import Job_Status from '../../components/items/Job_Status';
 import { Grid, Header, Row } from '../../components/styles/Containers';
 import styles from '../../styles/pages/Dashboard/Company/Company.module.scss';
-import Job from './Job';
+import Job from './Post';
 import Analytics from './Company/Analytics';
 import Employees from './Company/Employees';
-import Create_Job from './Company/Create_Job';
 import { FaChevronLeft } from "react-icons/fa";
 import { MenuContext } from '../../contexts/Menu.context';
+import Template_Tasks from './Company/Template_Tasks';
+import Job_List from './Company/Job_List';
 
 function Company (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
@@ -17,7 +18,7 @@ function Company (props) {
 
 
     useEffect(() => {
-        set_options(["Overview", "Employees", "Managers", "Onboarding", "Analytics", "Create Job"]);
+        set_options(["Overview", "Employees", "Templates", "Analytics", "Job List"]);
         set_title(data.name)
         return () => { 
             set_options([]);
@@ -73,12 +74,11 @@ function Company (props) {
     );
 
     const content = [
-        main, 
+        main,
         <Employees go_back={go_back} />, 
-        <Employees go_back={go_back} />, 
-        <Employees go_back={go_back} />,
+        <Template_Tasks go_back={go_back} />, 
         <Analytics go_back={go_back} />,
-        <Create_Job go_back={go_back} />
+        <Job_List go_back={go_back} />,
     ]
 
 

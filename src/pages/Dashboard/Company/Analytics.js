@@ -1,12 +1,12 @@
-import styles from '../../../styles/pages/Dashboard/Overview.module.scss';
+import styles from '../../../styles/pages/Dashboard/Post.module.scss';
 import Candidate_Preview from '../../../components/dashboard/Candidate_Preview';
 import { FiFileText, FiArrowUpRight } from "react-icons/fi";
 import { useState } from 'react';
-import Candidates from '../Job/Candidates';
+import Candidates from '../Post/Candidates';
 import { FaChevronLeft } from "react-icons/fa";
 import Job_Process from '../../../components/dashboard/Job_Process';
 import { TiBriefcase } from "react-icons/ti";
-import Interviews from '../Job/Interviews';
+import Interviews from '../Post/Interviews';
 import Employees from '../Company/Employees';
 
 

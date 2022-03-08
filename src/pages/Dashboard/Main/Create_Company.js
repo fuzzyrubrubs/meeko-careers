@@ -1,12 +1,12 @@
-import styles from '../../styles/pages/Dashboard.module.scss';
-import Text_Input from '../inputs/Text_Input';
-import Button_Main from '../items/Button_Main';
-import { create_company } from '../../firebase/methods/Company_Functions';
+import styles from '../../../styles/pages/Dashboard.module.scss';
+import Text_Input from '../../../components/inputs/Text_Input';
+import Button_Main from '../../../components/items/Button_Main';
+import { create_company } from '../../../firebase/methods/Company_Functions';
 import { useContext, useState } from 'react';
-import generatePushID from '../../tools/IDGenerator';
-import Requirements from '../dashboard/Requirements';
-import Add_Managers from '../dashboard/Add_Managers';
-import { AuthContext } from '../../contexts/Auth.context';
+import generatePushID from '../../../tools/IDGenerator';
+import Requirements from '../../../components/dashboard/Requirements';
+import Add_Managers from '../../../components/dashboard/Add_Managers';
+import { AuthContext } from '../../../contexts/Auth.context';
 
 
 function Create_Company (props) {

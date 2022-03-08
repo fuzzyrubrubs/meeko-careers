@@ -12,13 +12,37 @@
             height: 7rem;
             border-radius: 7rem;
             object-fit: cover;
+            background-color: var(--white);
         }
     }
     &__options {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
+        & svg {
+            color: var(--white);
+            font-size: 2.5rem;
+        }
+        & div {
+            padding: 1rem;
+            width: 8rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.219);
+                & p { color: var(--white);}
+                & svg { color: var(--white);}
+            }
+            & small {
+                color: var(--white);
+            }
+        }
     }
     &__menu {
+        margin-bottom: 4rem;
         & div {
             display: flex;
             align-items: center;
@@ -26,6 +50,33 @@
             gap: 1rem;
             border-radius: 1.2rem;
             cursor: pointer;
+            & svg, p {
+                color: rgba(255, 255, 255, 0.781);
+            }
+            & p {
+                font-weight: 700;
+                margin-right: auto;
+            }
+            & svg {
+                font-size: 2rem;
+            }
+            & svg:last-child {
+                font-size: 1.5rem;
+            }
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.219);
+                & p { color: var(--white);}
+                & svg { color: var(--white);}
+            }
+        }
+        & li {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem 1.5rem;
+            gap: 1rem;
+            border-radius: 1.2rem;
+            cursor: pointer;
+            list-style: none;
             & svg, p {
                 color: rgba(255, 255, 255, 0.781);
             }
@@ -43,22 +94,6 @@
                 background-color: rgba(255, 255, 255, 0.219);
                 & p { color: var(--white);}
                 & svg { color: var(--white);}
-            }
-        }
-        & li {
-            list-style: none;
-            padding: 0 1rem;
-            border-left: 1.2px solid rgba(255, 255, 255, 0.781);
-            margin-left: 2.5rem;
-            & p {
-                color: rgba(255, 255, 255, 0.781);
-                padding: 0.6rem 1.5rem;
-                border-radius: 1.2rem;
-                font-weight: 500;
-                cursor: pointer;
-                &:hover {
-                    background-color: rgba(255, 255, 255, 0.219);
-                }
             }
         }
     }

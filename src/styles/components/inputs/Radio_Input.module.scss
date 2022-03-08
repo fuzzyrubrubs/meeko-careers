@@ -1,13 +1,9 @@
 .radio {
-    display: flex;
-    align-items: center;
-    & label {
-        text-transform: capitalize;
-        width: 10rem;
-    }
+   margin-bottom: 4rem;
+
     &__options {     
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
         gap: 2rem;
     }
     &__wrapper {

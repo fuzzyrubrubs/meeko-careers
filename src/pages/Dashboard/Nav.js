@@ -10,14 +10,16 @@ function Nav () {
     const [selected, set_selected] = useState(0);
     const history = useHistory();
 
+    const url = history.location.pathname;
+
     return ( 
         <div className={styles.navigation}>
             <Link to="/" className={styles.navigation__logo}></Link>
             <div className={styles.navigation__menu}>
-                <p class="bold" onClick={() => history.goBack()}>Home</p>
-                <p class="bold" onClick={() => history.goBack()}>Find Jobs</p>
-                <p class="bold" onClick={() => history.goBack()}>Dashboard</p>
-                <p class="bold" onClick={() => history.goBack()}>Portfolio</p>
+                <Link to="/" className={`${styles.navigation__menu__item}`}>Home</Link>
+                <Link to="/jobs" className={`${styles.navigation__menu__item}`}>Find Jobs</Link>
+                <Link to="/dashboard" className={`${styles.navigation__menu__item} ${styles.navigation__menu__item__active}`}>Dashboard</Link>
+                <Link to="/portfolio" className={`${styles.navigation__menu__item}`}>Portfolio</Link>
             </div>
             <div className={styles.navigation__notes}><IoMdNotificationsOutline /></div>
         </div>

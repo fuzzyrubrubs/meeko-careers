@@ -6,7 +6,7 @@ import { concat_ids } from "../tools/global_functions";
 export const AuthContext = createContext();
 
 export function AuthProvider(props) {
-    const [user, set_user] = useState(null);
+    const [user, set_user] = useState();
     const [user_data, set_user_data] = useState({});
     const [applications, set_applications] = useState([]);
     const [employement_data, set_employment_data] = useState([]);
