@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
-import Profile from "./Panel/Profile";
-import Tasks from "./Panel/Tasks";
 import styles from '../../styles/pages/Dashboard/Panel/Panel.module.scss';
 import { IoMdLogOut, IoIosCheckmarkCircleOutline, IoMdCheckboxOutline, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineHome } from "react-icons/ai";
-import { FaTasks, FaUsers, FaChevronDown } from "react-icons/fa";
+import { FaTasks, FaUsers, FaChevronDown, FaChevronLeft } from "react-icons/fa";
 import { FiMessageSquare } from "react-icons/fi";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { convert_name } from "../../tools/global_functions";
@@ -13,15 +11,12 @@ import { MenuContext } from "../../contexts/Menu.context";
 
 function Panel (props) {
     const history = useHistory();
-    const params = useParams();
     const { options, selected, set_selected, title } = useContext(MenuContext);
     const [display_applications, set_display_applications] = useState(true);
     const [display_companies, set_display_companies] = useState(true);
     const [display_posts, set_display_posts] = useState(true);
     const [display_jobs, set_display_jobs] = useState(true);
 
-    console.log(history)
-    console.log(params)
 
     const user_data = props.user_data;
     const company_data = props.companies;
@@ -30,53 +25,44 @@ function Panel (props) {
     const application_data = props.applications;
 
 
-    console.log(company_data)
-
-    console.log(post_data)
-
-    console.log(params)
-
-    console.log(application_data)
-
-
     const list = (
-        <div>
+        <>
 
             {application_data.length === 0 ? null :
-            <section className={styles.panel__menu}>
+            <section className={styles.panel__category}>
                 <div onClick={() => set_display_applications(!display_applications)}><p>Applications</p> <FaChevronDown /></div>
-                {display_applications === true ? application_data.map(item => <li><p>{item.job_data.title}</p></li>) : null}
+                {display_applications === true ? application_data.map(item => <Link to={`/dashboard/applications/${item.job_id}`}><li><p>{item.job_data.title}</p></li></Link>) : null}
             </section>
             }
 
             {job_data.length === 0 ? null :
-            <section className={styles.panel__menu}>
+            <section className={styles.panel__category}>
                 <div onClick={() => set_display_jobs(!display_jobs)}><p>Jobs</p> <FaChevronDown /></div>
-                {display_jobs === true ? job_data.map(item => <li><p>{item.title}</p></li>) : null}
+                {display_jobs === true ? job_data.map(item => <Link to={`/dashboard/jobs/${convert_name(item.company_data.name)}`}><li><p>{item.company_data.name}</p></li></Link>) : null}
             </section>
             }
 
             {post_data.length === 0 ? null :
-            <section className={styles.panel__menu}>
+            <section className={styles.panel__category}>
                 <div onClick={() => set_display_posts(!display_posts)}><p>Posts</p> <FaChevronDown /></div>
-                {display_posts === true ? post_data.map(item => <li><p>{item.title}</p></li>) : null}
+                {display_posts === true ? post_data.map(item => <Link to={`/dashboard/posts/${item.job_id}`}><li><p>{item.title}</p></li></Link>) : null}
             </section>
             }
 
             {company_data.length === 0 ? null :
-            <section className={styles.panel__menu}>
+            <section className={styles.panel__category}>
                 <div onClick={() => set_display_companies(!display_companies)}><p>Companies</p> <FaChevronDown /></div>
-                {display_companies === true ? company_data.map(item => <Link to="/dashboard/company/anna-corp"><li><p>{item.name}</p></li></Link>) : null}
+                {display_companies === true ? company_data.map(item => <Link to={`/dashboard/company/${convert_name(item.name)}`}><li><p>{item.name}</p></li></Link>) : null}
             </section>
             }
 
-        </div>
+        </>
     );
 
     const menu = (
         <>
-        <p>{title}</p>
-        <section className={styles.panel__menu}>
+        <div className={styles.menu__title}><div onClick={() => {history.push('/dashboard'); set_selected(0);}}><FaChevronLeft /></div> <h4>{title}</h4></div>
+        <section className={styles.menu__list}>
             {options.map((item, index) => <div className={selected === index ? styles.active : null}><p onClick={() => set_selected(index)}>{item}</p></div>)}
         </section>
         </>
@@ -88,20 +74,22 @@ function Panel (props) {
         <main className={styles.panel}>
             <section className={styles.panel__user}>
                 <img src={user_data.avatar} />
-                <p>{user_data.name}</p>
+                <h5 class="bold">{user_data.name}</h5>
             </section>
 
             <section className={styles.panel__options}>
-                <div onClick={() => history.push('/dashboard')}><AiOutlineHome /><small>Home</small></div>
-                <div><FaTasks /><small>Tasks</small></div>
-                <div><FiMessageSquare /><small>Messages</small></div>
+                <div onClick={() => {history.push('/dashboard'); set_selected(0);}}><AiOutlineHome /><small>Home</small></div>
+                <div onClick={() => history.push('/dashboard/tasks')}><FaTasks /><small>Tasks</small></div>
+                <div onClick={() => history.push('/dashboard/messages')}><FiMessageSquare /><small>Messages</small></div>
             </section>
 
-            {options.length === 0 ? list : menu}
+            <section className={styles.menu}>
+                {options.length === 0 ? list : menu}
+            </section>
     
-            <section>
-                <IoMdLogOut />
-                <small>Logout</small>
+            <section className={styles.actions}>
+                <div><IoMdLogOut /></div>
+                <div><IoMdLogOut /></div>
             </section>
         </main>
     )

@@ -15,6 +15,8 @@ import { Route, useParams } from 'react-router-dom';
 import Post from './Dashboard/Post';
 import Application from './Dashboard/Application';
 import Job from './Dashboard/Job';
+import Tasks from './Dashboard/Main/Tasks';
+import Messages from './Dashboard/Main/Messages';
 
 
 
@@ -36,14 +38,14 @@ function Dashboard (props) {
         const fetch_data = async () => {  
             const company_data = manager_data.length > 0 ? await get_companies(manager_data) : [];
             const post_data = recruiter_data.length > 0 ? await get_jobs(recruiter_data) : [];
-            const employee_data = employement_data.length > 0 ? await get_companies(employement_data) : [];
             set_companies(company_data);
             set_posts(post_data);
-            set_jobs(employee_data);
             set_loader(false);
         };
         fetch_data();
     }, []);    
+
+    console.log(employement_data)
 
     if(loader) return <Item_Loader />
     
@@ -55,20 +57,24 @@ function Dashboard (props) {
     console.log(posts)
     console.log(params)
 
+    console.log(applications)
+
 
     return (
         <main className={styles.dashboard}>
             <div className={styles.container}>
                 <Nav />
                 <section className={styles.main}>
-                    <Route exact path="/dashboard" render={(props) => <Main companies={companies} posts={posts} jobs={jobs} applications={applications}  /> } /> 
+                    <Route exact path="/dashboard" render={(props) => <Main companies={companies} posts={posts} jobs={employement_data} applications={applications}  /> } /> 
+                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks /> } />
+                    <Route exact path="/dashboard/messages" render={(props) => <Messages /> } /> 
                     <Route exact path="/dashboard/company/:name" render={(props) => <Company data={companies.find(company => convert_name(company.name) === params)} /> } /> 
                     <Route exact path="/dashboard/posts/:id" render={(props) => <Post data={posts.find(post => post.job_id === params)} /> } /> 
-                    <Route exact path="/dashboard/applications/:id" render={(props) => <Application /> } /> 
-                    <Route exact path="/dashboard/jobs/:id" render={(props) => <Job /> } /> 
+                    <Route exact path="/dashboard/applications/:id" render={(props) => <Application data={applications.find(post => post.job_id === params)} /> } /> 
+                    <Route exact path="/dashboard/jobs/:id" render={(props) => <Job data={employement_data.find(job => convert_name(job.company_data.name) === params)} /> } /> 
                 </section>
             </div>
-            <Panel params={params} user_data={user_data} companies={companies} posts={posts} jobs={jobs} applications={applications} />
+            <Panel params={params} user_data={user_data} companies={companies} posts={posts} jobs={employement_data} applications={applications} />
         </main>
     )
 }

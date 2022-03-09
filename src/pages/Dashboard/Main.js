@@ -1,5 +1,5 @@
 import styles from '../../styles/pages/Dashboard/Main.module.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { convert_name } from '../../tools/global_functions';
 import Company from './Main/Create_Company';
@@ -10,29 +10,37 @@ import Pie_Chart from '../../components/items/Pie_Chart';
 import Modal from '../../components/UI/Modal';
 import { useHistory } from 'react-router-dom';
 import Join_Company from './Main/Join_Company';
+import { MenuContext } from '../../contexts/Menu.context';
 
 
 function Main (props) {
-    const [selected, set_selected] = useState(0);
+    const { selected, set_selected } = useContext(MenuContext);
+    // const [selected, set_selected] = useState(0);
     const [manager, set_manager] = useState(true);
-    const [options, set_options] = useState(false);
+    const [selector, set_selector] = useState(false);
     const companies = props.companies;
     const posts = props.posts;
     const jobs = props.jobs;
     const applications = props.applications;
     const history = useHistory()
 
+    useEffect(() => {
+        return () => { 
+            set_selected(0);
+        };
+    }, []);
+
 
     const _add = () => {
-        set_options(true);
+        set_selector(true);
     };
 
     const options_grid = (
         <section className={styles.grid}>
             <h3 onClick={() => history.push('/jobs')}>Find Job</h3>
-            <h3 onClick={() => set_selected(3)}>Join Company</h3>
-            <h3 onClick={() => set_selected(1)}>Create Company</h3>
-            <h3 onClick={() => set_selected(2)}>Create Job</h3>
+            <h3 onClick={() => {set_selected(3); set_selector(false)}}>Join Company</h3>
+            <h3 onClick={() => {set_selected(1); set_selector(false)}}>Create Company</h3>
+            <h3 onClick={() => {set_selected(2); set_selector(false)}}>Create Job</h3>
         </section>
     )
     
@@ -52,14 +60,14 @@ function Main (props) {
         </Link>
     ));
     const job_items = jobs.map(item => (
-        <Link to={`/dashboard/jobs/${item.id}`} className={styles.content__item}>
+        <Link to={`/dashboard/jobs/${convert_name(item.company_data.name)}`} className={styles.content__item}>
             <div className={`shape_pink ${styles.content__item__box}`}></div>
-            <h4 className={styles.content__item__text}>{item.name}</h4>
+            <h4 className={styles.content__item__text}>{item.company_data.name}</h4>
             <small>Job</small>
         </Link>
     ));
     const application_items = applications.map(item => (
-        <Link to={`/dashboard/applications/${item.id}`} className={styles.content__item}>
+        <Link to={`/dashboard/applications/${item.job_id}`} className={styles.content__item}>
             <div className={`shape_pink ${styles.content__item__box}`}></div>
             <h4 className={styles.content__item__text}>{item.job_data.title}</h4>
             <small>Application</small>
@@ -81,7 +89,7 @@ function Main (props) {
             </div>
         
         </section>
-        {options ? <Modal close={() => set_options(false)}>{options_grid}</Modal> : null}
+        {selector ? <Modal close={() => set_selector(false)}>{options_grid}</Modal> : null}
     </main>
     )
 

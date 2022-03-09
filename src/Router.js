@@ -27,6 +27,8 @@ function Router(){
                 <Route exact path="/" render={(props) => <Landing {...props} /> } /> 
                 <Route exact path="/jobs" render={(props) => <Jobs {...props} /> } /> 
                 <Route exact path="/dashboard" render={(props) => <Dashboard user_data={user_data} {...props} /> } /> 
+                <Route exact path="/dashboard/tasks" render={(props) => <Dashboard user_data={user_data} {...props} /> } /> 
+                <Route exact path="/dashboard/messages" render={(props) => <Dashboard user_data={user_data} {...props} /> } /> 
                 <Route exact path="/dashboard/:type/:name" render={(props) => <Dashboard user_data={user_data} {...props} /> } />  
                 <Route exact path="/portfolio" render={(props) => <Portfolio user_data={user_data} {...props} /> } /> 
                 {/* <Route exact path="/job/:id" render={(props) => <Portfolio {...props} /> } />  */}

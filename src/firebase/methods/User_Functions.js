@@ -1,4 +1,5 @@
 import { firebase, db, auth } from '../Firebase';
+import { get_company } from './Company_Functions';
 import { get_job, get_user_interviews } from './Job_Functions';
 
 const register_user = (main, profile) => {
@@ -98,16 +99,21 @@ const delete_portfolio_entry = (user_id, entry, type) => {
 const get_applications = async (user_id) => {
     return await db.collectionGroup("candidates").where('user_id', '==', user_id).get().then(async (querySnapshot) => {
         return await Promise.all(querySnapshot.docs.map(async (doc) => {
-            const interview_data = await get_user_interviews(doc.data().job_id, user_id);
-            const job_data = await get_job(doc.data().job_id);
-            return {...doc.data(), interview_data, job_data}
+            const data = doc.data();
+            const interview_data = await get_user_interviews(data.job_id, user_id);
+            const job_data = await get_job(data.job_id);
+            return {...data, interview_data, job_data}
         }))
     });
 };
 
 const get_employements = async (user_id) => {
-    return await db.collectionGroup("employee").where("user_id", "==", user_id).get().then(querySnapshot => {
-        return querySnapshot.docs.map(doc => doc.data().company_id);
+    return await db.collectionGroup("employees").where("user_id", "==", user_id).get().then(async (querySnapshot) => {
+        return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const company_data = await get_company(data.company_id);
+            return {...data, company_data}
+        }));
     });
   }
 
