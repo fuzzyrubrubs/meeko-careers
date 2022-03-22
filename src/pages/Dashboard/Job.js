@@ -1,9 +1,18 @@
+import Header from "../../components/headers/Header";
+import styles from '../../styles/pages/Dashboard/Job.module.scss';
 
 
-function Job () {
+function Job (props) {
+    const data = props.data;
+    console.log(props)
 
     return (
-        <h1>Job</h1>
+        <>
+        <Header name="Employee">{data.company_data.name}</Header>
+        <main>
+            
+        </main>
+       </>
     )
 }
 

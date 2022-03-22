@@ -2,9 +2,9 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr;
-    column-gap: 5rem;
-    padding-right: 6rem;
+    column-gap: 4rem;
     height: 91vh;
+    margin-top: 4rem;
 };
 
 .content {
@@ -82,25 +82,21 @@
     gap: 2rem;
 };
 
-.next_interview {
-    background-color: red;
-};
 
 .analytics {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    padding: 0.5rem 2.5rem;
     background-color: var(--background_light);
     border-radius: 2rem;
-    & div {
-        height: 5rem;
-        width: 5rem;
-        border-radius: 5rem;
-        background-color: red;
-    }
-    & h2 {
-        font-size: 3.3rem;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--primary);
+        & h4, p {
+            color: var(--white);
+        }
     }
     & p {
         color: var(--text_dark);
@@ -108,20 +104,6 @@
     }
 };
 
-.data {
-
-}
-
-.interview_template {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--background_light);
-    border-radius: 2rem;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-}
 
 
 .calendar__item {
@@ -146,20 +128,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 1rem;
+    border-radius: 2rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--background_light);
+    }
 
-&__image {
-    background-image: url('../../../assets/about/1.png');
-    background-position: center;
-    background-size: cover;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 3rem;
-    background-color: orange;
-};
-& span {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
+    &__image {
+        background-image: url('../../../assets/about/1.png');
+        background-position: center;
+        background-size: cover;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 5rem;
+        background-color: orange;
+    };
+    & span {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
 }

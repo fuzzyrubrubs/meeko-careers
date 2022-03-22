@@ -1,0 +1,38 @@
+
+.main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    height: 66vh;
+    margin-top: 4rem;
+    gap: 5rem;
+
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.details {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    & h5 {
+        margin-bottom: 1rem;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1rem;
+};
+
+.interview {
+    height: 15rem;
+    width: 100%;
+    border-radius: 2rem;
+    background-color: var(--text_light);
+}

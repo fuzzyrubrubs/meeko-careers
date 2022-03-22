@@ -13,13 +13,14 @@ import Edit_Icon from '../../components/items/Edit_Icon';
 import Pie_Chart from '../../components/items/Pie_Chart';
 import { MenuContext } from '../../contexts/Menu.context';
 import Edit_Post from './Post/Edit_Post';
+import Header from '../../components/headers/Header';
 
 
 
 
 const Grid = (props) => <div className={styles.grid} style={{gridTemplateColumns: props.columns, gridTemplateRows: props.rows}}>{props.children}</div>;
 const List = (props) => <div className={styles.list}>{props.children}</div>;
-const Header = (props) => <h4 className={styles.header}>{props.children}</h4>;
+const Grid_Header = (props) => <h4 className={styles.header}>{props.children}</h4>;
 
 function Overview (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
@@ -37,6 +38,8 @@ function Overview (props) {
     }, []);
 
     const main = (
+        <>
+        <Header name="Post">{data.title}</Header>
         <main className={styles.main}>
         <section className={styles.content}>
             <Grid columns="1fr 1fr" rows="1fr 1fr">
@@ -58,27 +61,28 @@ function Overview (props) {
                 </div>
                 <div className={styles.small_box}>
                     <div className={styles.small_box__icon}><FiFileText /></div>
-                    <h3>9</h3>
-                    <p class="medium">Messages</p>
+                    <h3>4</h3>
+                    <p class="medium">Templates</p>
                     <span><FiArrowUpRight/></span>
                 </div>
             </Grid>
-      
-            <Header>Analytics</Header>
-            <Grid columns="1fr 1fr 1fr" rows="1fr">
-                <div class="centered-column">
-                    <Pie_Chart data={[128, 48, 22, 11]} />
-                    <p class="bold">Applicants</p>
-                </div>
-                <div class="centered-column">
-                    <Pie_Chart data={[22, 11, 10]} />
-                    <p class="bold">Interviews</p>
-                </div>
-                <div class="centered-column">
-                    <Pie_Chart data={[22, 11, 10]} />
-                    <p class="bold">Tasks</p>
-                </div>
-            </Grid>
+            <div>
+                <Grid_Header>Analytics</Grid_Header>
+                <Grid columns="1fr 1fr 1fr" rows="1fr">
+                    <div class="centered-column">
+                        <Pie_Chart data={[128, 48, 22, 11]} />
+                        <p class="bold">Applicants</p>
+                    </div>
+                    <div class="centered-column">
+                        <Pie_Chart data={[22, 11, 10]} />
+                        <p class="bold">Interviews</p>
+                    </div>
+                    <div class="centered-column">
+                        <Pie_Chart data={[22, 11, 10]} />
+                        <p class="bold">Tasks</p>
+                    </div>
+                </Grid>
+            </div>
             
         </section>
         <section className={styles.candidates}>
@@ -86,7 +90,7 @@ function Overview (props) {
                     <div><p class="bold">Job Title</p></div>
                     <div><p>{data.title}</p></div>
                     <div><p class="bold">Company</p></div>
-                    <div><p>Anna Corp</p></div>
+                    <div><p>Lucidica</p></div>
                     <div><p class="bold">Salary</p></div>
                     <div><p>45k</p></div>
                     <div><p class="bold">Status</p></div>
@@ -98,7 +102,7 @@ function Overview (props) {
                     <div><p class="bold">Hiring Manager</p></div>
                     <div><p>Anna Taylor</p></div>
             </Grid>
-            <Header>Upcoming Interviews</Header>
+            <Grid_Header>Calender</Grid_Header>
             <List>
                 <small style={{marginBottom: "1rem"}}>11 December</small>
                 <Calendar_Preview data={{time: "09:00", type: 1, name: "Oberyn Martell"}} />
@@ -110,6 +114,7 @@ function Overview (props) {
             </List>
         </section>
     </main>
+    </>
     )
 
     const go_back = () => set_selected(0);

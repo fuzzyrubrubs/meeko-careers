@@ -6,8 +6,9 @@ import { AuthContext } from '../../contexts/Auth.context';
 import { get_resume, upload_resume } from '../../firebase/methods/Storage_Functions';
 import { update_my_profile } from '../../firebase/methods/User_Functions';
 import Upload_Resume from '../portfolio/Upload_Resume';
-import { apply_job } from '../../firebase/methods/Job_Functions';
 import { interview_types } from '../../tools/global_variables';
+import { create_application } from '../../firebase/methods/Applicant_Functions';
+import generatePushID from '../../tools/IDGenerator';
 
 function Apply (props) {
     const data = props.data;
@@ -45,11 +46,11 @@ function Apply (props) {
 
 
     const apply_handler = async () => {
+        const application_id = generatePushID();
         set_loader(true);
-        const interviews = data.interviews.map(item =>  interview_types[item.type])
         try {
-            apply_job(data.job_id, interviews, user_data.id, {email: email, phone: phone});
-            set_applications(prev => [...prev, {user_id: user_data.id, job_id: data.id, status: 0, interviews: interviews, email: email, phone: phone}])
+            create_application(application_id, data.post_id, data.company_id, user_data.id, {email: email, phone: phone});
+            set_applications(prev => [...prev, {application_id: application_id, company_id: data.company_id, user_id: user_data.id, post_id: data.id, stage: 0, email: email, phone: phone, closed: false}])
             set_loader(false);
             set_selected(2);
         } catch(error) {

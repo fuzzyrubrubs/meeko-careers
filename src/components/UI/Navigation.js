@@ -30,8 +30,8 @@ function Navigation (props) {
 
     const member = (
         <>
+        <Link to="/portfolio" className={`${styles.navigation__menu__item} ${url === "/portfolio" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}>Portfolio</Link>
         <Link to="/dashboard" className={`${styles.navigation__menu__item} ${url === "/dashboard" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}>Dashboard</Link>
-        <Link to="/portfolio" className={`${styles.navigation__menu__avatar} ${url === "/portfolio" && login_open === false && register_open === false ? styles.navigation__menu__item__active : null}`}><img src={user_data.avatar} /></Link>
         </>
     );
 

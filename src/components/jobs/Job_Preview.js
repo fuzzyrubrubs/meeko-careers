@@ -5,7 +5,7 @@ import { FaSortDown, FaSortUp  } from "react-icons/fa";
 import { IoMdToday } from "react-icons/io";
 import Button_Main from '../items/Button_Main';
 import { useState } from 'react';
-import { job_categories, job_hours, job_location } from '../../tools/global_variables';
+import { job_categories, job_hours, job_remote } from '../../tools/global_variables';
 import Apply from '../forms/Apply';
 
 function Job_Preview (props) {
@@ -28,7 +28,7 @@ function Job_Preview (props) {
                 <ul className={styles.details__list}>
                     <p><FiCreditCard/> ${data.salary}k <small>/ year</small></p>
                     <p><FiBriefcase/> {job_hours[data.hours]}</p>
-                    <p><GoLocation /> {job_location[data.location]}</p>
+                    <p><GoLocation /> {job_remote[data.location]}</p>
                 </ul>
             </div>
             <div className={expand ? styles.wrapper : null}>

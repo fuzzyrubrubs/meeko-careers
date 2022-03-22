@@ -1,0 +1,40 @@
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    
+    &__title {
+        margin-right: auto;
+        & h5 {
+            font-size: 3.5rem;
+            color: var(--text_light_medium);
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        };
+        & span {
+            background-color: var(--primary);
+            padding: 0.3rem 1rem;
+            font-size: 1rem;
+            color: var(--white);
+            border-radius: 2rem
+
+        }
+    }
+};
+
+.icon {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 5rem;
+    border: 0.5px solid var(--text_light_medium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & svg {
+        font-size: 2rem;
+        color: var(--text_light_medium);
+    }
+}

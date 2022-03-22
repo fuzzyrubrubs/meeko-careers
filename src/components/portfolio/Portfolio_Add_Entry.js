@@ -6,7 +6,7 @@ import Button_Main from '../items/Button_Main';
 
 function Portfolio_Add_Entry (props) {
     const data = props.data;
-    const [job, set_job] = useState("");
+    const [job, set_post] = useState("");
     const [company, set_company] = useState("");
     const [years, set_years] = useState("");
     const [months, set_months] = useState("");
@@ -14,7 +14,7 @@ function Portfolio_Add_Entry (props) {
     const add_handler = () => {
         props.input({...props.value, [props.type]: [...props.value[props.type], {job, company, years, months}] })
         props.save({job, company, years, months});
-        set_job("");
+        set_post("");
         set_company("");
         set_years("");
         set_months("");
@@ -23,7 +23,7 @@ function Portfolio_Add_Entry (props) {
     return (
         <>
         <div className={styles.form}>
-            <Text_Input value={job} input={set_job}>Job title</Text_Input>
+            <Text_Input value={job} input={set_post}>Job title</Text_Input>
             <Text_Input value={company} input={set_company}>Company</Text_Input>
             <Date_Input years_value={years} years_input={set_years} months_value={months} months_input={set_months}>Duration</Date_Input>
         </div>

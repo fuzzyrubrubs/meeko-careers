@@ -1,9 +1,10 @@
+import Header from "../../../components/headers/Header";
 
 
 function Messages () {
 
     return (
-        <h1>Messages</h1>
+        <Header name="All" back={true}>Messages</Header>
     )
 }
 

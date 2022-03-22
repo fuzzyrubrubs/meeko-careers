@@ -1,7 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 import { auth } from '../firebase/Firebase';
-import { get_applications, get_employements, get_managements, get_recruitments, get_user_data } from '../firebase/methods/User_Functions';
-import { concat_ids } from "../tools/global_functions";
+import { get_applications } from "../firebase/methods/Applicant_Functions";
+import { get_managements } from "../firebase/methods/Company_Functions";
+import { get_employements } from "../firebase/methods/Employee_Functions";
+import { get_recruitments } from "../firebase/methods/Post_Functions";
+import { get_user_data } from '../firebase/methods/User_Functions';
 
 export const AuthContext = createContext();
 
@@ -9,9 +12,9 @@ export function AuthProvider(props) {
     const [user, set_user] = useState();
     const [user_data, set_user_data] = useState({});
     const [applications, set_applications] = useState([]);
-    const [employement_data, set_employment_data] = useState([]);
-    const [recruiter_data, set_recruiter_data] = useState([]);
-    const [manager_data, set_manager_data] = useState([]);
+    const [jobs, set_jobs] = useState([]);
+    const [posts, set_posts] = useState([]);
+    const [companies, set_companies] = useState([]);
     
     useEffect(() => {
         var unlisten = auth.onAuthStateChanged(async (user) => {
@@ -23,21 +26,25 @@ export function AuthProvider(props) {
                 const m_data = await get_managements(user.uid);
                 set_user_data(u_data); 
                 set_applications(a_data);
-                set_employment_data(e_data);
-                set_recruiter_data(r_data);
-                set_manager_data(m_data);
+                set_jobs(e_data);
+                set_posts(r_data);
+                set_companies(m_data);
                 set_user(user.uid)   
             } else {
                 set_user(null);         
             }
     })
-    }, [])
+    }, []);
 
-    const all_ids = concat_ids(user_data.id, recruiter_data, manager_data);
+    console.log(companies)
+    console.log(posts)
+    console.log(applications)
+    console.log(user_data)
+    console.log(jobs)
 
 
     return (
-        <AuthContext.Provider value={{ user, user_data, applications, set_applications, employement_data, recruiter_data, manager_data, all_ids }}>
+        <AuthContext.Provider value={{ user, user_data, applications, set_applications, jobs, posts, companies }}>
             {props.children}
         </AuthContext.Provider>
     );

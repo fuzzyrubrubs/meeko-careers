@@ -5,7 +5,7 @@ import { convert_name } from '../../tools/global_functions';
 import Company from './Main/Create_Company';
 import { IoIosAdd } from "react-icons/io";
 import Create_Company from './Main/Create_Company';
-import Create_Job from './Main/Create_Job';
+import Create_Post from './Main/Create_Post';
 import Pie_Chart from '../../components/items/Pie_Chart';
 import Modal from '../../components/UI/Modal';
 import { useHistory } from 'react-router-dom';
@@ -22,7 +22,9 @@ function Main (props) {
     const posts = props.posts;
     const jobs = props.jobs;
     const applications = props.applications;
-    const history = useHistory()
+    const history = useHistory();
+
+    console.log(jobs)
 
     useEffect(() => {
         return () => { 
@@ -53,7 +55,7 @@ function Main (props) {
     ));
 
     const post_items = posts.map(item => (
-        <Link to={`/dashboard/posts/${item.job_id}`} className={styles.content__item}>
+        <Link to={`/dashboard/posts/${item.post_id}`} className={styles.content__item}>
             <div className={`shape_pink ${styles.content__item__box}`}></div>
             <h4 className={styles.content__item__text}>{item.title}</h4>
             <small>Post</small>
@@ -66,8 +68,9 @@ function Main (props) {
             <small>Job</small>
         </Link>
     ));
+
     const application_items = applications.map(item => (
-        <Link to={`/dashboard/applications/${item.job_id}`} className={styles.content__item}>
+        <Link to={`/dashboard/applications/${item.post_id}`} className={styles.content__item}>
             <div className={`shape_pink ${styles.content__item__box}`}></div>
             <h4 className={styles.content__item__text}>{item.job_data.title}</h4>
             <small>Application</small>
@@ -93,7 +96,7 @@ function Main (props) {
     </main>
     )
 
-    const content = [main, <Create_Company />, <Create_Job />, <Join_Company />]
+    const content = [main, <Create_Company />, <Create_Post companies={companies} />, <Join_Company />]
 
     return content[selected]
 };

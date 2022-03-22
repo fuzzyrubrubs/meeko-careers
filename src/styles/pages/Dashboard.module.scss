@@ -2,7 +2,11 @@
     height: 100vh;
     display: grid;
     grid-template-columns: 1fr 30rem;
-    background: linear-gradient(180deg, var(--primary), var(--primary_light))  
+    background: linear-gradient(180deg, var(--primary), var(--primary_light));
+
+    &__hidden {
+        grid-template-columns: 1fr 5rem;
+    }
 };
 
 .container {
@@ -31,6 +35,26 @@
         border-radius: 20px;
       }
 };
+
+.operator {
+    position: absolute;
+    top: 5%;
+    right: 1%;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    cursor: pointer;
+    &:hover {
+        background-color: var(--primary_light);
+    }
+    & svg {
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.692);
+    }
+}
 
 
 

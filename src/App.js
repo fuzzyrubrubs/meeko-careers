@@ -5,6 +5,7 @@ import Router from './Router';
 
 import { AuthProvider } from './contexts/Auth.context';
 import { MenuProvider } from './contexts/Menu.context';
+import { NotificationProvider } from './contexts/Notification.context';
 
 
 function App(){  
@@ -13,9 +14,11 @@ function App(){
         <>
         <AuthProvider>
             <MenuProvider>
-                <BrowserRouter>
-                    <Router />
-                </BrowserRouter>
+                <NotificationProvider>
+                    <BrowserRouter>
+                        <Router />
+                    </BrowserRouter>
+                </NotificationProvider>
             </MenuProvider>
         </AuthProvider>
         </>

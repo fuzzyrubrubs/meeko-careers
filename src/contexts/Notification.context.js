@@ -10,6 +10,7 @@ export function NotificationProvider(props) {
     const { user, recruiter_data, manager_data } = useContext(AuthContext)
     const [notifications, set_notifications] = useState([]);
     const [unread_notes, set_unread_notes] = useState(0);
+    const [display_notes, set_display_notes] = useState(false);
 
 
     useEffect(() => {
@@ -43,6 +44,8 @@ export function NotificationProvider(props) {
     return (
     <NotificationContext.Provider value={{
         notifications, 
+        display_notes,
+        set_display_notes,
         unread_notes, 
         read_notes_handler, 
         }}>

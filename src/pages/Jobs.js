@@ -3,24 +3,24 @@ import Check_Box from '../components/inputs/Check_Box';
 import Job_Post from '../components/jobs/Job_Post';
 import Job_Preview from '../components/jobs/Job_Preview';
 import { AuthContext } from '../contexts/Auth.context';
-import { get_jobs } from '../firebase/methods/Job_Functions';
+import { get_posts } from '../firebase/methods/Post_Functions';
 import styles from '../styles/pages/Jobs.module.scss';
-import { job_categories, job_hours, job_location } from '../tools/global_variables';
+import { job_categories, job_hours, job_remote } from '../tools/global_variables';
 
 function Jobs () {
     const { applications } = useContext(AuthContext);
     const [selected, set_selected] = useState(0);
-    const [jobs, set_jobs] = useState([]);
+    const [jobs, set_posts] = useState([]);
     
     useEffect(() => {
         const fetch_data = async () => {
-            const jobs_data = await get_jobs();
-            set_jobs([...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data]);
+            const jobs_data = await get_posts();
+            set_posts([...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data, ...jobs_data]);
         }
         fetch_data();
     }, []);
 
-    const check_status = (job_id) => applications.some(item => item.job_id === job_id);
+    const check_status = (post_id) => applications.some(item => item.post_id === post_id);
 
     return (
         <>
@@ -37,7 +37,7 @@ function Jobs () {
                         <div className={styles.category__list__item}>
                             <div>
                                 <p className={styles.category__list__item__name}>Location</p>
-                                {job_location.map(item => <Check_Box>{item}</Check_Box>)}
+                                {job_remote.map(item => <Check_Box>{item}</Check_Box>)}
                             </div>
                         </div>
                         <div className={styles.category__list__item}>

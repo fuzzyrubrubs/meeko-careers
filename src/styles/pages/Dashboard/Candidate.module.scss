@@ -42,6 +42,7 @@
     }
     &__actions {
         display: flex;
+        flex-direction: column;
         width: 100%;
         justify-content: space-evenly;
         align-items: center;
@@ -135,4 +136,12 @@
          & p { color: var(--primary); font-weight: 600;}
          & svg { color: var(--primary); font-size: 2rem;}
      }
+}
+
+
+.view_interview {
+    background-color: var(--background_light);
+    border-radius: 2rem;
+    height: 65%;
+    width: 75%;
 }

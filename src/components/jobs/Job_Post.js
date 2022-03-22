@@ -3,7 +3,7 @@ import Button_Main from '../items/Button_Main';
 import { GoLocation } from "react-icons/go";
 import { FiBriefcase, FiCreditCard } from "react-icons/fi";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
-import { job_categories, job_hours, job_location } from '../../tools/global_variables';
+import { job_categories, job_hours, job_remote } from '../../tools/global_variables';
 import { time_since } from '../../tools/DateTime_Methods';
 import { useState } from 'react';
 import Apply from '../forms/Apply';
@@ -30,7 +30,7 @@ function Job_Post (props) {
             <div className={styles.preview__details}>
                 <p><FiCreditCard/> ${data.salary}k <small>/ year</small></p>
                 <p><FiBriefcase/> {job_hours[data.hours]}</p>
-                <p><GoLocation /> {job_location[data.location]}</p>
+                <p><GoLocation /> {job_remote[data.location]}</p>
             </div>
             <div>
                 <small>{data.about.slice(0, 200)}...</small>

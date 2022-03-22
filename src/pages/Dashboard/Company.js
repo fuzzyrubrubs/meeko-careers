@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Job_Status from '../../components/items/Job_Status';
-import { Grid, Header, Row } from '../../components/styles/Containers';
+// import { Grid, Header, Row } from '../../components/styles/Containers';
 import styles from '../../styles/pages/Dashboard/Company/Company.module.scss';
 import Job from './Post';
 import Analytics from './Company/Analytics';
@@ -10,6 +10,7 @@ import { FaChevronLeft } from "react-icons/fa";
 import { MenuContext } from '../../contexts/Menu.context';
 import Template_Tasks from './Company/Template_Tasks';
 import Job_List from './Company/Job_List';
+import Header from '../../components/headers/Header';
 
 function Company (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
@@ -53,23 +54,8 @@ function Company (props) {
     const select_handler = (index) => set_posts(index);
 
     const main = (
-        <main className={styles.company}> 
-            <Link to="/dashboard" className={styles.company__title}><FaChevronLeft /> <h2>{data.name}</h2></Link>
-            <div className={styles.company__menu}>{list.map((item, index) => _item(item, index))}</div>
-            <div className={styles.company__posts}>
-                <Header>Job Posts</Header>
-                <div>
-                    {data.posts.map((item, index) => <Job_Status data={item} select={() => select_handler(index)} />)}
-                </div>
-            </div>
-            <div></div>
-            <div className={styles.company__posts}>
-                <Header>Employee Tasks</Header>
-                <div>
-                    {data.posts.map((item, index) => <Job_Status data={item} select={() => select_handler(index)} />)}
-                </div>
-            </div>
-            <div></div>
+        <main> 
+            <Header name={"Company"}>{data.name}</Header>
         </main>
     );
 

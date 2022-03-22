@@ -30,8 +30,14 @@
         justify-content: space-evenly;
         padding-bottom: 2rem;
 
+        &_active {
+            & svg, small {
+                color: var(--white) !important;
+            }
+        }
+
         & svg {
-            color: var(--white);
+            color: rgba(255, 255, 255, 0.692);
             font-size: 2.5rem;
         }
         & div {
@@ -45,11 +51,11 @@
             justify-content: center;
             &:hover {
                 background-color: rgba(255, 255, 255, 0.219);
-                & p { color: var(--white);}
+                & small { color: var(--white);}
                 & svg { color: var(--white);}
             }
             & small {
-                color: var(--white);
+                color: rgba(255, 255, 255, 0.692);
             }
         }
     }
@@ -120,7 +126,7 @@
 };
 
 .menu {
-    border-top: 0.5px solid rgba(226, 226, 226, 0.644);
+    border-top: 0.5px solid rgba(226, 226, 226, 0.479);
     margin-bottom: auto;
     padding-top: 2rem;
     margin-left: 2rem;
@@ -202,4 +208,21 @@
     background-color: rgba(255, 255, 255, 0.219);
     & p { color: var(--white);}
     & svg { color: var(--white);}
+}
+
+
+.notes {
+    display: flex;
+    padding: 4rem 1rem;
+    flex-direction: column;
+    &__title {
+        height: 10rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & h2 {
+            color: var(--white);
+        }
+    }
 }

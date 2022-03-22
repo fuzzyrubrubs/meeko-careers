@@ -1,0 +1,12 @@
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    gap: 1rem;
+    & p {
+        margin-bottom: 2rem;
+    }
+}

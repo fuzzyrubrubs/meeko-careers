@@ -5,6 +5,13 @@ import { MdWeb } from "react-icons/md";
 import { useEffect, useState } from 'react';
 import { interview_types } from '../../../tools/global_variables';
 import Button_Modal from '../../../components/items/Button_Modal';
+import { populate_24_hours, populate_30_days } from '../../../tools/DateTime_Methods';
+import Dates_List from '../../../components/lists/Dates_List';
+import Times_List from '../../../components/lists/Times_List';
+import moment from 'moment';
+import Text_Input from '../../../components/inputs/Text_Input';
+import Textarea_Input from '../../../components/inputs/Textarea_Input';
+import Arrange_Interview from '../../../components/dashboard/Tasks/Arrange_Interview';
 
 
 const Grid = (props) => <div className={styles.grid} style={{gridTemplateColumns: props.columns, gridTemplateRows: props.rows}}>{props.children}</div>;
@@ -15,54 +22,23 @@ function Candidate (props) {
     const data = props.data;
     const job_data = props.job_data;
     const stages = props.stages;
-    const [status, set_status] = useState(0);
-    const [closed, set_closed] = useState(false);
-    const [open_task, set_open_task] = useState(false);
-    const [shortlisted, set_shortlisted] = useState(data.shortlist);
-    const [found_interview, set_found_interview] = useState(data.interview_data.filter(item => item.complete === false)[0]);
+    const [shortlist, set_shortlist] = useState(data.shortlist);
+    
 
-    /// if not shortlisted show shortlist button, if upcoming interview show correct interview 
-    /// if shortlisted and no upcoming interviews and offers - set open options 
-    /// list all options - remove interviews that already happened 
+    console.log(data)
+    console.log(job_data)
+    console.log(data.interviews)
 
-    const _get_status = () => {
-        if(shortlisted === false) { set_status(0); return };
-        if(found_interview.length > 0) { set_status(1); return };
-        set_status(2);
-    };
+    const active_interview = data.interviews.find(item => item.completed === false);
 
-    useEffect(() => {
-        _get_status();
-    }, [shortlisted, found_interview]);
+    console.log(active_interview)
+
 
     const _shortlist = () => {
-        // update user profile 
-        set_shortlisted(true);
+        // shortlist_candiate(data.user_id, data.post_id);
+        set_shortlist(true);
     };
 
-    const open_interview = (interview) => {
-        console.log(interview);
-    };
-
-    const create_interview = (item) => {
-        console.log(item)
-    };
-
-    const _filter_interviews = job_data.interview_template.filter(item => {
-        const _d = data.interview_data.filter(ele => ele.order === item.order)[0];
-        return _d === undefined ? true : false;
-    });
-
-    const _options = (
-        <div>
-            {_filter_interviews.map(item => <Button_Modal action={(obj) => create_interview(obj)} data={{interview_data: item, user_data: data, job_data: job_data}}>{interview_types[item.type]}</Button_Modal>)}
-            <Button_Modal>Make offer</Button_Modal>
-        </div>
-    );
-
-
-    const _action = [<Button_Main action={_shortlist}>Shortlist</Button_Main>, <Button_Main action={() => open_interview(found_interview)}>{interview_types[found_interview.type]}</Button_Main>, _options]
-    
     return (
         <main className={styles.main}>
             <section>
@@ -113,8 +89,6 @@ function Candidate (props) {
                     <div className={styles.profile__header__image} style={{"backgroundImage": `url(${data.user_data.avatar})`}}></div>
                     <small>{data.user_data.title}</small>
                     <h4>{data.user_data.name}</h4> 
-                    {/* <Button_Main>Resume</Button_Main>
-                    <Button_Main hollow={true}>Messages</Button_Main> */}
                 </section>
 
                 <section>
@@ -131,8 +105,12 @@ function Candidate (props) {
 
             
                 <section className={styles.profile__actions}>
-                    {_action[status]}
+                    {shortlist ? null : <Button_Main action={() => _shortlist()}>Shortlist</Button_Main>}
+                    {data.interviews.map(item => <Button_Modal name="View Interview"><View_Interview data={item} user_data={data.user_data} /></Button_Modal>)}
+                    {active_interview ? null : <Button_Modal name="Arrange Interview"><Arrange_Interview data={job_data} user_data={data.user_data} /></Button_Modal>}
+                    <Button_Main>Make offer</Button_Main>
                 </section>
+
                 <section>
                     <p>Close Application</p>
                 </section>
@@ -143,11 +121,18 @@ function Candidate (props) {
 
 export default Candidate;
 
-// function interview_window {
-//     return (
-//         <div></div>
-//     )
-// };
 
+function View_Interview (props) {
+    const data = props.data;
+    const user_data = props.user_data;
+    console.log(data)
 
+    return (
+        <main className={styles.view_interview}>
+            <section>
+                <p>Status: Pending</p>
+            </section>
 
+        </main>
+    )
+}
