@@ -1,0 +1,40 @@
+.automation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 68vh;
+    gap: 0.1rem;
+    margin-top: 2rem;
+    background-color: var(--text_light);
+    &__column {
+        background-color: var(--white);
+        padding: 1rem 3rem;
+        &__title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 0.15rem solid var(--text_light);
+            padding-bottom: 1rem;
+            & div {
+                height: 3.5rem;
+                width: 3.5rem;
+                border-radius: 3.5rem;
+                border: 1px solid var(--text_light_medium);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                & svg {
+                    font-size: 2.5rem;
+                    color: var(--text_light_medium);
+                }
+            }
+        }
+    }
+};
+
+.modal {
+    height: 85%;
+    width: 55%;
+    border-radius: 1.5rem;
+    background-color: var(--white);
+}

@@ -36,11 +36,6 @@ export function AuthProvider(props) {
     })
     }, []);
 
-    console.log(companies)
-    console.log(posts)
-    console.log(applications)
-    console.log(user_data)
-    console.log(jobs)
 
 
     return (

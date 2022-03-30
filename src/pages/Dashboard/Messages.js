@@ -1,8 +1,9 @@
-import Header from "../../../components/headers/Header";
+import Header from "../../components/headers/Header";
 
 
-function Messages () {
+function Messages (props) {
 
+    
     return (
         <Header name="All" back={true}>Messages</Header>
     )

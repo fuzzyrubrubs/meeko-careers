@@ -64,33 +64,35 @@ const get_interviews = async (post_id) => {
 
 
 const create_interview = async (data) => {
-    try {
-        await db.collection("applicant").doc(data.application_id).collection("interviews").doc(data.id).set({
-            managers: data.managers,
-            id: data.id,
-            type: data.type,
-            application_id: data.application_id,
-            applicant: data.applicant,
-            duration: data.duration,
-            post_id: data.post_id,
-            company_id: data.company_id,
-            contact: data.contact, 
-            description: data.description,
-            accepted: false,
-            completed: false,
-            declined: false,
-            reschedueled: false,
-            expired: false,
-            closed: false,
-            feedback: "",
-            time: null,
-            timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
-        })
-        return true
-    } catch(error) {
-        return false
-    }
+    console.log(data)
+    await db.collection("applicant").doc(data.application_id).collection("interviews").doc(data.id).set({
+        managers: data.managers,
+        id: data.id,
+        type: data.type,
+        application_id: data.application_id,
+        applicant: data.applicant,
+        duration: data.duration,
+        post_id: data.post_id,
+        company_id: data.company_id,
+        contact: data.contact, 
+        message: data.message,
+        accepted: false,
+        completed: false,
+        declined: false,
+        reschedueled: false,
+        expired: false,
+        closed: false,
+        feedback: "",
+        time: null,
+        timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+    })
+
 }
+
+
+const update_application_status = async (application_id, status) => {
+    await db.collection("applicant").doc(application_id).update({status: status})
+};
 
 
 export {
@@ -98,5 +100,6 @@ export {
     get_applications,
     get_post_applicants, 
     get_interviews,
-    create_interview
+    create_interview,
+    update_application_status
 }

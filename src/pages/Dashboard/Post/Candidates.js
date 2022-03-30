@@ -17,15 +17,13 @@ function Candidates (props) {
 
     console.log(data)
 
-    const stages = ["New", "Applied", "Qualified", "Interviews", "Accepted"]
+    const stages = ["New", "Applied", "Shortlist", "Interviews", "Accepted"]
 
     const categories = ["New", "Reviewed", "Shortlisted", "Interviews", "Offers"]
 
     // new, in review, shortlisted, interviews, offers
 
     const main = (
-        <main className={styles.main}>
-        <Header name="Post">Applicants</Header>
         <section className={styles.wrapper}>
             <div className={styles.menu}>
                 <h5>Work type</h5>
@@ -38,7 +36,6 @@ function Candidates (props) {
                 </div>
             </div>
         </section>
-    </main>
     )
 
     const display_content = selected ? <Candidate data={selected} job_data={data} stages={stages} go_back={go_back} /> : main;

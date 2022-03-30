@@ -16,7 +16,8 @@ import { create_interview } from '../../../firebase/methods/Applicant_Functions'
 
 
 function Arrange_Interview (props) {
-    const data = props.data;
+    const job_data = props.job_data;
+    const application_data = props.application_data;
     const applicant_data = props.user_data;
     const { user_data } = useContext(AuthContext);
     const [selected, set_selected] = useState(0);
@@ -56,36 +57,28 @@ function Arrange_Interview (props) {
     const submit_handler = () => {
 
         const interview_id = generatePushID();
-        const task_id = generatePushID();
         const slots = _get_dates();
 
         const interview_item = {
             managers: user_data.id,
             id: interview_id,
             type: type,
-            application_id: data.application_id,
+            application_id: application_data.application_id,
             applicant: applicant_data.id,
             duration: duration,
-            post_id: data.post_id,
-            company_id: data.company_id,
+            post_id: job_data.post_id,
+            company_id: job_data.company_id,
             contact: contact, 
             message: message,
             slots: slots
         };
 
-
-        const task_item = {
-            id: interview_id,
-            type: "interview"
+        try {
+            create_interview(interview_item);
+            set_selected(5);
+        } catch(error) {
+            alert("Error");
         };
-
-        console.log(interview_item)
-
-        // try {
-        //     create_interview(interview_item).then(res => res ? create_task(data.applicant_data.user_id, task_id, task_item, 7) : null);
-        // } catch(error) {
-        //     alert("Error");
-        // }
     
     };
 
@@ -102,7 +95,7 @@ function Arrange_Interview (props) {
     const _duration = (
         <>
         <section className={styles.grid}>
-            {interview_duration.map((item, index) => <h3 onClick={() => {set_type(index); set_selected(2)}}>{item}</h3>)}
+            {interview_duration.map((item, index) => <h3 onClick={() => {set_duration(index); set_selected(2)}}>{item}</h3>)}
         </section>
         </>
     );
@@ -145,7 +138,13 @@ function Arrange_Interview (props) {
         </section>
     );
 
-    const content = [_type, _duration, _contact, _message, _date];
+    const _sent = (
+        <section className={styles.form}>
+            <h5>Sent</h5>
+        </section>
+    );
+
+    const content = [_type, _duration, _contact, _message, _date, _sent];
 
 
     return (

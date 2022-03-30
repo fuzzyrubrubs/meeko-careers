@@ -1,4 +1,4 @@
-import styles from "../../styles/components/items/Job_Status.module.scss";
+import styles from "../../styles/components/previews/Post_Preview.module.scss";
 import { IoMdAnalytics } from "react-icons/io";
 import { FaRegListAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -9,31 +9,27 @@ import { get_user_data } from "../../firebase/methods/User_Functions";
 function Job_Status(props) {
   const data = props.data;
 
-  const array1 = [1, 1, 1, 1, 1, 1, 1, 1, 1].slice(0, 2);
-  const array2 = [1, 1, 1, 1, 1, 1, 1, 1, 1].slice(0, 5);
+  console.log(data)
 
   return (
-    <div className={styles.container} onClick={() => props.select()}>
+    <Link to={`/dashboard/posts/${data.post_id}`} className={styles.container}>
        
-        <div className={styles.status__display}><FaRegListAlt /></div>
+        <div className={styles.icon}><FaRegListAlt /></div>
+        <h5 class="bold">{data.title}</h5>
+        <h5>{data.salary}k</h5>
 
-
-      <p>{data.title}</p>
-
-      <div className={styles.applicants}>
-        <div className={styles.applicants__wrapper}>
-          <div className={styles.applicants__list}>
-            {data.candidates.map(person =><> <Person data={person} /><Person data={person} /><Person data={person} /></>)}
-            <small className={styles.applicants__end}>{data.candidates.length}</small>
+        <div className={styles.applicants}>
+          <div className={styles.applicants__wrapper}>
+            <div className={styles.applicants__list}>
+              {data.candidates.map(person =><> <Person data={person} /><Person data={person} /><Person data={person} /></>)}
+              <small className={styles.applicants__end}>{data.candidates.length}</small>
+            </div>
           </div>
         </div>
-      </div>
-
-      <small className={styles.applicants__end}>{data.candidates.length}</small>
 
         <small>{data.closed ? "Closed" : time_since(data.timestamp)}</small>
 
-    </div>
+    </Link>
   );
 }
 

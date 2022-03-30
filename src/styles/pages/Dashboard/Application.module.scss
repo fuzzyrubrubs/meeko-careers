@@ -1,10 +1,14 @@
 
 .main {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 1.1fr;
     height: 66vh;
     margin-top: 4rem;
-    gap: 5rem;
+    gap: 20rem;
+    & h4 {
+        margin-bottom: 2rem !important;
+        color: var(--text_light_medium);
+    }
 
 }
 
@@ -12,13 +16,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    justify-content: flex-start;
+    gap: 15rem;
+    & div h4 span {
+        color: var(--text_dark);
+    }
 }
 
 .details {
-    justify-content: space-between;
     display: flex;
     flex-direction: column;
+    gap: 3rem;
     & h5 {
         margin-bottom: 1rem;
     }
@@ -32,7 +40,31 @@
 
 .interview {
     height: 15rem;
-    width: 100%;
+    width: 30rem;
     border-radius: 2rem;
     background-color: var(--text_light);
+}
+
+.interviews {
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    &__item {
+        height: 7rem;
+        width: 7rem;
+        border-radius: 1rem;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        & svg {
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+    }
 }

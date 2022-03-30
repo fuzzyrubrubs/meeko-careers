@@ -1,0 +1,18 @@
+
+
+
+.icon {
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 3.5rem;
+    border: 1px solid var(--text_light_medium);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & svg {
+        font-size: 2.5rem;
+        color: var(--text_light_medium);
+    }
+};
+

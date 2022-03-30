@@ -1,26 +1,27 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Job_Status from '../../components/items/Job_Status';
+import Job_Status from '../../components/previews/Post_Preview';
 // import { Grid, Header, Row } from '../../components/styles/Containers';
 import styles from '../../styles/pages/Dashboard/Company/Company.module.scss';
 import Job from './Post';
 import Analytics from './Company/Analytics';
 import Employees from './Company/Employees';
-import { FaChevronLeft } from "react-icons/fa";
 import { MenuContext } from '../../contexts/Menu.context';
-import Template_Tasks from './Company/Template_Tasks';
-import Job_List from './Company/Job_List';
+import Settings from './Company/Settings';
+import Recruitment from './Company/Recruitment';
+import Main from './Company/Main';
 import Header from '../../components/headers/Header';
+import Automation from './Company/Automation';
 
 function Company (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
     const data = props.data;
-    const [posts, set_posts] = useState(null);
 
+    const menu_options = ["Overview", "Employees", "Recruitment", "Automation", "Analytics", "Settings"];
 
     useEffect(() => {
-        set_options(["Overview", "Employees", "Templates", "Analytics", "Job List"]);
-        set_title(data.name)
+        set_options(menu_options);
+        set_title(data.name);
         return () => { 
             set_options([]);
             set_selected(0);
@@ -30,45 +31,22 @@ function Company (props) {
 
     if(data === undefined) return <h1>Not found</h1>
 
-    console.log(data)
-
-    const go_back = () => set_selected(0);
-
-
-    const _item = (name, index) => (
-        <div onClick={() => set_selected(index + 1)} className={styles.menu_item}>
-            <div className={`shape_pink ${styles.menu_item__icon}`}></div>
-            <p className={styles.menu_item__text}>{name}</p>
-        </div>
-    )
-
-    // const items = companies.map(item => (
-    //     <Link to={`/dashboard/${convert_name(item.name)}`} className={styles.box}>
-    //         <div className={`shape_pink ${styles.box__box}`}></div>
-    //         <h4 className={styles.box__text}>{item.name}</h4>
-    //     </Link>
-    // ))
-
-    const list = ["Employees", "Managers", "Onboarding", "Analytics", "Create Job"];
-
-    const select_handler = (index) => set_posts(index);
-
-    const main = (
-        <main> 
-            <Header name={"Company"}>{data.name}</Header>
-        </main>
-    );
-
     const content = [
-        main,
-        <Employees go_back={go_back} />, 
-        <Template_Tasks go_back={go_back} />, 
-        <Analytics go_back={go_back} />,
-        <Job_List go_back={go_back} />,
-    ]
+        <Main data={data} />,
+        <Employees data={data} />, 
+        <Recruitment data={data} />,
+        <Automation data={data} />,
+        <Analytics data={data} />,
+        <Settings data={data} />, 
+    ];
 
 
-    return posts === null ? content[selected] : <Job data={data.posts[posts]} go_back={() => set_posts(null)} />
+    return (
+        <main> 
+            <Header name={data.name} tasks={data.tasks}>{menu_options[selected]}</Header>
+            {content[selected]}
+        </main>
+    ) 
 }
 
 export default Company;

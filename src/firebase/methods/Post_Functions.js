@@ -21,11 +21,23 @@ const create_post = async (data) => {
         closed: false,
         paused: false,
         timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+        templates: {
+            applied: "Thanks for your application! We'll review it and get back to you shortly.",
+            review: "We're currently reviewing your application.",
+            shortlist: "We like your application and have added you to the shortlisted candidates.",
+            interviews: "We'd love to invite you for an interview to tell you about us and get to know you.",
+            offer: "Thanks for being patient through our application process, we've loved your application and want to make you an offer!"
+        }
     }).then(async () => {
           await data.managers.forEach(item => create_post_recruiter(item.id, data.id, data.company_id))
           await data.invited_managers.forEach(item => invite_post_recruiter(item.email, data.id, data.company_id))
       })
 };
+
+
+const update_post = async (post_id, data) => {
+    return await db.collection("posts").doc(post_id).update(data);
+}
 
 
 const get_recruiters = async (post_id) => {
@@ -164,7 +176,7 @@ const create_recruiter_message = async (user_id, chat_id, post_id, content, comp
 
 
 export { 
-    create_post, get_posts, get_post, 
+    create_post, get_posts, get_post, update_post,
     get_recruiter_messages, get_recruiter_tasks,
     get_companies_posts,
     get_recruitments

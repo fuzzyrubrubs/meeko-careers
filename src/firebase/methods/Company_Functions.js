@@ -71,6 +71,11 @@ const create_company = async (data) => {
   })
 };
 
+
+const update_company = async (company_id, name, value) => {
+    return await db.collection("company").doc(company_id).update({[name]: value})
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 const create_company_manager = async (user_id, company_id, level) => {
@@ -130,7 +135,7 @@ const create_company_message = async (user_id, chat_id, company_id, content) => 
 
 
 export { 
-  create_company, get_companies, get_company,
+  create_company, get_companies, get_company, update_company,
   get_manager_tasks,
   get_managements
 }

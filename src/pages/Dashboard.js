@@ -15,8 +15,8 @@ import { Route, useParams } from 'react-router-dom';
 import Post from './Dashboard/Post';
 import Application from './Dashboard/Application';
 import Job from './Dashboard/Job';
-import Tasks from './Dashboard/Main/Tasks';
-import Messages from './Dashboard/Main/Messages';
+import Tasks from './Dashboard/Tasks';
+import Messages from './Dashboard/Messages';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 
@@ -24,21 +24,12 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 function Dashboard (props) {
     const params = props.match.params.name;
     const { user_data, companies, posts, jobs, applications } = useContext(AuthContext);
-    const [selected, set_selected] = useState(null);
     const [loader, set_loader] = useState(false);
-    const [tasks, set_tasks] = useState([]);
-    const [panel, set_panel] = useState(true);
     const [display, set_display] = useState(true);
-
 
 
     if(loader) return <Item_Loader />
     
-    const go_home = () =>  set_selected(0);
-
-    const selected_company = companies.find(company => convert_name(company.name) === params);
-
-    console.log(posts)
 
     return (
         <main className={`${styles.dashboard} ${display === false ? styles.dashboard__hidden : null}`}>
@@ -47,7 +38,7 @@ function Dashboard (props) {
                 <Nav />
                 <section className={styles.main}>
                     <Route exact path="/dashboard" render={(props) => <Main companies={companies} posts={posts} jobs={jobs} applications={applications}  /> } /> 
-                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks /> } />
+                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks data={[...companies, ...posts, ...jobs, ...applications].flat()} /> } />
                     <Route exact path="/dashboard/messages" render={(props) => <Messages /> } /> 
                     <Route exact path="/dashboard/company/:name" render={(props) => <Company data={companies.find(company => convert_name(company.name) === params)} /> } /> 
                     <Route exact path="/dashboard/posts/:id" render={(props) => <Post data={posts.find(post => post.post_id === params)} /> } /> 

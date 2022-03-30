@@ -3,8 +3,9 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 4rem;
-    border-radius: 2rem;
+    height: 7rem;
+    padding: 0 3rem;
+    border-radius: 3rem;
     margin-bottom: 0.5rem;
     cursor: pointer;
     &:hover {
@@ -12,23 +13,24 @@
     }
 };
 
-.status {
-    text-align: center;
-    &__display {
-        height: 4rem;
-        width: 4rem;
-        border-radius: 4rem;
+
+.icon {
+        height: 4.5rem;
+        width: 4.5rem;
+        border-radius: 4.5rem;
         background-color: var(--primary);
         display: flex;
         justify-content: center;
         align-items: center;
         & svg {
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             color: var(--white)
         }
-    }
-
 };
+
+.title {
+    margin-right: auto;
+}
 
 .applicants {
     

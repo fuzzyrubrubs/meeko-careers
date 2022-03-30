@@ -2,8 +2,8 @@
 .main {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 85vh;
-    gap: 5rem;
+    grid-template-rows: 72vh;
+    gap: 2rem;
     // border-bottom: 0.5px solid var(--text_light);;
 }
 
@@ -36,28 +36,11 @@
             background-color: orange;
         }
     }
-    &__portfolio {
-        display: flex;
-        flex-direction: column;
-    }
-    &__actions {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: space-evenly;
-        align-items: center;
-        background-color: var(--primary);
-        height: 100%;
-        border-radius: 2rem;
-
-        & svg {
-            font-size: 8rem;
-            color: rgb(255, 71, 71);
-            &:last-of-type {
-                color: #69b996;
-            }
-        }
-    }
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
+    };
 }
 
 
@@ -65,9 +48,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 2rem 2rem;
     overflow-y: auto;
     gap: 3rem;
+    margin-top: 2rem;
 
     & h5 {
         margin-bottom: 1rem;
@@ -76,7 +59,8 @@
     &__urls {
         display: flex;
         justify-content: flex-start;
-        gap: 5rem;
+        flex-wrap: wrap;
+        column-gap: 2rem;
         align-items: center;
         width: 100%; 
         & div {
@@ -84,8 +68,6 @@
         }
     }
     
-    &__summary {
-    }
     &__history {
         width: 100%;
         &__item {
@@ -112,36 +94,108 @@
 }
 
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    & div { 
+.interviews {
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    &__item {
+        height: 7rem;
+        width: 7rem;
+        border-radius: 1rem;
+        background-color: var(--primary);
         display: flex;
         align-items: center;
+        justify-content: center;
         cursor: pointer;
         & svg {
             font-size: 2.5rem;
-            color: var(--text_dark);
-            margin-right: 2rem;
+            color: var(--white);
         }
-     }
-     & span {
-         background-color: var(--background_light);
-         padding: 0.5rem 1rem;
-         border-radius: 1rem;
-         display: flex;
-         cursor: pointer;
-         gap: 1rem;
-         & p { color: var(--primary); font-weight: 600;}
-         & svg { color: var(--primary); font-size: 2rem;}
-     }
+    }
+    &__create {
+        height: 7rem;
+        width: 7rem;
+        border-radius: 1rem;
+        background-color: var(--background_light);
+        border: 0.5px solid var(--text_light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        & svg {
+            font-size: 3rem;
+            color: var(--text_light);
+        }
+
+    }
 }
 
+//////////////////////////////////
 
-.view_interview {
-    background-color: var(--background_light);
-    border-radius: 2rem;
-    height: 65%;
-    width: 75%;
-}
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    
+    &__title {
+        margin-right: auto;
+        & h5 {
+            font-size: 3.5rem;
+            color: var(--text_light_medium);
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        };
+        & span {
+            cursor: pointer;
+            height: 3.5rem;
+            width: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1.5rem;
+            &:hover {
+                background-color: var(--background_light);
+            }
+           & svg {
+               font-size: 2.5rem;
+               color: var(--text_light_medium)
+           }
+
+        }
+    }
+    
+    &__row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    &__icon {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 5rem;
+        border: 1.4px solid var(--text_light_medium);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        & svg {
+            font-size: 2rem;
+            color: var(--text_light_medium);
+        }
+        &__star {
+            border: 1.4px solid gold;
+            & svg { color: gold; }
+        }
+        &__red {
+            border: 1.4px solid var(--primary);
+            & svg { color: var(--primary); }
+        }
+    }
+};

@@ -51,7 +51,7 @@ function Panel (props) {
         {company_data.length === 0 ? null :
         <section className={styles.panel__category}>
             <div onClick={() => set_display_companies(!display_companies)}><p>Companies</p> <FaChevronDown /></div>
-            {display_companies === true ? company_data.map(item => <Link to={`/dashboard/company/${convert_name(item.name)}`}><li><p>{item.name}</p></li></Link>) : null}
+            {display_companies === true ? company_data.map(item => <Link to={`/dashboard/company/${convert_name(item.name)}`}><li><p>{item.name}</p><p>{item.tasks.length}</p></li></Link>) : null}
         </section>
         }
         </>

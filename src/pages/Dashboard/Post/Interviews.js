@@ -18,8 +18,6 @@ function Interviews (props) {
     console.log(data)
 
     return (
-        <>
-        <Header name="Post">Interviews</Header>
         <main className={styles.main}>
         <section className={styles.content}>
             <Grid columns="1fr 1fr 1fr 1fr" rows="1fr">
@@ -56,7 +54,6 @@ function Interviews (props) {
             </List>
         </section>
     </main>
-    </>
     )
 };
 
