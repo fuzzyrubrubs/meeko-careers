@@ -28,7 +28,7 @@ const get_applications = async (user_id) => {
     return await db.collection("applicant").where('user_id', '==', user_id).get().then(async (querySnapshot) => {
         return await Promise.all(querySnapshot.docs.map(async (doc) => {
             const data = doc.data();
-            const interviews = await get_application_interviews(data.post_id, user_id);
+            const interviews = await get_application_interviews(data.application_id);
             const job_data = await get_post(data.post_id);
             const tasks = await get_applicant_tasks(data.application_id)
             const messages = await get_applicant_messages(data.application_id)
@@ -51,14 +51,22 @@ const get_post_applicants = async (post_id) => {
 
 
 const get_application_interviews = async (application_id) => {
-    return await db.collection("applicant").doc(application_id).collection("interviews").get().then(querySnapshot => {
-        return querySnapshot.docs.map(doc => doc.data());
+    return await db.collection("applicant").doc(application_id).collection("interviews").get().then(async (querySnapshot) => {
+        return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const manager = await get_user_data(data.managers);
+            return {...data, manager}
+        }));
     });
 };
 
 const get_interviews = async (post_id) => {
-    return await db.collectionGroup("interviews").where("post_id", "==", post_id).get().then(querySnapshot => {
-      return querySnapshot.docs.map(doc => doc.data());
+    return await db.collectionGroup("interviews").where("post_id", "==", post_id).get().then(async (querySnapshot) => {
+        return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const manager = await get_user_data(data.managers);
+            return {...data, manager}
+        }));
     });
 };
 
@@ -76,6 +84,7 @@ const create_interview = async (data) => {
         company_id: data.company_id,
         contact: data.contact, 
         message: data.message,
+        slots: data.slots,
         accepted: false,
         completed: false,
         declined: false,
@@ -86,12 +95,19 @@ const create_interview = async (data) => {
         time: null,
         timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
     })
+}
 
+const delete_interview = async (application_id, interview_id) => {
+    db.collection("applicant").doc(application_id).collection("interviews").doc(interview_id).delete();
 }
 
 
 const update_application_status = async (application_id, status) => {
     await db.collection("applicant").doc(application_id).update({status: status})
+};
+
+const update_application_message = async (application_id, message) => {
+    await db.collection("applicant").doc(application_id).update({message: message})
 };
 
 
@@ -101,5 +117,6 @@ export {
     get_post_applicants, 
     get_interviews,
     create_interview,
-    update_application_status
+    update_application_status, update_application_message,
+    delete_interview
 }

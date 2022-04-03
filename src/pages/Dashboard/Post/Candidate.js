@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
 import { FiMessageSquare } from "react-icons/fi";
 import { IoIosAdd } from "react-icons/io";
-import { update_application_status } from '../../../firebase/methods/Applicant_Functions';
+import { update_application_message, update_application_status } from '../../../firebase/methods/Applicant_Functions';
 import Click_Modal from '../../../components/items/Click_Modal';
 import View_Interview from '../../../components/dashboard/Tasks/View_Interview';
 
@@ -60,7 +60,10 @@ function Candidate (props) {
 
 
     const _shortlist = () => {
-        if(status <= 2) { update_status(2) }
+        if(status <= 2) { 
+            update_status(2);
+            update_application_message(data.application_id, job_data.templates.shortlist);
+        }
         set_shortlist(true);
     };
 
@@ -112,7 +115,7 @@ function Candidate (props) {
                     <section className={styles.interviews}>
                         <h5 class="bold">Interviews</h5>
                         <div className={styles.interviews__items}>
-                            {data.interviews.map(item => <Click_Modal content={interview_item(item)}><View_Interview application_data={data} job_data={job_data} user_data={data.user_data} /></Click_Modal>)}
+                            {data.interviews.map(item => <Click_Modal content={interview_item(item)}><View_Interview data={item} user_data={data.user_data} /></Click_Modal>)}
                             <Click_Modal content={interview_create}>{active_interview ? <h1>You already have an interview</h1> : <Arrange_Interview application_data={data} job_data={job_data} user_data={data.user_data} />}</Click_Modal>
                         </div>
                     </section>

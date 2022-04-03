@@ -1,0 +1,63 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 4rem);
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.operator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & div {
+        display: flex;
+        gap: 4rem;
+        & span svg {
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+    }
+    &__invalid svg {
+        cursor: not-allowed !important;
+        color: var(--text_light_medium) !important;
+    }
+}
+
+.weekday {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.day {
+    width: 4.5rem;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 5rem;
+    & p {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--text_light_medium);
+    }
+}
+
+.selected {
+    background-color: var(--primary);
+    & p {
+        color: var(--white);
+    }
+};
+
+.invalid {
+    cursor: not-allowed;
+}

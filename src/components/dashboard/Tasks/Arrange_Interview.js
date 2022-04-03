@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, forwardRef, useRef, useImperativeHandle } from 'react';
 import styles from '../../../styles/components/dashboard/tasks/Arrange_Interview.module.scss';
 import Button_Main from '../../../components/items/Button_Main';
 import { FaChevronLeft, FaLinkedin, FaClock, FaInfoCircle } from "react-icons/fa";
@@ -12,7 +12,8 @@ import moment from 'moment';
 import Text_Input from '../../../components/inputs/Text_Input';
 import { AuthContext } from '../../../contexts/Auth.context';
 import generatePushID from '../../../tools/IDGenerator';
-import { create_interview } from '../../../firebase/methods/Applicant_Functions';
+import { create_interview, update_application_message, update_application_status } from '../../../firebase/methods/Applicant_Functions';
+import Calendar from '../../items/Calendar';
 
 
 function Arrange_Interview (props) {
@@ -27,19 +28,19 @@ function Arrange_Interview (props) {
     const [contact, set_contact] = useState("");
     const [date_selected, set_date_selected] = useState([]);
     const [time_selected, set_time_selected] = useState([]);
-    const next_30_days = populate_30_days();
     const next_24_hours = populate_24_hours();
-
-
-    const toggle_date_selected = (e) => date_selected.includes(e) ? set_date_selected(date_selected.filter(item => item !== e)) : set_date_selected([...date_selected, e]);
+    const calender_ref = useRef();
 
     const toggle_time_selected = (e) => time_selected.includes(e) ? set_time_selected(time_selected.filter(item => item !== e)) : set_time_selected([...time_selected, e]);
 
     const _get_dates = () => {
-        const total = date_selected.map(date => {
-            const items = [];
-            const converted_date = next_30_days[date].full;
 
+        const calender_dates = (() => calender_ref.current.get_dates())();
+
+        const total = calender_dates.map(date => {
+            const items = [];
+            const converted_date = date.format('YYYY-MM-DD');
+            
             time_selected.forEach(time => {
                 const converted_time = next_24_hours[time];
                 const combined = (`${converted_date} ${converted_time}`);
@@ -73,8 +74,12 @@ function Arrange_Interview (props) {
             slots: slots
         };
 
+
+
         try {
             create_interview(interview_item);
+            update_application_status(application_data.application_id, 3)
+            update_application_message(application_data.application_id, job_data.templates.interviews);
             set_selected(5);
         } catch(error) {
             alert("Error");
@@ -117,6 +122,11 @@ function Arrange_Interview (props) {
     );
 
 
+    const select_all_handler = () => {
+        if(time_selected.length === 32) { set_time_selected([]) } else { set_time_selected([...Array(next_24_hours.length).keys()]) }
+    };
+
+
     const _date = (
         <section className={styles.date}>
             <div className={styles.date__info}>
@@ -130,9 +140,11 @@ function Arrange_Interview (props) {
             </div>
             <h3 className={styles.date__header}>Select dates and times</h3>
             <div className={styles.date__day}>
-                <Dates_List list={next_30_days} array={true} selector={(e) => toggle_date_selected(e)} selected={date_selected} />
+                <Calendar rules={true} ref={calender_ref} schedule={true} />
+                {/* <Dates_List list={next_30_days} array={true} selector={(e) => toggle_date_selected(e)} selected={date_selected} /> */}
             </div>
             <div className={styles.date__time}>
+                <small onClick={select_all_handler}>Select all</small>
                 <Times_List list={next_24_hours} array={true} selector={(e) => toggle_time_selected(e)} selected={time_selected} />
             </div>
         </section>
