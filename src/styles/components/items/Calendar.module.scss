@@ -60,4 +60,8 @@
 
 .invalid {
     cursor: not-allowed;
+};
+
+.available {
+    border: 1px solid var(--primary);
 }

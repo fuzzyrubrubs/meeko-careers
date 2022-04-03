@@ -2,18 +2,21 @@
     background-color: var(--background_light);
     border-radius: 1rem;
     height: 75%;
-    width: 80%;
-    padding: 5rem;
+    width: 75%;
+    min-width: 100rem;
+    padding: 4%;
 };
 
 
 
 .form {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 7rem 1fr;
+    grid-template-columns: 1fr 35rem 25rem;
+    grid-template-rows: 5rem 1fr;
+    column-gap: 5%;
     overflow: hidden;
     height: 65vh;
+
     &__header {
         grid-column: 2 / 4;
         font-weight: 500;
@@ -48,5 +51,10 @@
         & button {
             margin-top: auto;
         }
+    }
+    &__time {
+        max-height: 58vh;
+        display: flex;
+        flex-direction: column;
     }
 };

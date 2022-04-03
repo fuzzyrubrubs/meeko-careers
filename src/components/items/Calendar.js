@@ -6,6 +6,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Calendar = forwardRef((props, ref) => {
 
+    const available = props.available;
     const schedule = props.schedule;
     const [rules, set_rules] = useState(props.rules || false);
     const [value, set_value] = useState(0);
@@ -48,6 +49,9 @@ const Calendar = forwardRef((props, ref) => {
         } else { 
             set_selected([index]) 
         }
+        if(available) {
+            props.set_date_selected(calendar[index])
+        }
     }
 
 
@@ -64,9 +68,10 @@ const Calendar = forwardRef((props, ref) => {
                 {weekdays.map((day, index) => <div className={styles.weekday}><p class="bold medium">{weekdays[index]}</p></div>)}
                 {new Array(weekdiff).fill().map(item => <div></div>)}
                 {calendar.map((day, index) => {
-                    const invalid = day.isBefore(now) && schedule ? true : false;
+                    const chosen = available ? available.map(date => moment.unix(date).format('YYYY-MM-DD')).includes(day.format('YYYY-MM-DD')) : null;
+                    const invalid = available ? (!chosen || day.isBefore(now) && schedule ? true : false) : day.isBefore(now) && schedule ? true : false;
                     return (
-                        <div onClick={invalid ? null : () => selected_handler(index)} className={`${styles.day} ${selected.includes(index) ? styles.selected : null} ${invalid ? styles.invalid : null}`}>
+                        <div onClick={invalid ? null : () => selected_handler(index)} className={`${styles.day} ${invalid ? styles.invalid : null} ${chosen ? styles.available : null} ${selected.includes(index) ? styles.selected : null}`}>
                             <p>{day.format('D')}</p>
                         </div>
                     )

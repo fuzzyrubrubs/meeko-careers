@@ -20,8 +20,8 @@ const populate_30_days = () => {
 
 function populate_24_hours () {
     const items = [];
-    new Array(16).fill().forEach((acc, index) => {
-      const num = index + 6;
+    new Array(13).fill().forEach((acc, index) => {
+      const num = index + 8;
       items.push(moment( {hour: num} ).format('hh:mm a'));
       items.push(moment({ hour: num, minute: 30 }).format('hh:mm a'));
     })

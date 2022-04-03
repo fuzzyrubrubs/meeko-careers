@@ -123,7 +123,7 @@ function Arrange_Interview (props) {
 
 
     const select_all_handler = () => {
-        if(time_selected.length === 32) { set_time_selected([]) } else { set_time_selected([...Array(next_24_hours.length).keys()]) }
+        if(time_selected.length === 26) { set_time_selected([]) } else { set_time_selected([...Array(next_24_hours.length).keys()]) }
     };
 
 
@@ -141,7 +141,6 @@ function Arrange_Interview (props) {
             <h3 className={styles.date__header}>Select dates and times</h3>
             <div className={styles.date__day}>
                 <Calendar rules={true} ref={calender_ref} schedule={true} />
-                {/* <Dates_List list={next_30_days} array={true} selector={(e) => toggle_date_selected(e)} selected={date_selected} /> */}
             </div>
             <div className={styles.date__time}>
                 <small onClick={select_all_handler}>Select all</small>

@@ -40,7 +40,7 @@ function Application (props) {
             <main className={styles.main}>
                 <section className={styles.content}>
                     <div>
-                        <h4>Status: <span class="bold dark">{application_status[data.status]}</span></h4>
+                        <h4 className={styles.header}>Status: <span class="bold dark">{application_status[data.status]}</span></h4>
                         <p>Hi, Anna! {data.message}</p>
                     </div>
                     
@@ -48,12 +48,12 @@ function Application (props) {
                 <section className={styles.details}>
                     {data.status < 3 ? null : ( 
                         <div className={styles.interviews}>
-                            <h4>Interviews</h4>
+                            <h4 className={styles.header}>Interviews</h4>
                             {data.interviews.map(item => <Click_Modal content={interview_item(item)}><Attend_Interview data={item} /></Click_Modal>)}       
                         </div>
                      )}
                     <div>
-                        <h4>Job Details</h4>
+                        <h4 className={styles.header}>Job Details</h4>
                         <div className={styles.grid}>
                             <div><p class="bold">Salary</p></div>
                             <div><p>45k</p></div>
@@ -70,7 +70,7 @@ function Application (props) {
                         </div>
                     </div>
                     <div>
-                        <h4>Contact Details</h4>
+                        <h4 className={styles.header}>Contact Details</h4>
                         <div className={styles.grid}>
                             <div><p class="bold">Phone</p></div>
                             <div><p>{data.phone}</p></div>

@@ -5,11 +5,11 @@
     height: 66vh;
     margin-top: 4rem;
     gap: 20rem;
-    & h4 {
-        margin-bottom: 2rem !important;
-        color: var(--text_light_medium);
-    }
+}
 
+.header {
+    margin-bottom: 2rem;
+    color: var(--text_light_medium);
 }
 
 .content {
