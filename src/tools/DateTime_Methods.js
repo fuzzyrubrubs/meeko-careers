@@ -3,6 +3,8 @@ import moment from 'moment';
 const time_since = (date) => moment.unix(date.seconds).fromNow();
 const calculate_age = (date) => moment().diff(date, 'years');
 const calendar = (date) => moment.unix(date.seconds).format("DD-MM-YYYY");
+const get_time = (seconds) => moment.unix(seconds).format('hh:mm a');
+const get_date = (seconds) => moment.unix(seconds).format('D MMMM')
 
 const populate_30_days = () => {
     const new_array = [];
@@ -34,5 +36,6 @@ export {
     calculate_age,  
     calendar,
     populate_30_days, 
-    populate_24_hours
+    populate_24_hours,
+    get_time, get_date
 }

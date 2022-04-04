@@ -108,7 +108,7 @@ function Candidate (props) {
                         <h5 class="bold">Interviews</h5>
                         <div className={styles.interviews__items}>
                             {data.interviews.map(item => <Click_Modal content={interview_item(item)}><View_Interview data={item} user_data={data.user_data} /></Click_Modal>)}
-                            <Click_Modal content={interview_create}>{!active_interview ? <h1>You already have an interview</h1> : <Arrange_Interview application_data={data} job_data={job_data} user_data={data.user_data} />}</Click_Modal>
+                            <Click_Modal content={interview_create}>{active_interview ? <h1>You already have an interview</h1> : <Arrange_Interview application_data={data} job_data={job_data} user_data={data.user_data} />}</Click_Modal>
                         </div>
                     </section>
 

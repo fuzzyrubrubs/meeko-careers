@@ -41,8 +41,12 @@ const update_post = async (post_id, data) => {
 
 
 const get_recruiters = async (post_id) => {
-    return await db.collection("posts").doc(post_id).collection("recruiters").get().then(querySnapshot => {
-      return querySnapshot.docs.map(doc => doc.data());
+    return await db.collection("posts").doc(post_id).collection("recruiters").get().then(async (querySnapshot) => {
+      return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const user_data = await get_user_data(data.user_id)
+            return {...data, user_data}
+      }))
     });
 };
 

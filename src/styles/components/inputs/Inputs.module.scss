@@ -28,14 +28,15 @@
 
 .edit_input {
     border: 0;
-    width: 100%;
     height: inherit;
     background-color: inherit;
     font-size: inherit;
     font-weight: inherit;
     font-family: inherit;
-    text-align: center;
+    // text-align: center;
     color: var(--text_medium);
+    line-height: 1.5;
+    width: inherit;
 }
 
 .date__wrapper {   

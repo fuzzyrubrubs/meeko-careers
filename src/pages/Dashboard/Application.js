@@ -10,6 +10,7 @@ import Edit_Icon from '../../components/items/Edit_Icon';
 import Edit_Area from '../../components/inputs/Edit_Area';
 import { interview_icons } from '../../tools/global_variables';
 import Attend_Interview from '../../components/dashboard/Tasks/Attend_Interview';
+import Button_Modal from '../../components/items/Button_Modal';
 
 function Application (props) {
     const data = props.data;
@@ -18,20 +19,15 @@ function Application (props) {
     console.log(data)
 
 
-    const _interview = (
-        <div className={styles.interview}></div>
-    );
-    
-    const save_handler = (name, entry) => {
-        console.log(name)
-        console.log(entry)
-    };
+
 
     const interview_item = (item) => (
         <div className={styles.interviews__items}>
             <div className={styles.interviews__item}>{interview_icons[item.type]}</div>
         </div>
     )
+
+    const active_interview = data.interviews.find(item => item.completed === false);
 
     return (
 
@@ -43,6 +39,7 @@ function Application (props) {
                         <h4 className={styles.header}>Status: <span class="bold dark">{application_status[data.status]}</span></h4>
                         <p>Hi, Anna! {data.message}</p>
                     </div>
+                    <Button_Modal type={0} name={active_interview.status === 2 ? "Select time" : "View Interview"}><Attend_Interview data={active_interview} /></Button_Modal>)
                     
                 </section>
                 <section className={styles.details}>

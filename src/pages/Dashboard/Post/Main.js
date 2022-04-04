@@ -14,6 +14,7 @@ import Pie_Chart from '../../../components/items/Pie_Chart';
 import { MenuContext } from '../../../contexts/Menu.context';
 import Edit_Post from './Edit_Post';
 import Header from '../../../components/headers/Header';
+import { candidate_status } from '../../../tools/global_variables';
 
 
 
@@ -26,6 +27,15 @@ function Main (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
     const data = props.data;
 
+    console.log(data)
+
+    const analytics_handler = (num, type) => {
+        if(type === 0) return data.candidates.filter(item => item.status === num).length
+        if(type === 1) return data.interviews.filter(item => item.status === num).length
+        if(type === 2) return data.candidates.filter(item => item.status === num).length
+    };
+
+    console.log(analytics_handler(1))
     return (
         <main className={styles.main}>
         <section className={styles.content}>
@@ -57,7 +67,7 @@ function Main (props) {
                 <Grid_Header>Analytics</Grid_Header>
                 <Grid columns="1fr 1fr 1fr" rows="1fr">
                     <div class="centered-column">
-                        <Pie_Chart data={[128, 48, 22, 11]} />
+                        <Pie_Chart labels={candidate_status} data={[analytics_handler(0, 0), analytics_handler(1, 0), analytics_handler(2, 0), analytics_handler(3, 0), analytics_handler(4, 0), analytics_handler(5, 0)]} />
                         <p class="bold">Applicants</p>
                     </div>
                     <div class="centered-column">
@@ -74,30 +84,25 @@ function Main (props) {
         </section>
         <section className={styles.candidates}>
             <Grid columns="1fr 1fr" rows="1fr 1fr 1fr 1fr">
+                    <div><p class="bold">Status</p></div>
+                    <div><p>{data.closed === true ? "Closed" : "Open"}</p></div>
                     <div><p class="bold">Job Title</p></div>
                     <div><p>{data.title}</p></div>
                     <div><p class="bold">Company</p></div>
-                    <div><p>Lucidica</p></div>
+                    <div><p>{data.company_name}</p></div>
                     <div><p class="bold">Salary</p></div>
-                    <div><p>45k</p></div>
-                    <div><p class="bold">Status</p></div>
-                    <div><p>{data.closed === true ? "Closed" : "Open"}</p></div>
+                    <div><p>{data.salary}k</p></div>
                     <div><p class="bold">Date Opened</p></div>
                     <div><p>{calendar(data.timestamp)}</p></div>
                     <div><p class="bold">Date Closed</p></div>
                     <div><p>---</p></div>
-                    <div><p class="bold">Hiring Manager</p></div>
-                    <div><p>Anna Taylor</p></div>
+                    <div><p class="bold">Hiring Managers</p></div>
+                    <div>{data.managers.map(item => <p>{item.user_data.name}</p>)}</div>
             </Grid>
             <Grid_Header>Calender</Grid_Header>
             <List>
                 <small style={{marginBottom: "1rem"}}>11 December</small>
-                <Calendar_Preview data={{time: "09:00", type: 1, name: "Oberyn Martell"}} />
-                <Calendar_Preview data={{time: "11:00", type: 0, name: "Davos Seaworth"}} />
-                <small style={{marginBottom: "1rem"}}>12 December</small>
-                <Calendar_Preview data={{time: "09:00", type: 0, name: "Sandor Clegane"}} />
-                <Calendar_Preview data={{time: "14:00", type: 1, name: "Margaery Tyrell"}} />
-                <Calendar_Preview data={{time: "09:00", type: 0, name: "Anna Taylor"}} />
+                {data.interviews.map(item => <Calendar_Preview data={item} applicant={data.candidates.filter(user => user.user_id === item.applicant)[0]} />)}
             </List>
         </section>
     </main>

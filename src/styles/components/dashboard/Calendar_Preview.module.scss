@@ -4,17 +4,23 @@
     gap: 1rem;
     align-items: center;
     margin-bottom: 1rem;
+    border-radius: 2rem;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
     & h4 {
         font-weight: 500;
     }
     & span {
-        height: 80%;
+        height: 4rem;
         vertical-align: middle;
         width: 4px;
         border-radius: 5px;
     }
     & div {
         & p { color: var(--text_dark); font-weight: 500;}
+    }
+    &:hover {
+        background-color: var(--background_light);
     }
     
 }

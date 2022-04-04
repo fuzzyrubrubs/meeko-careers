@@ -33,7 +33,7 @@ function Panel (props) {
         {application_data.length === 0 ? null :
         <section className={styles.panel__category}>
             <div onClick={() => set_display_applications(!display_applications)}><p>Applications</p> <FaChevronDown /></div>
-            {display_applications === true ? application_data.map(item => <Link to={`/dashboard/applications/${item.post_id}`}><li><p>{item.job_data.title}</p></li></Link>) : null}
+            {display_applications === true ? application_data.map(item => <Link to={`/dashboard/applications/${item.post_id}`}><li><p>{item.job_data.title}</p>{item.interviews.filter(item => item.status === 2).length === 0 ? null : <p className={styles.panel__category__icon}>{item.interviews.filter(item => item.status === 2).length}</p>}</li></Link>) : null}
         </section>
         }
         {job_data.length === 0 ? null :
@@ -51,7 +51,7 @@ function Panel (props) {
         {company_data.length === 0 ? null :
         <section className={styles.panel__category}>
             <div onClick={() => set_display_companies(!display_companies)}><p>Companies</p> <FaChevronDown /></div>
-            {display_companies === true ? company_data.map(item => <Link to={`/dashboard/company/${convert_name(item.name)}`}><li><p>{item.name}</p><p>{item.tasks.length}</p></li></Link>) : null}
+            {display_companies === true ? company_data.map(item => <Link to={`/dashboard/company/${convert_name(item.name)}`}><li><p>{item.name}</p><p className={styles.panel__category__icon}>{item.tasks.length}</p></li></Link>) : null}
         </section>
         }
         </>

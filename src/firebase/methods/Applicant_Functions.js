@@ -72,7 +72,6 @@ const get_interviews = async (post_id) => {
 
 
 const create_interview = async (data) => {
-    console.log(data)
     await db.collection("applicant").doc(data.application_id).collection("interviews").doc(data.id).set({
         managers: data.managers,
         id: data.id,
@@ -85,6 +84,7 @@ const create_interview = async (data) => {
         contact: data.contact, 
         message: data.message,
         slots: data.slots,
+        status: 2,
         accepted: false,
         completed: false,
         declined: false,
@@ -99,7 +99,15 @@ const create_interview = async (data) => {
 
 const delete_interview = async (application_id, interview_id) => {
     db.collection("applicant").doc(application_id).collection("interviews").doc(interview_id).delete();
-}
+};
+
+const update_interview_contact = async (application_id, interview_id, contact) => {
+    await db.collection("applicant").doc(application_id).collection("interviews").doc(interview_id).update({contact: contact})
+};
+
+const update_interview = async (application_id, interview_id, type, update) => {
+    await db.collection("applicant").doc(application_id).collection("interviews").doc(interview_id).update({[type]: update})
+};
 
 
 const update_application_status = async (application_id, status) => {
@@ -116,7 +124,7 @@ export {
     get_applications,
     get_post_applicants, 
     get_interviews,
-    create_interview,
+    create_interview, update_interview_contact, update_interview,
     update_application_status, update_application_message,
     delete_interview
 }

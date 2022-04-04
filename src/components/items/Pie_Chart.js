@@ -4,13 +4,11 @@ import { Pie } from 'react-chartjs-2';
 function Pie_Chart (props) {
 
     const _data = props.data;
+    const _labels = props.labels
 
     const data = {
-        labels: [
-          'Red',
-          'Green',
-          'Yellow'
-        ],
+        labels: _labels,
+  
         datasets: [{
             label: 'My First dataset',
           data: _data,
