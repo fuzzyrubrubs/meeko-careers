@@ -1,0 +1,21 @@
+
+
+.main {
+    height: 30rem;
+    width: 30rem;
+    border-radius: 2rem;
+    background-color: var(--background_light);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+}

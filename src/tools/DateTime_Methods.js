@@ -5,6 +5,14 @@ const calculate_age = (date) => moment().diff(date, 'years');
 const calendar = (date) => moment.unix(date.seconds).format("DD-MM-YYYY");
 const get_time = (seconds) => moment.unix(seconds).format('hh:mm a');
 const get_date = (seconds) => moment.unix(seconds).format('D MMMM')
+const get_diff = (date1, date2) => {
+    const start_time = moment(date2, 'hh:mm a');
+    const end_time = moment(date1, 'hh:mm a');
+    const duration = moment.duration(end_time.diff(start_time));
+    return parseInt(duration.asHours());
+};
+
+const get_now = () => moment().format('DD-MM-YYYY');
 
 const populate_30_days = () => {
     const new_array = [];
@@ -37,5 +45,6 @@ export {
     calendar,
     populate_30_days, 
     populate_24_hours,
-    get_time, get_date
+    get_time, get_date,
+    get_diff, get_now
 }

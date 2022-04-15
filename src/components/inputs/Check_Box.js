@@ -1,17 +1,21 @@
-import styles from '../../styles/components/inputs/Inputs.module.scss';
+import React, { useState } from 'react';
+import styles from '../../styles/components/inputs/Toggle.module.scss';
 
-function Check_Box (props) {
-
-    const check_handler = (e) => {
-        console.log(e.target.value)
-    };
+function Check_box (props) {
+    const value = props.value;
+    const input = props.input;
 
     return (
-        <div className={styles.check_box}>
-            <input type="checkbox" value={true} onClick={(e) => check_handler(e)} checked />
-            <p>{props.children}</p>
+        <div className={styles.toggle}>
+            <div>
+                <p className={styles.name}>{props.children}</p>
+            </div>
+            <div>
+                <input defaultChecked={value} onChange={(e) => input(!value)} className={styles.input} type="checkbox" name={props.children} id={props.children} />
+                <label for={props.children}></label>  
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default Check_Box;
+export default Check_box;

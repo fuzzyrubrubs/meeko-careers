@@ -1,14 +1,17 @@
 import { firebase, db, auth } from '../Firebase';
 import { get_company } from './Company_Functions';
+import { get_user_data } from './User_Functions';
 
 
-const create_employee = (employee_id, user_id, company_id, position) => {
+const create_employee = (employee_id, user_id, company_id, data) => {
     return db.collection("employee").doc(employee_id).set({
+        ...data, 
+        accepted: false,
+        address: "",
         employee_id: employee_id,
         user_id: user_id,
-        position: "Software Dev",
+        offboard: false,
         contact: null,
-        probation: false,
         company_id: company_id,
         start_date: firebase.firestore.Timestamp.fromDate(new Date()),
         end_date: null,
@@ -37,12 +40,17 @@ const get_employements = async (user_id) => {
 }
 
 const get_company_employees = async (company_id) => {
-    return await db.collection("employee").where("company_id", "==", company_id).get().then(querySnapshot => {
-      return querySnapshot.docs.map(doc => doc.data());
+    return await db.collection("employee").where("company_id", "==", company_id).get().then(async (querySnapshot) => {
+      return await Promise.all(querySnapshot.docs.map(async (doc) => {
+          const data = doc.data();
+          const user_data = await get_user_data(data.user_id)
+          return {...data, user_data}
+      }))
     });
 };
 
 export {
+    create_employee,
     get_employements,
     get_company_employees,
 }

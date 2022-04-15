@@ -21,6 +21,7 @@ function Main (props) {
     const companies = props.companies;
     const posts = props.posts;
     const jobs = props.jobs;
+    const offers = props.offers;
     const applications = props.applications;
     const history = useHistory();
 
@@ -50,7 +51,7 @@ function Main (props) {
         <Link to={`/dashboard/company/${convert_name(item.name)}`} className={styles.content__item}>
             <div className={`shape_pink ${styles.content__item__box}`}></div>
             <h4 className={styles.content__item__text}>{item.name}</h4>
-            <small>Company</small>
+            <small>Manager</small>
         </Link>
     ));
 
@@ -65,7 +66,7 @@ function Main (props) {
         <Link to={`/dashboard/jobs/${convert_name(item.company_data.name)}`} className={styles.content__item}>
             <div className={`shape_pink ${styles.content__item__box}`}></div>
             <h4 className={styles.content__item__text}>{item.company_data.name}</h4>
-            <small>Job</small>
+            <small>{item.title}</small>
         </Link>
     ));
 
@@ -77,6 +78,16 @@ function Main (props) {
         </Link>
     ));
 
+    const offer_items = offers.map(item => (
+        <div className={styles.content__item}>
+             <div className={`shape_pink ${styles.content__item__box}`}>
+                <IoIosAdd />
+             </div>5
+            <h4 className={styles.content__item__text}>{item.title}</h4>
+            <small>Offer</small>
+        </div>
+    ));
+
 
 
     const main = (
@@ -86,6 +97,7 @@ function Main (props) {
            {post_items}
            {job_items}
            {application_items}
+           {offer_items}
             <div className={styles.content__item} onClick={() => _add()}>
                 <div className={styles.content__item__box_outline}><IoIosAdd /></div>
                 <h4 className={styles.content__item__text}></h4>

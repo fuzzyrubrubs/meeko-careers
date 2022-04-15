@@ -35,7 +35,6 @@ function Router(){
                 {/* <Route exact path="/manage/:id" render={(props) => <Overview {...props} /> } />  */}
                 <Route render={() => <Error404 /> } />
                 </Switch>
-            <Footer />
         </>
     )
 

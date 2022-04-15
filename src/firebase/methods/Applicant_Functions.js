@@ -13,7 +13,8 @@ const create_application = async (application_id, post_id, company_id, user_id, 
         status: 0,
         email: contact.email, 
         phone: contact.phone,
-        closed: false
+        closed: false,
+        offer: null,
     })
 };
 
@@ -118,6 +119,25 @@ const update_application_message = async (application_id, message) => {
     await db.collection("applicant").doc(application_id).update({message: message})
 };
 
+const close_application = async (application_id) => {
+    await db.collection("applicant").doc(application_id).update({closed: true})
+}
+
+const create_offer = async (application_id, data) => {
+    await db.collection("applicant").doc(application_id).update({
+        offer: {
+            ...data, 
+            accepted: false
+        }
+    })
+}
+
+const cancel_offer = async (application_id) => {
+    await db.collection("applicant").doc(application_id).update({
+        offer: null
+    })
+}
+
 
 export {
     create_application,
@@ -126,5 +146,8 @@ export {
     get_interviews,
     create_interview, update_interview_contact, update_interview,
     update_application_status, update_application_message,
-    delete_interview
+    delete_interview,
+    create_offer, 
+    cancel_offer,
+    close_application
 }

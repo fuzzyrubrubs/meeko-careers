@@ -16,7 +16,7 @@ import { AuthContext } from '../../../contexts/Auth.context';
 import { useHistory } from 'react-router-dom';
 
 
-function Create_post (props) {
+function Create_Post (props) {
     const { user_data } = useContext(AuthContext);
     const [title, set_title] = useState("");
     const [salary, set_salary] = useState(0);
@@ -81,4 +81,4 @@ function Create_post (props) {
     )
 }
 
-export default Create_post;
+export default Create_Post;

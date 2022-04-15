@@ -20,6 +20,8 @@ function Settings (props) {
                 <h3>Features</h3>
                 <Toggle id={data.id} name="rota" value={data.rota} data={data.rota_data}>Rota</Toggle>
                 <Toggle id={data.id} name="equipment" value={data.equipment} data={data.equipment_data}>{equipment_modal}</Toggle>
+                <Toggle id={data.id} name="contracts" value={data.equipment} data={data.equipment_data}>{equipment_modal}</Toggle>
+                <Toggle id={data.id} name="invoices" value={data.equipment} data={data.equipment_data}>{equipment_modal}</Toggle>
             </section>
         </main>
     );

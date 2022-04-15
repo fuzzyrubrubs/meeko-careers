@@ -23,9 +23,10 @@ function Add_Managers (props) {
  
 
     const add_handler = async (item) => {
+
         if(found_managers.length > 0) {
             const obj = {name: item.name, email: item.email, id: item.id, avatar: item.avatar}
-            props.input([...data, obj]);
+            props.select ? props.input([obj]) : props.input([...data, obj]);
             set_managers("");
         } else {
             const obj = {email: managers}
@@ -70,7 +71,7 @@ function Add_Managers (props) {
             <div className={styles.managers__added_wrapper}>{[...data, ...invited_data].map(item => manager(item))}</div>
             <div className={styles.managers__action}>
                 <Text_Input value={managers} input={set_managers} />
-                <Button_Main active={false} active={active} no_margin={true} size={"10rem"} action={() => add_handler(found_managers[0])}>Add</Button_Main>
+                <Button_Main active={active} no_margin={true} size={"10rem"} action={() => add_handler(found_managers[0])}>Add</Button_Main>
                 <div className={styles.managers__found}>{found_managers.map(item => manager_selection(item))}</div>
             </div>
         </div>

@@ -23,7 +23,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function Dashboard (props) {
     const params = props.match.params.name;
-    const { user_data, companies, posts, jobs, applications } = useContext(AuthContext);
+    const { user_data, companies, posts, jobs, applications, offers } = useContext(AuthContext);
     const [loader, set_loader] = useState(false);
     const [display, set_display] = useState(true);
 
@@ -37,8 +37,8 @@ function Dashboard (props) {
             <div className={styles.container}>
                 <Nav />
                 <section className={styles.main}>
-                    <Route exact path="/dashboard" render={(props) => <Main companies={companies} posts={posts} jobs={jobs} applications={applications}  /> } /> 
-                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks data={[...companies, ...posts, ...jobs, ...applications].flat()} /> } />
+                    <Route exact path="/dashboard" render={(props) => <Main companies={companies} posts={posts} jobs={jobs} applications={applications} offers={offers}  /> } /> 
+                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks companies={companies} posts={posts} jobs={jobs} applications={applications} /> } />
                     <Route exact path="/dashboard/messages" render={(props) => <Messages /> } /> 
                     <Route exact path="/dashboard/company/:name" render={(props) => <Company data={companies.find(company => convert_name(company.name) === params)} /> } /> 
                     <Route exact path="/dashboard/posts/:id" render={(props) => <Post data={posts.find(post => post.post_id === params)} /> } /> 

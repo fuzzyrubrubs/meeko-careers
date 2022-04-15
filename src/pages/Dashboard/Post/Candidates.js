@@ -34,13 +34,13 @@ function Candidates (props) {
             <section className={styles.candidates}>
                 <h2>{selected === null ? "All" : candidate_status[selected]}</h2>
                 <div className={styles.candidates__list}>
-                    {filter_handler(selected).map(item => <Candidate_Preview data={item} stages={candidate_status} select={select_handler} />)}
+                    {filter_handler(selected).map(item => <Candidate_Preview data={item} select={select_handler} />)}
                 </div>
             </section>
         </main>
     )
 
-    const display_content = profile ? <Candidate data={profile} job_data={data} stages={candidate_status} go_back={go_back} /> : main;
+    const display_content = profile ? <Candidate data={profile} job_data={data} go_back={go_back} /> : main;
 
     return display_content
 };
@@ -50,14 +50,13 @@ export default Candidates;
 
 function Candidate_Preview (props) {
     const data = props.data;
-    const stages = props.stages;
     return (
         <div onClick={() => props.select(data)} className={styles.preview}>
             <span>
                 <div className={styles.preview__image} style={{"backgroundImage": `url(${data.user_data.avatar})`}}></div>
                  <p class="bold">{data.user_data.name}</p>
             </span>
-            <small>{stages[data.status]}</small>
+            <small>{candidate_status[data.status]}</small>
             <p>1</p>
             <p>1</p>
             <small>{time_since(data.timestamp)}</small>

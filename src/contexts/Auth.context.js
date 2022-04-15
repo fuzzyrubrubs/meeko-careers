@@ -13,8 +13,12 @@ export function AuthProvider(props) {
     const [user_data, set_user_data] = useState({});
     const [applications, set_applications] = useState([]);
     const [jobs, set_jobs] = useState([]);
+    const [offers, set_offers] = useState([]);
     const [posts, set_posts] = useState([]);
     const [companies, set_companies] = useState([]);
+
+
+    const usesplit = (data) => [data.filter(item => item.accepted === true), data.filter(item => item.accepted === false)];
     
     useEffect(() => {
         var unlisten = auth.onAuthStateChanged(async (user) => {
@@ -22,11 +26,13 @@ export function AuthProvider(props) {
                 const u_data = await get_user_data(user.uid);
                 const a_data = await get_applications(user.uid);
                 const e_data = await get_employements(user.uid);
+                const [j_data, o_data] = usesplit(e_data)
                 const r_data = await get_recruitments(user.uid);
                 const m_data = await get_managements(user.uid);
                 set_user_data(u_data); 
                 set_applications(a_data);
-                set_jobs(e_data);
+                set_jobs(j_data);
+                set_offers(o_data);
                 set_posts(r_data);
                 set_companies(m_data);
                 set_user(user.uid)   
@@ -39,7 +45,7 @@ export function AuthProvider(props) {
 
 
     return (
-        <AuthContext.Provider value={{ user, user_data, applications, set_applications, jobs, posts, companies }}>
+        <AuthContext.Provider value={{ user, user_data, applications, set_applications, jobs, posts, companies, offers }}>
             {props.children}
         </AuthContext.Provider>
     );

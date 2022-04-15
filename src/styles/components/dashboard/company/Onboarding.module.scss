@@ -1,0 +1,29 @@
+
+.onboard {
+    height: 70%;
+    width: 65%;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--background_light);
+    &__form {
+        display: flex;
+        flex-direction: column;
+        & img {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 8rem;
+            object-fit: cover;
+        }
+    }
+}
+
+
+.post {
+    height: 90%;
+    width: 70%;
+    background: var(--background_light);
+    overflow-y: auto;
+    border-radius: 1rem;
+    padding: 3rem 0;
+}

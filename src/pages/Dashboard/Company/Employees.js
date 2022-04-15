@@ -1,112 +1,111 @@
-import styles from '../../../styles/pages/Dashboard/Hired.module.scss';
+import styles from '../../../styles/pages/Dashboard/Company/Employees.module.scss';
 import { FiFileText, FiArrowUpRight } from "react-icons/fi";
 import { useState } from 'react';
 import { FaChevronLeft } from "react-icons/fa";
 import Hiree from './Employee';
-
-
+import Doughnut_Chart from '../../../components/charts/Doughnut';
+import Half_Doughnut_Chart from '../../../components/items/Half_Doughnut_Chart';
+import Employee from './Employee';
+import Click_Modal from '../../../components/items/Click_Modal';
+import Add_Managers from '../../../components/dashboard/Add_Managers';
+import Make_Offer from '../../../components/dashboard/Tasks/Make_Offer';
+import Text_Input_Alt from '../../../components/inputs/Text_Input_Alt';
+import Onboarding from '../../../components/dashboard/Company/Onboarding';
 
 const Grid = (props) => <div className={styles.grid} style={{gridTemplateColumns: props.columns, gridTemplateRows: props.rows}}>{props.children}</div>;
 const List = (props) => <div className={styles.list}>{props.children}</div>;
 const Header = (props) => <h4 className={styles.header}>{props.children}</h4>;
 
-function Hired (props) {
-    const [selected, set_selected] = useState(false);
 
-    const select_handler = () => set_selected(true);
+function Employees (props) {
+    const data = props.data;
+    console.log(data)
+    const [profile, set_profile] = useState(false);
+    const [selected, set_selected] = useState(null);
+    const [positions, set_positions] = useState(props.data.employees)
+
+    console.log(data)
+
+    const select_handler = (data) => set_profile(data);
+    const go_back = () => set_profile(false);
+
     
-    const fake_array = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
     const main = (
         <main className={styles.main}>
-        <section className={styles.content}>
-            <header className={styles.header}><div onClick={() => props.go_back()}><FaChevronLeft /> <h2>Hired</h2></div></header>
-            <Grid columns="1fr 1fr 1fr" rows="1fr">
-                <div className={styles.analytics}>
-                    <h2>11</h2>
-                    <span>
-                        <p>Hired</p>
-                        <small>5 Tasks</small>
-                    </span>
-                    <div></div>
+            <section className={styles.list}>
+                {positions.map(item => item.accepted ? <Employee_Preview data={item} select={select_handler}  /> : <Pending_Preview  data={item}  /> )}
+                {data.posts.map(item => <Recruit_Preview data={item} /> )}
+                <Click_Modal content={<p>Add</p>}><Onboarding data={data} /></Click_Modal>
+            </section>
+            <section className={styles.display}>
+                <h4>Task Analytics</h4>
+                <div className={styles.display__chart}>
+                   <Half_Doughnut_Chart data={[4, 2]} />
                 </div>
-                <div className={styles.analytics}>
-                    <h2>4</h2>
-                    <span>
-                        <p>Probation</p>
-                        <small>12 Tasks</small>
-                    </span>
-                    <div></div>
-                </div>
-                <div className={styles.analytics}>
-                    <h2>2</h2>
-                    <span>
-                        <p>Offboarded</p>
-                        <small>0 tasks</small>
-                    </span>
-                    <div></div>
-                </div>
-            </Grid>
-      
-            <Grid columns="1fr" rows="1fr">
-                <List>
-                    {fake_array.map(item => <Candidate_Preview select={select_handler} />)}
-                </List>
-            </Grid>
+                <div></div>
+            </section>
+        </main>
+    );
 
-            <Grid columns="1fr 1fr" rows="1fr"> 
-                <div className={styles.interview_template}>On/offboarding Task Template</div>
-                <div className={styles.interview_template}>Custom Task Template</div>      
-            </Grid>
-            
-        </section>
-        <section className={styles.candidates}>
-            <Header>Tasks Not/Complete | Probation Analytics</Header>
-            <div className={styles.task_analytics}>80% complete</div>
-            <List>
-                {fake_array.map(item => <Calendar_Preview />)}
-            </List>
-        </section>
-    </main>
-    )
+    const content = profile ? <Employee data={profile} job_data={data} go_back={go_back} /> : main;
 
-    const go_back = () => set_selected(0);
-
-    const display_content = selected ? <Hiree id={selected} go_back={go_back} /> : main;
-
-    return display_content;
+    return content
 
 };
 
-export default Hired;
+export default Employees;
 
 
-function Candidate_Preview (props) {
+function Employee_Preview (props) {
+    const data = props.data;
+
     return (
-        <div onClick={() => props.select()} className={styles.preview}>
-            <span>
-                <div className={styles.preview__image}></div>
-                 <p>Anna Taylor</p>
-            </span>
-            <small>Probation</small>
-            <small>6 tasks</small>
-            <small>4 tasks</small>
-            <small>6 months</small>
-            <small>Contract</small>
-        </div>
-    )
-};
-
-function Calendar_Preview (props) {
-    return (
-        <div onClick={() => props.select()} className={styles.calendar__item}>
-            <h4>Task</h4>
-            {/* <h4>Complete</h4> */}
-            <span></span>
-            <div>
-                <small>Sign Contract</small>
-                <p>Anna Taylor</p>
+        <div onClick={() => props.select(data)} className={styles.preview}>      
+            <p class="bold">{data.position}</p>
+            <div className={styles.preview__wrapper}>
+                <div className={styles.preview__image} style={{"backgroundImage": `url(${data.user_data.avatar})`}}></div>
+                <p class="bold">{data.user_data.name}</p>
+                <p>Onboarding</p>
+                <p>4 days ago</p>
+                <p>{data.salary}</p>
+                <p>6 Tasks pending</p>
+                <p>Last Active: 54 mins</p>
             </div>
         </div>
     )
 };
+
+function Recruit_Preview (props) {
+    const data = props.data;
+    console.log(data)
+
+    return (
+        <div className={styles.preview}>
+            <p class="bold">Software Developer</p>
+            <div className={styles.preview__wrapper}>
+                <p>Recruiting</p>
+                <p>400 applicants</p>
+                <p>4 days ago</p>
+            </div>
+        </div>
+    )
+};
+
+function Pending_Preview (props) {
+    const data = props.data;
+    const post = props.post;
+    console.log(post)
+
+    return (
+        <div className={styles.preview}>
+            <p class="bold">Software Developer</p>
+            <div className={styles.preview__wrapper}>
+                <p>Recruiting</p>
+                <p>400 applicants</p>
+                <p>4 days ago</p>
+            </div>
+        </div>
+    )
+};
+

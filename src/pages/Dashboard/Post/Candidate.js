@@ -1,9 +1,9 @@
-import styles from '../../../styles/pages/Dashboard/Candidate.module.scss';
+import styles from '../../../styles/pages/Dashboard/Post/Candidate.module.scss';
 import Button_Main from '../../../components/items/Button_Main';
 import { FaChevronLeft, FaLinkedin, FaTimes, FaPen, FaStar } from "react-icons/fa";
 import { MdWeb } from "react-icons/md";
 import { useEffect, useState, useContext } from 'react';
-import { interview_icons, interview_types } from '../../../tools/global_variables';
+import { interview_icons, interview_types, candidate_status } from '../../../tools/global_variables';
 import Button_Modal from '../../../components/items/Button_Modal';
 import { populate_24_hours, populate_30_days } from '../../../tools/DateTime_Methods';
 import Dates_List from '../../../components/lists/Dates_List';
@@ -18,9 +18,12 @@ import { Link } from 'react-router-dom';
 import { IoCloseOutline } from "react-icons/io5";
 import { FiMessageSquare } from "react-icons/fi";
 import { IoIosAdd } from "react-icons/io";
-import { update_application_message, update_application_status } from '../../../firebase/methods/Applicant_Functions';
+import { update_application_message, update_application_status, close_application, create_offer } from '../../../firebase/methods/Applicant_Functions';
 import Click_Modal from '../../../components/items/Click_Modal';
 import View_Interview from '../../../components/dashboard/Tasks/View_Interview';
+import Make_Offer from '../../../components/dashboard/Tasks/Make_Offer';
+import Edit_Offer from '../../../components/dashboard/Tasks/Edit_Offer';
+import Confirmation from '../../../components/items/Confirmation';
 
 
 const Grid = (props) => <div className={styles.grid} style={{gridTemplateColumns: props.columns, gridTemplateRows: props.rows}}>{props.children}</div>;
@@ -31,15 +34,19 @@ function Candidate (props) {
     const { set_hide_header } = useContext(MenuContext);
     const data = props.data;
     const job_data = props.job_data;
-    const stages = props.stages;
     const [shortlist, set_shortlist] = useState(data.status >= 2);
     const [status, set_status] = useState(data.status);
 
     const history = useHistory();
 
+
     const update_status = async (num) => {
         update_application_status(data.application_id, num)
     };
+
+    const close_handler = async () => {
+        close_application(data.application_id)
+    }
 
     useEffect(() => {
         set_hide_header(true);
@@ -50,7 +57,7 @@ function Candidate (props) {
     }, []);
     
 
-    const active_interview = data.interviews.find(item => item.completed === false);
+    const active_interview = data.interviews.find(item => item.status < 5);
 
     const _shortlist = () => {
         if(status <= 2) { 
@@ -73,8 +80,19 @@ function Candidate (props) {
         <div className={styles.interviews__create}>
             <IoIosAdd />
         </div>
-    )
+    );
 
+    const offer_create = (
+        <div>
+            <p>Make Offer</p>
+        </div>
+    );
+
+    const offer_handler = (item) => {
+        create_offer(data.application_id, item);
+        update_application_status(data.application_id, 4);
+        update_application_message(data.application_id, job_data.templates.offer);
+    }
 
     return (
         <>
@@ -83,7 +101,7 @@ function Candidate (props) {
                 <div className={styles.header__row}>
                     {/* <span onClick={() => props.go_back()}><FaChevronLeft /></span> */}
                     <h5>Applicant</h5>
-                    <div class="small_button">{stages[data.status]}</div>
+                    <div class="small_button">{candidate_status[data.status]}</div>
                 </div>
                 <h1>{data.user_data.name}</h1> 
             </div>
@@ -161,8 +179,16 @@ function Candidate (props) {
                 </div>
 
                 <div>
-                    <p>Make Offer</p>
-                    <p>Close Application</p>
+                    {data.offer ? 
+                    <Click_Modal content={<Button_Main>View Offer</Button_Main>}>
+                        <Edit_Offer application_id={data.application_id} user_data={data.user_data} job_data={job_data} offer_data={data.offer} />
+                    </Click_Modal> 
+                    : 
+                    <Click_Modal content={<Button_Main>Make Offer</Button_Main>}> 
+                        <Make_Offer action={(e) => offer_handler(e)} application_id={data.application_id} user_data={data.user_data} job_data={job_data} />
+                    </Click_Modal>
+                    }
+                    <Confirmation action={close_handler}><div className={styles.close}><small>Close Application</small></div></Confirmation>
                 </div>
             </section>
         </main>

@@ -11,6 +11,7 @@ import Edit_Area from '../../components/inputs/Edit_Area';
 import { interview_icons } from '../../tools/global_variables';
 import Attend_Interview from '../../components/dashboard/Tasks/Attend_Interview';
 import Button_Modal from '../../components/items/Button_Modal';
+import View_Offer from '../../components/dashboard/Tasks/Vew_Offer';
 
 function Application (props) {
     const data = props.data;
@@ -29,6 +30,9 @@ function Application (props) {
 
     const active_interview = data.interviews.find(item => item.completed === false);
 
+    const offer_button = <Button_Modal type={0} name="View Offer"><View_Offer offer={data.offer} /></Button_Modal>;
+    const interview_button =  <Button_Modal type={0} name={active_interview.status === 2 ? "Select time" : "View Interview"}><Attend_Interview data={active_interview} /></Button_Modal>;
+
     return (
 
             <>
@@ -39,7 +43,9 @@ function Application (props) {
                         <h4 className={styles.header}>Status: <span class="bold dark">{application_status[data.status]}</span></h4>
                         <p>Hi, Anna! {data.message}</p>
                     </div>
-                    <Button_Modal type={0} name={active_interview.status === 2 ? "Select time" : "View Interview"}><Attend_Interview data={active_interview} /></Button_Modal>)
+                   {data.status === 3 ? interview_button : null }
+                   {data.status === 4 ? offer_button : null }
+                    
                     
                 </section>
                 <section className={styles.details}>

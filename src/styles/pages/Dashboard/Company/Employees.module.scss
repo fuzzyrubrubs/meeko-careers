@@ -1,0 +1,59 @@
+.main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 5%;
+}
+
+.list {
+    margin-top: 2rem;
+}
+
+.display {
+    &__chart {
+        height: 20rem;
+        width: 20rem;
+    }
+}
+
+.preview {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    align-items: center;
+    cursor: pointer;
+    height: 4rem;
+
+    & p {
+        // border-right: 1px solid var(--text_light);
+    }
+    
+    &__wrapper {     
+        display: flex;
+        border-radius: 1.5rem;
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__image {
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 3.5rem;
+        background-position: center;
+        background-size: cover;
+    }
+    &:hover {
+        background-color: var(--background_light);
+    }
+};
+
+
+
+
+.modal {
+    height: 70%;
+    width: 65%;
+    background-color: var(--background_light);
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

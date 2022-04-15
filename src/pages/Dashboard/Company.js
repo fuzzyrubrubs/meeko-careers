@@ -4,7 +4,6 @@ import Job_Status from '../../components/previews/Post_Preview';
 // import { Grid, Header, Row } from '../../components/styles/Containers';
 import styles from '../../styles/pages/Dashboard/Company/Company.module.scss';
 import Job from './Post';
-import Analytics from './Company/Analytics';
 import Employees from './Company/Employees';
 import { MenuContext } from '../../contexts/Menu.context';
 import Settings from './Company/Settings';
@@ -17,7 +16,7 @@ function Company (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
     const data = props.data;
 
-    const menu_options = ["Overview", "Employees", "Recruitment", "Automation", "Analytics", "Settings"];
+    const menu_options = ["Overview", "Employees", "Recruitment", "Automation", "Settings"];
 
     useEffect(() => {
         set_options(menu_options);
@@ -36,7 +35,6 @@ function Company (props) {
         <Employees data={data} />, 
         <Recruitment data={data} />,
         <Automation data={data} />,
-        <Analytics data={data} />,
         <Settings data={data} />, 
     ];
 
