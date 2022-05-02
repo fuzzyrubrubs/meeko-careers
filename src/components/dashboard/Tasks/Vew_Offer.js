@@ -21,8 +21,6 @@ function View_Offer (props) {
     // const per_week = hours === 1 ? working_hours : (get_diff(times_list[end_time_selected], times_list[start_time_selected]) - lunch_duration) * 5;
     // const day_rate = parseInt((salary * 12 / 52) / per_week)
 
-
-    console.log(offer)
     
     const submit_handler = () => {
      
@@ -51,7 +49,7 @@ function View_Offer (props) {
 
             <section>
                 <p class="bold">Start Date</p>
-                <p>{offer.start_date}</p>
+                {/* <p>{offer.start_date}</p> */}
             </section>
 
             {offer.probation.exists ? <section>

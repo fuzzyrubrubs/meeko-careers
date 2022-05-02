@@ -7,6 +7,7 @@ import Make_Offer from '../Tasks/Make_Offer';
 import Create_Post from '../../../pages/Dashboard/Main/Create_Post';
 import { create_employee } from '../../../firebase/methods/Employee_Functions';
 import generatePushID from '../../../tools/IDGenerator';
+import { form_header } from '../../../tools/global_components';
 
 
 function Onboarding (props) {
@@ -19,13 +20,32 @@ function Onboarding (props) {
 
     const add_employee = (item) => {
         const id = generatePushID();
-        console.log(item)
-        console.log(id, user_data[0].id, data.id, item)
         create_employee(id, user_data[0].id, data.id, item)
     };
 
-    
     const main = (
+        <section className={styles.onboard}>
+            <h2>Create Position</h2>
+            <div className={styles.grid__column}>
+                {form_header("Position", " Fill in the position you would like to create")}
+                <Text_Input_Alt value={position} input={set_position}>Position</Text_Input_Alt>
+                {form_header("Employee", "If you have someone in mind for the position you can send them an offer here.")}
+                {user_data.length === 0 ? <Add_Managers value={user_data} input={set_user_data} invited_value={user_data} select={true} /> : (
+                    <div className={styles.onboard__form}>
+                        <img src={user_data[0].avatar} />
+                        <h4 class="bold medium">{user_data[0].name}</h4>
+                        <Button_Main action={() => set_selected(1)}>Create Position</Button_Main>
+                    </div>
+                )}
+            </div>
+            <div className={styles.grid__divider}></div>
+            {form_header("Recruitment", "Or if you don't have anyone in mind.")}
+            <Button_Main action={() => set_selected(2)}>Start Recruitment</Button_Main>
+        </section>
+    );
+
+    
+    const main1 = (
         <section className={styles.onboard}>
             <div>
                 <h3>Add an employee</h3>
@@ -43,7 +63,9 @@ function Onboarding (props) {
                 <Button_Main action={() => set_selected(2)}>Create Post</Button_Main>
             </div>
         </section>
-    )
+    );
+
+
     const content = [main, <Make_Offer action={(e) => add_employee(e)} user_data={user_data[0]} job_data={{title: position, company_name: data.name}} />, <section className={styles.post}><Create_Post  companies={[data.id]} /></section>]
 
     return content[selected]

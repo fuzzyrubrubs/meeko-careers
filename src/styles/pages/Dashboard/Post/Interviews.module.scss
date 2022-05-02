@@ -1,7 +1,7 @@
 .main {
     height: 66vh;
     display: grid;
-    grid-template-columns: 15rem 1fr 25rem;
+    grid-template-columns: 15rem 1fr;
     grid-template-rows: 66vh;
     gap: 5rem;
     margin-top: 4rem;
@@ -48,7 +48,10 @@
 
 .interviews {
     &__list {
-        margin-top: 3rem;
+        margin-top: 1.5rem;
+    }
+    &__header {
+        padding-left: 2rem;
     }
 
     overflow-y: auto;
@@ -80,7 +83,8 @@
         align-items: center;
         justify-content: space-between;
         border-radius: 2rem;
-        padding: 1rem 0.5rem;
+        padding: 1rem 2rem;
+        width: 100%;
         cursor: pointer;
         &:hover {
             background-color: var(--background_light);

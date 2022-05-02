@@ -1,8 +1,9 @@
 
 import React from 'react';
-import Half_Doughnut_Chart from '../../../components/items/Half_Doughnut_Chart';
+import Half_Doughnut_Chart from '../../../components/charts/Half_Doughnut_Chart';
 import styles from '../../../styles/pages/Dashboard/Job/Main.module.scss';
 import { MdLocationOn } from "react-icons/md";
+import Button_Main from '../../../components/items/Button_Main';
 
 function Main (props) {
     const data = props.data;
@@ -83,6 +84,10 @@ function Main (props) {
                         <div><p>Closed</p></div>
                     </div>
 
+                </div>
+                <div className={styles.grid__column}>
+                    <Button_Main>Arrange Leave</Button_Main>
+                    <Button_Main>Terminate Contract</Button_Main>
                 </div>
 
             </section>

@@ -19,8 +19,6 @@ function Login (props) {
     }
 
     const submit_handler = () => {
-        console.log(email)
-        console.log(password)
         if(loader === false) {
             set_loader(true);
             sign_in({email: email, password: password}).then(result => {

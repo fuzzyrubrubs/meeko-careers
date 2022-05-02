@@ -15,10 +15,10 @@ function Toggle (props) {
 
     return (
         <div className={styles.toggle}>
-            <div>
-                <h5 className={styles.name} onClick={() => set_modal(true)}>{props.name}</h5>
+            <div className={styles.toggle__wrapper} onClick={() => set_modal(true)}>
+                <h5 className={styles.name}>{props.name}</h5>
             </div>
-            <div>
+            <div className={styles.toggle__wrapper}>
                 <input defaultChecked={selected} onChange={() => select_handler(!selected)} className={styles.input} type="checkbox" name={props.name} id={props.name} />
                 <label for={props.name}></label>  
             </div>

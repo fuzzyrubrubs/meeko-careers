@@ -1,0 +1,20 @@
+.add {
+    cursor: pointer;
+    color: var(--text_medium);
+    font-weight: 600;
+    border-radius: 2rem;
+    padding: 0 1.5rem;
+    background-color: var(--background_light);
+    border: 1.5px solid var(--text_light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    & svg {
+        color: var(--text_light_medium);
+        font-size: 1.8rem;
+    }
+    &:hover {
+        background-color: var(--background_light);
+    }
+}

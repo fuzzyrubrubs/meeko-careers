@@ -5,7 +5,7 @@ function Main (props) {
     const data = props.data;
     return (
         <main> 
-            {/* <Header name={"Company"}>{data.name}</Header> */}
+            
         </main>
     )
 };

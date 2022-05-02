@@ -13,6 +13,7 @@ const get_diff = (date1, date2) => {
 };
 
 const get_now = () => moment().format('DD-MM-YYYY');
+const get_now_seconds = () => moment().format('X');
 
 const populate_30_days = () => {
     const new_array = [];
@@ -36,7 +37,7 @@ function populate_24_hours () {
       items.push(moment({ hour: num, minute: 30 }).format('hh:mm a'));
     })
     return items;
-  }
+};
 
 
 export { 
@@ -46,5 +47,5 @@ export {
     populate_30_days, 
     populate_24_hours,
     get_time, get_date,
-    get_diff, get_now
-}
+    get_diff, get_now, get_now_seconds
+};

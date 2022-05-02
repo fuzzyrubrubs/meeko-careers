@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import styles from '../../styles/components/inputs/Toggle.module.scss';
+import styles from '../../styles/components/inputs/Check.module.scss';
 
 function Check_box (props) {
     const value = props.value;
     const input = props.input;
 
     return (
-        <div className={styles.toggle}>
+        <div className={styles.check}>
             <div>
                 <p className={styles.name}>{props.children}</p>
             </div>

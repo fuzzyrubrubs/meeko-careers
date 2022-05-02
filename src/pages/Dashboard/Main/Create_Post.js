@@ -55,7 +55,6 @@ function Create_Post (props) {
         }
     }
 
-    console.log(props.companies)
 
     return (
             <section className={styles.form}>

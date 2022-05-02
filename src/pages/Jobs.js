@@ -50,8 +50,8 @@ function Jobs () {
                 </section>
                 <section className={styles.main}>
                     <div className={styles.header}>
-                        <h2>Lorem ipsum</h2>
-                        <p>Ut tristique eros ut elit dignissim placerat. Fusce feugiat ante augue. r in Aenean vel porttitor purue.</p>
+                        <h2>Meeko Job Board</h2>
+                        <p>See the list of availbale Meeko positions below.</p>
                     </div>
                     <div className={styles.posts}>
                         {jobs.map((item, index) => <Job_Post data={item} applied={check_status(item.id)} selected={selected === index} select={() => set_selected(index)} />)}

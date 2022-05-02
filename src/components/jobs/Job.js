@@ -17,8 +17,6 @@ function Job (props) {
     const [apply_open, set_apply_open] = useState(false);
     const [loader, set_loader] = useState(true);
 
-    console.log(id)
-
 
     useEffect(() => {
         const fetch_data = async () => {

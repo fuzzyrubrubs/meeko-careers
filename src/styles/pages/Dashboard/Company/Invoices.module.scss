@@ -1,0 +1,49 @@
+
+
+.container {
+
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    & span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & svg { 
+            font-size: 2rem; 
+            color: var(--text_light_medium); 
+            cursor: pointer; 
+        }
+
+    }
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.invoice {
+    text-align: center;
+    cursor: pointer;
+    & div {
+        height: 17rem;
+        width: 12rem;
+        border-radius: 1rem;
+        background-color: var(--text_light_medium);
+        margin-bottom: 0.5rem;
+    }
+};
+
+
+.invalid {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

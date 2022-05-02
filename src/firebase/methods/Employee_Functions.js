@@ -21,7 +21,13 @@ const create_employee = (employee_id, user_id, company_id, data) => {
 
 
 const get_employee_tasks = async (employee_id) => {
-    return await db.collection("employee").doc(employee_id).collection("task").get().then(querySnapshot => querySnapshot.docs.map(doc => doc.data()));
+    return await db.collection("employee").doc(employee_id).collection("tasks").get().then(async (querySnapshot) => {
+        return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const ref = await data.ref.get(doc => doc.data())
+            return {...data, ref}
+        }))
+    });
   }
 const get_employee_messages = async (employee_id) => {
 return await db.collection("employee").doc(employee_id).collection("messages").get().then(querySnapshot => querySnapshot.docs.map(doc => doc.data()));
@@ -53,4 +59,6 @@ export {
     create_employee,
     get_employements,
     get_company_employees,
+    get_employee_tasks, 
+    get_employee_messages
 }

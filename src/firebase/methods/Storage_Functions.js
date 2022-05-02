@@ -15,7 +15,6 @@ const get_avatar = async (userId) => {
 };
 
 const upload_resume = async (file, userId) => {
-  console.log(file)
   var metadata = {contentType: file.type};
     const imageRef = storage.ref('resumes/' + userId);
     const task = await imageRef.put(file, metadata).then(snapshot => { return snapshot });

@@ -88,8 +88,15 @@ const get_post = async (post_id) => {
 };
 
 const get_post_tasks = async (post_id) => {
-    return await db.collection("posts").doc(post_id).collection("task").get().then(querySnapshot => querySnapshot.docs.map(doc => doc.data()));
+    return await db.collection("posts").doc(post_id).collection("tasks").get().then(async (querySnapshot) => {
+        return await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data();
+            const ref = await data.ref.get().then(doc => doc.data());
+            return {...data, ref}
+        }))
+    })
 }
+
 const get_post_messages = async (post_id) => {
     return await db.collection("posts").doc(post_id).collection("messages").get().then(querySnapshot => querySnapshot.docs.map(doc => doc.data()));
 }
@@ -183,5 +190,6 @@ export {
     create_post, get_posts, get_post, update_post,
     get_recruiter_messages, get_recruiter_tasks,
     get_companies_posts,
-    get_recruitments
+    get_recruitments, get_recruiters, get_post_tasks, get_post_messages
 }
+

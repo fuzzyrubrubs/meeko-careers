@@ -9,8 +9,6 @@ import { get_user_data } from "../../firebase/methods/User_Functions";
 function Job_Status(props) {
   const data = props.data;
 
-  console.log(data)
-
   return (
     <Link to={`/dashboard/posts/${data.post_id}`} className={styles.container}>
        

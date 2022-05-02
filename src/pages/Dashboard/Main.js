@@ -6,26 +6,24 @@ import Company from './Main/Create_Company';
 import { IoIosAdd } from "react-icons/io";
 import Create_Company from './Main/Create_Company';
 import Create_Post from './Main/Create_Post';
-import Pie_Chart from '../../components/items/Pie_Chart';
+import Pie_Chart from '../../components/charts/Pie_Chart';
 import Modal from '../../components/UI/Modal';
 import { useHistory } from 'react-router-dom';
 import Join_Company from './Main/Join_Company';
 import { MenuContext } from '../../contexts/Menu.context';
+import Click_Modal from '../../components/items/Click_Modal';
+import View_Offer from '../../components/dashboard/Tasks/Vew_Offer';
 
 
 function Main (props) {
     const { selected, set_selected } = useContext(MenuContext);
-    // const [selected, set_selected] = useState(0);
     const [manager, set_manager] = useState(true);
-    const [selector, set_selector] = useState(false);
     const companies = props.companies;
     const posts = props.posts;
     const jobs = props.jobs;
     const offers = props.offers;
     const applications = props.applications;
     const history = useHistory();
-
-    console.log(jobs)
 
     useEffect(() => {
         return () => { 
@@ -34,16 +32,19 @@ function Main (props) {
     }, []);
 
 
-    const _add = () => {
-        set_selector(true);
-    };
+    const offer_form = (
+        <section className={styles.offer}>
+
+        </section>
+    );
+
 
     const options_grid = (
         <section className={styles.grid}>
             <h3 onClick={() => history.push('/jobs')}>Find Job</h3>
-            <h3 onClick={() => {set_selected(3); set_selector(false)}}>Join Company</h3>
-            <h3 onClick={() => {set_selected(1); set_selector(false)}}>Create Company</h3>
-            <h3 onClick={() => {set_selected(2); set_selector(false)}}>Create Job</h3>
+            <h3 onClick={() => {set_selected(3);}}>Join Company</h3>
+            <h3 onClick={() => {set_selected(1);}}>Create Company</h3>
+            <h3 onClick={() => {set_selected(2);}}>Create Job</h3>
         </section>
     )
     
@@ -79,34 +80,36 @@ function Main (props) {
     ));
 
     const offer_items = offers.map(item => (
-        <div className={styles.content__item}>
-             <div className={`shape_pink ${styles.content__item__box}`}>
-                <IoIosAdd />
-             </div>5
-            <h4 className={styles.content__item__text}>{item.title}</h4>
-            <small>Offer</small>
-        </div>
+        <Click_Modal content={
+            <div className={styles.content__item}>
+                <div className={`shape_pink ${styles.content__item__box}`}><IoIosAdd /></div>
+                <h4 className={styles.content__item__text}>{item.title}</h4>
+                <small>Offer</small>
+            </div>
+        }>
+            <View_Offer offer={item} />
+        </Click_Modal>
     ));
 
 
 
-    const main = (
-    <main className={styles.content}>
-        <section className={styles.content__section_1}>
+    const main = (  
+        <main className={styles.content__section_1}>
            {company_items}
            {post_items}
            {job_items}
            {application_items}
            {offer_items}
-            <div className={styles.content__item} onClick={() => _add()}>
-                <div className={styles.content__item__box_outline}><IoIosAdd /></div>
-                <h4 className={styles.content__item__text}></h4>
-            </div>
-        
-        </section>
-        {selector ? <Modal close={() => set_selector(false)}>{options_grid}</Modal> : null}
-    </main>
-    )
+           <Click_Modal content={
+                <div className={styles.content__item}>
+                    <div className={styles.content__item__box_outline}><IoIosAdd /></div>
+                    <h4 className={styles.content__item__text}></h4>
+                </div>
+            }>
+                {options_grid}
+           </Click_Modal>       
+        </main>
+    );
 
     const content = [main, <Create_Company />, <Create_Post companies={companies} />, <Join_Company />]
 

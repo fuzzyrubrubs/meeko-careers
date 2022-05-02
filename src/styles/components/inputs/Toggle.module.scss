@@ -3,7 +3,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  & div {
+  border: 1.5px solid var(--text_light);
+  border-radius: 1.5rem;
+  height: 7rem;
+  padding: 0 2rem;
+  background-color: var(--background_light);
+  &__wrapper {
     display: flex;
     align-items: center;
     justify-content: center;

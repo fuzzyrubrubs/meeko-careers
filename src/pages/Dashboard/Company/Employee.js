@@ -24,12 +24,10 @@ import View_Interview from '../../../components/dashboard/Tasks/View_Interview';
 import Make_Offer from '../../../components/dashboard/Tasks/Make_Offer';
 import Edit_Offer from '../../../components/dashboard/Tasks/Edit_Offer';
 import Confirmation from '../../../components/items/Confirmation';
-import Half_Doughnut_Chart from '../../../components/items/Half_Doughnut_Chart';
+import Half_Doughnut_Chart from '../../../components/charts/Half_Doughnut_Chart';
+import { Table } from '../../../tools/global_components';
+import Create_Task from '../../../components/tasks/Create';
 
-
-const Grid = (props) => <div className={styles.grid} style={{gridTemplateColumns: props.columns, gridTemplateRows: props.rows}}>{props.children}</div>;
-const List = (props) => <div className={styles.list}>{props.children}</div>;
-const Header = (props) => <h4 className={styles.header}>{props.children}</h4>;
 
 function Employee (props) {
     const { set_hide_header } = useContext(MenuContext);
@@ -45,21 +43,6 @@ function Employee (props) {
         };
     }, []);
     
-
-    const interview_item = (item) => {
-        return (
-            <div className={styles.interviews__item}>
-                {/* <p>{}</p> */}
-                {interview_icons[item.type]}
-            </div>
-        )
-    };
-
-    const interview_create = (
-        <div className={styles.interviews__create}>
-            <IoIosAdd />
-        </div>
-    );
 
     const complete = 4;
     const pending = 2;
@@ -82,27 +65,20 @@ function Employee (props) {
         </section>
 
         <main className={styles.main}>
-            <section>
-                <div className={styles.profile__grid}>
-                    <div><p class="bold">Start Date</p></div>
-                    <div><p>25/02/2022</p></div>
-                    <div><p class="bold">Salary</p></div>
-                    <div><p>45k</p></div>
-                    <div><p class="bold">Bonus</p></div>
-                    <div><p>500</p></div>
-                    <div><p class="bold">Probation</p></div>
-                    <div><p>Yes</p></div>
-                    <div><p class="bold">Probation Duration</p></div>
-                    <div><p>6 months</p></div>
-                    <div><p class="bold">Working hours</p></div>
-                    <div><p>40 per week</p></div>
-                    <div><p class="bold">Health Insurance</p></div>
-                    <div><p>Yes</p></div>
-                    <div><p class="bold">Annual Leave</p></div>
-                    <div><p>11</p></div>
-                    <div><p class="bold">Sick Leave</p></div>
-                    <div><p>0</p></div>
-                </div>
+            <section className={styles.info}>
+                <div className={styles.calendar}>Rota</div>
+
+                <Table>
+                    <p class="bold">Start Date</p><p>25/02/2022</p>
+                    <p class="bold">Salary</p><p>45k</p>
+                    <p class="bold">Bonus</p><p>500</p>
+                    <p class="bold">Probation</p><p>Yes</p>
+                    <p class="bold">Probation Duration</p><p>6 months</p>
+                    <p class="bold">Working hours</p><p>40 per week</p>
+                    <p class="bold">Health Insurance</p><p>Yes</p>
+                    <p class="bold">Annual Leave</p><p>11</p>
+                    <p class="bold">Sick Leave</p><p>0</p>
+                </Table>
 
             
                 <div className={styles.tasks}>
@@ -118,6 +94,7 @@ function Employee (props) {
                         </div>
                     </div>
                 </div>
+
             </section>
 
 
@@ -127,19 +104,19 @@ function Employee (props) {
                     <h4>{user_data.name}</h4> 
                 </div>
 
-                <div className={styles.profile__grid}>
-                    <div><p class="bold">Phone</p></div>
-                    <div><p>{data.phone}</p></div>
-                    <div><p class="bold">Email</p></div>
-                    <div><p>anna@gmail.com</p></div>
-                    <div><p class="bold">Location</p></div>
-                    <div><p>Kyiv, Ukraine</p></div>
-                    <div><p class="bold">Apply Date</p></div>
-                    <div><p>25/02/2022</p></div>
-                </div>
+                <div>Anna has requested 3 days off</div>
+
+                <Table>
+                    <p class="bold">Phone</p><p>{data.phone}</p>
+                    <p class="bold">Email</p><p>anna@gmail.com</p>
+                    <p class="bold">Location</p><p>Kyiv, Ukraine</p>
+                    <p class="bold">Apply Date</p><p>25/02/2022</p>
+                </Table>
 
                 <div>
-                   
+                    <Click_Modal content={<Button_Main>Assign Task</Button_Main>}><Create_Task /></Click_Modal>
+                    <Button_Main>View Contract</Button_Main>
+                    <Button_Main>Terminate Contract</Button_Main>
                 </div>
             </section>
         </main>

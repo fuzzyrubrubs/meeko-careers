@@ -24,8 +24,6 @@ function Register (props) {
         }
     }
 
-    console.log(type)
-
     const add_starter_tasks = () => {
         create_task()
     };

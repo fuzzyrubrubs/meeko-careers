@@ -18,7 +18,6 @@ import { AuthContext } from './contexts/Auth.context';
 
 function Router(){  
     const { user, user_data } = useContext(AuthContext);
-    console.log(user)
 
     const app = user === undefined ? ( <Loader_Page /> ) : (
         <>

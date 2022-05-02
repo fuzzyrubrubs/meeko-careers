@@ -1,42 +1,57 @@
 import { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Job_Status from '../../components/previews/Post_Preview';
-// import { Grid, Header, Row } from '../../components/styles/Containers';
-import styles from '../../styles/pages/Dashboard/Company/Company.module.scss';
-import Job from './Post';
-import Employees from './Company/Employees';
 import { MenuContext } from '../../contexts/Menu.context';
-import Settings from './Company/Settings';
-import Recruitment from './Company/Recruitment';
-import Main from './Company/Main';
+import useMenu from '../../tools/useMenu';
+import { listenRealTimeEmployees, listenRealTimePosts, listenRealTimeRota } from '../../tools/fetches';
 import Header from '../../components/headers/Header';
+import Missing from '../../components/UI/404';
+
+import Main from './Company/Main';
+import Employees from './Company/Employees';
+import Recruitment from './Company/Recruitment';
 import Automation from './Company/Automation';
+import Settings from './Company/Settings';
+import Office from './Company/Office';
+import Invoices from './Company/Invoices';
+
 
 function Company (props) {
-    const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
+    const { set_options, selected } = useContext(MenuContext);
     const data = props.data;
+    const [employees, set_employees] = useState([]);
+    const [posts, set_posts] = useState([]);
+    const [rota, set_rota] = useState([]);
+    
+    const menu_options = ["Overview", "Employees", "Recruitment", "Automation", "Settings", data.office ? "Office" : null, data.invoices ? "Invoices" : null].filter(item => item);
 
-    const menu_options = ["Overview", "Employees", "Recruitment", "Automation", "Settings"];
+    useMenu({menu: menu_options, title: data.name});
 
     useEffect(() => {
         set_options(menu_options);
-        set_title(data.name);
+    }, [data.office, data.invoices]);
+
+    useEffect(() => {
+        const unlistenEmployees = listenRealTimeEmployees(set_employees, data.id);
+        const unlistenPosts = listenRealTimePosts(set_posts, data.id);
+        const unlistenRota = listenRealTimeRota(set_rota, data.id);
         return () => { 
-            set_options([]);
-            set_selected(0);
-            set_title("");
+           unlistenEmployees();
+           unlistenPosts();
+           unlistenRota();
         };
     }, []);
 
-    if(data === undefined) return <h1>Not found</h1>
+
+    if(data === undefined) return <Missing />
 
     const content = [
         <Main data={data} />,
-        <Employees data={data} />, 
-        <Recruitment data={data} />,
+        <Employees data={data} employees={employees} />, 
+        <Recruitment data={data} posts={posts} />,
         <Automation data={data} />,
         <Settings data={data} />, 
-    ];
+        data.office ? <Office data={data} rota={rota} /> : null,
+        data.invoices ? <Invoices data={data}  /> : null,
+    ].filter(item => item);
 
 
     return (
@@ -44,7 +59,7 @@ function Company (props) {
             <Header name={data.name} tasks={data.tasks}>{menu_options[selected]}</Header>
             {content[selected]}
         </main>
-    ) 
-}
+    );
+};
 
 export default Company;

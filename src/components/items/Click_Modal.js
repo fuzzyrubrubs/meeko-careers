@@ -14,7 +14,7 @@ function Click_Modal(props){
 
     return (
         <>
-        <div onClick={() => set_open_task(true)}>{content}</div>
+        <div style={{display: "flex"}} onClick={() => set_open_task(true)}>{content}</div>
         {open_task ? <Modal close={() => set_open_task(false)}>{props.children}</Modal> : null}
         </>
     )

@@ -16,9 +16,6 @@ function Candidates (props) {
     const select_handler = (data) => set_profile(data);
     const go_back = () => set_profile(false);
 
-    console.log(data)
-
-
     // new, in review, shortlisted, interviews, offers
 
     const filter_handler = (selected) => {
@@ -32,7 +29,7 @@ function Candidates (props) {
                 {candidate_status.map((item, index) => <div className={`${styles.menu__item} ${selected === index ? styles.menu__item__active : null}`} onClick={() => set_selected(index)}><p>{item}</p>{filter_handler(index).length > 0 ? <p className={styles.menu__item__icon}>{filter_handler(index).length}</p> : null }</div>)}   
             </section>
             <section className={styles.candidates}>
-                <h2>{selected === null ? "All" : candidate_status[selected]}</h2>
+                <h2 className={styles.candidates__header}>{selected === null ? "All" : candidate_status[selected]}</h2>
                 <div className={styles.candidates__list}>
                     {filter_handler(selected).map(item => <Candidate_Preview data={item} select={select_handler} />)}
                 </div>

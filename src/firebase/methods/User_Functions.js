@@ -95,7 +95,19 @@ const get_user_data = async (user_id) => {
         const messages = await get_user_messages(user_id);
         return {...data, tasks, messages}
     });
-  };
+};
+
+const get_user_manager = async (user_id) => {
+    return await db.collectionGroup("managers").where("user_id", "==", user_id).get().then(async (querySnapshot) => {
+        return querySnapshot.docs.map(doc => doc.data().company_id);
+    })
+};
+
+const get_user_recruiter = async (user_id) => {
+    return await db.collectionGroup("recruiters").where("user_id", "==", user_id).get().then(async (querySnapshot) => {
+        return querySnapshot.docs.map(doc => doc.data().post_id);
+    })
+};
   
 
 const update_my_profile = (user_id, new_info) => {
@@ -175,5 +187,6 @@ export {
     create_user_profile, update_my_profile, delete_portfolio_entry,
     get_tasks, get_all_tasks, create_task,
     get_messages, get_all_messages,
-    get_all_notifications
+    get_all_notifications,
+    get_user_manager, get_user_recruiter
 }

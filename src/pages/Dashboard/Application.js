@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from '../../styles/pages/Dashboard/Application.module.scss';
 import Header from '../../components/headers/Header';
 import Job_Process from '../../components/dashboard/Job_Process';
-import { Grid, Grid_Header } from '../../components/styles/Containers';
 import Button_Main from '../../components/items/Button_Main';
 import { application_status } from '../../tools/global_variables';
 import Click_Modal from '../../components/items/Click_Modal';
@@ -17,7 +16,7 @@ function Application (props) {
     const data = props.data;
     const [notes, set_notes] = useState("");
     const [edit, set_edit] = useState(false);
-    console.log(data)
+
 
 
 

@@ -56,7 +56,6 @@ function Make_Offer (props) {
     const per_week = hours === 1 ? working_hours : (get_diff(times_list[end_time_selected], times_list[start_time_selected]) - lunch_duration) * 5;
     const day_rate = parseInt((salary * 12 / 52) / per_week)
 
-    console.log(props)
 
     const submit_handler = () => {
         const _probation = probation === 0 ? true : false;

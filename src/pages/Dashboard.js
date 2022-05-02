@@ -18,17 +18,30 @@ import Job from './Dashboard/Job';
 import Tasks from './Dashboard/Tasks';
 import Messages from './Dashboard/Messages';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { ProfileContext } from '../contexts/Profile.context';
+import Loader_Page from '../components/UI/Loader_Page';
 
 
 
 function Dashboard (props) {
     const params = props.match.params.name;
-    const { user_data, companies, posts, jobs, applications, offers } = useContext(AuthContext);
-    const [loader, set_loader] = useState(false);
+    const { user, user_data } = useContext(AuthContext);
+    const { companies, posts, jobs, applications, offers, loader, tasks } = useContext(ProfileContext);
     const [display, set_display] = useState(true);
 
+    useEffect(() => {
+        const fetch_data = async () => {
+            const i = await fetch("https://firestore.googleapis.com/v1/projects/forage-212715/databases/(default)/documents/events")
+            .then(response => response.json())
+            .then(data => data.documents.map(item => item.fields));
+    
+            // console.log(i.filter(item => item.group_name.stringValue.toLowerCase() === "Lucidica".toLocaleLowerCase()))
+        }
+        fetch_data()
+    }, [])
 
-    if(loader) return <Item_Loader />
+
+    if(loader) return <Loader_Page />
     
 
     return (
@@ -38,7 +51,7 @@ function Dashboard (props) {
                 <Nav />
                 <section className={styles.main}>
                     <Route exact path="/dashboard" render={(props) => <Main companies={companies} posts={posts} jobs={jobs} applications={applications} offers={offers}  /> } /> 
-                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks companies={companies} posts={posts} jobs={jobs} applications={applications} /> } />
+                    <Route exact path="/dashboard/tasks" render={(props) => <Tasks data={tasks} /> } />
                     <Route exact path="/dashboard/messages" render={(props) => <Messages /> } /> 
                     <Route exact path="/dashboard/company/:name" render={(props) => <Company data={companies.find(company => convert_name(company.name) === params)} /> } /> 
                     <Route exact path="/dashboard/posts/:id" render={(props) => <Post data={posts.find(post => post.post_id === params)} /> } /> 

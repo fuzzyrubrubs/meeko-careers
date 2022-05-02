@@ -1,37 +1,45 @@
-//import styles from '../../../styles/pages/Dashboard/Company/Recruitment.module.scss';
-import styles from '../../../styles/pages/Dashboard/Post.module.scss';
+import styles from '../../../styles/pages/Dashboard/Company/Recruitment.module.scss';
 import Candidate_Preview from '../../../components/dashboard/Candidate_Preview';
 import { FiFileText, FiArrowUpRight } from "react-icons/fi";
 import { useState } from 'react';
 import Candidates from '../Post/Candidates';
-import { FaChevronLeft } from "react-icons/fa";
-import Job_Process from '../../../components/dashboard/Job_Process';
-import { TiBriefcase } from "react-icons/ti";
 import Interviews from '../Post/Interviews';
 import Employees from '../Company/Employees';
+import { Column, ColumnCentered, Grid, Header, Table } from '../../../tools/global_components';
+import Doughnut_Chart from '../../../components/charts/Doughnut';
+import Recruitment_Preview from '../../../components/previews/Recruitment';
 
 
 
-
-const Grid = (props) => <div className={styles.grid} style={{gridTemplateColumns: props.columns, gridTemplateRows: props.rows}}>{props.children}</div>;
-const List = (props) => <div className={styles.list}>{props.children}</div>;
-const Header = (props) => <h4 className={styles.header}>{props.children}</h4>;
-
-function Analytics (props) {
+function Recruitment (props) {
+    const data = props.data;
     const [selected, set_selected] = useState(0);
-    
-    const fake_array = [1, 1, 1, 1, 1, 1, 1]
 
+    console.log(data)
+
+    const inter = () => {
+        let num = 0;
+        let int = 0;
+        data.posts.forEach(item => {
+            num = num + item.candidates.length; 
+            int = int + item.interviews.length;
+        });
+        return [num, int];
+    }
+    
+    const [applicants, interviews] = inter();
+
+    
     const main = (
         <main className={styles.main}>
         <section className={styles.content}>
-            <header className={styles.header}><div onClick={() => props.go_back()}><FaChevronLeft /> <h2>Company</h2></div> <span><TiBriefcase /> <p>Employees</p></span></header>
-            <Grid columns="1fr 1fr" rows="1fr 1fr">
+
+            <Grid columns="1fr 1fr" rows="1fr 1fr" height={18}>
                 <div style={{gridRow: "1 / 3"}} className={styles.box} onClick={() => set_selected(1)}>
                     <div className={styles.box__icon}><FiFileText /></div>
                     <p className={styles.box__details}>See Details <FiArrowUpRight/></p>
                     <div className={styles.box__applicants}>
-                        <h2>427</h2>
+                        <h2>{applicants}</h2>
                         <p>Applicants</p>
                     </div>
                     <div className={styles.box__shape}></div>
@@ -39,57 +47,34 @@ function Analytics (props) {
                 </div>
                 <div className={styles.small_box} onClick={() => set_selected(2)}>
                     <div className={styles.small_box__icon}><FiFileText /></div>
-                    <h3>42</h3>
+                    <h3>{interviews}</h3>
                     <p class="medium">Interviews</p>
                     <span><FiArrowUpRight/></span>
                 </div>
                 <div className={styles.small_box} onClick={() => set_selected(3)}>
                     <div className={styles.small_box__icon}><FiFileText /></div>
-                    <h3>9</h3>
+                    <h3>0</h3>
                     <p class="medium">Hired</p>
                     <span><FiArrowUpRight/></span>
                 </div>
             </Grid>
-      
-            <Header>Analytics</Header>
-            <Grid columns="1fr 1fr 1fr" rows="1fr">
-                <div class="centered-column">
-                    <div class={styles.chart}></div>
-                    <p>Applicants</p>
-                </div>
-                <div class="centered-column">
-                    <div class={styles.chart}></div>
-                    <p>Interviwed</p>
-                </div>
-                <div class="centered-column">
-                    <div class={styles.chart}></div>
-                    <p>Open time</p>
-                </div>
-            </Grid>
 
-            <Header>Employee Tasks / Contracts / Onboarding Template / MANAGERS</Header>
-            <Grid columns="1fr" rows="1fr"> 
-               <Job_Process />
-            </Grid>
-            
+            <div>
+                <Header>Posts</Header>
+                {data.posts.map(item => <Recruitment_Preview data={item} />)}
+            </div>
+
         </section>
-        <section className={styles.candidates}>
-            <Header>Company</Header>
-            <Grid columns="1fr 1fr" rows="1fr 1fr 1fr 1fr">
-                    <div><p class="bold">Name</p></div>
-                    <div><p>Lucidicar</p></div>
-                    <div><p class="bold">Open</p></div>
-                    <div><p>1</p></div>
-                    <div><p class="bold">Closed</p></div>
-                    <div><p>4</p></div>
-                    <div><p class="bold">Company Manager</p></div>
-                    <div><p>Anna Taylor</p></div>
-            </Grid>
-            <Header>Posts</Header>
-            <List>
-                {fake_array.map(item => <Candidate_Preview />)}
-            </List>
+
+        <section className={styles.posts}>
+            <Header>Analytics</Header>
+            <Table>
+                <p class="bold">Hire Time</p><p>24 days</p>
+                <p class="bold">Fill Time</p><p>40 days</p>
+                <p class="bold">Average Applies</p><p>205</p>
+            </Table>
         </section>
+
     </main>
     )
 
@@ -101,12 +86,5 @@ function Analytics (props) {
 
 };
 
-export default Analytics;
+export default Recruitment;
 
-
-// const Main_Overview = (props) => {
-//     return (
-        
-//     )
-
-          

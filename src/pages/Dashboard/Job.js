@@ -5,14 +5,15 @@ import { MenuContext } from '../../contexts/Menu.context';
 import Main from "./Job/Main";
 import Contract from "./Job/Contract";
 import Finance from "./Job/Finance";
+import Office from "./Job/Office";
 
 
 function Job (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
     const data = props.data;
-    console.log(data)
 
     const menu_options = ["Employee", "Finance", "Contract"];
+    if(data.company_data.office === true) { menu_options.push("Office") }
 
     useEffect(() => {
         set_options(menu_options);
@@ -31,6 +32,8 @@ function Job (props) {
         <Finance data={data} />,
         <Contract data={data} />,
     ];
+
+    if(data.company_data.office === true) { content.push(<Office data={data} />) }
 
 
     return (

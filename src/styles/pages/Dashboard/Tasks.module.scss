@@ -1,56 +1,17 @@
 .main {
     height: 66vh;
-    display: grid;
-    grid-template-columns:30rem 1fr;
-    grid-template-rows: 66vh;
-    gap: 5rem;
-    margin-top: 4rem;
-};
-
-
-.menu {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    &__item {
-        border-radius: 1.2rem;
-        cursor: pointer;
-        margin-bottom: 0.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.6rem 1.5rem;
-        opacity: 0.5;
-        &__icon {
-            background-color: var(--primary);
-            border-radius: 5px;
-            height: 2.2rem;
-            width: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
-        }
-        & p {
-            font-weight: 700;
-        }
-        &:hover {
-            background-color: var(--background_light);
-            opacity: 1;
-        }
-        &__active {
-            opacity: 1;
-            background-color: var(--background_light);
-        }
-    }
-}
+    margin-top: 4rem;
+};
 
 
 .tasks {
     overflow-y: auto;
     &__list {
-        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
     &::-webkit-scrollbar {
@@ -66,5 +27,41 @@
         background: var(--text_light_medium);
         border-radius: 20px;
       }
+}
+
+
+.task {
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    width: 100%;
+    & p {
+        font-weight: 600;
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        & span { font-weight: 300; opacity: 0.8;}
+    }
+    &:hover {
+        background-color: var(--background_light);
+    }
+};
+
+
+.add_task {
+    height: 6.5rem;
+    width: 6.5rem;
+    border-radius: 1rem;
+    background-color: var(--background_light);
+    border: 0.5px solid var(--text_light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & svg {
+        font-size: 3rem;
+        color: var(--text_light);
+    }
+
 }
 

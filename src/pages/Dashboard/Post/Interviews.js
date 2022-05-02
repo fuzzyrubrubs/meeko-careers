@@ -1,7 +1,6 @@
 import styles from '../../../styles/pages/Dashboard/Post/Interviews.module.scss';
 import { useState } from 'react';
 import { FaChevronLeft } from "react-icons/fa";
-import { Grid_Row } from '../../../components/styles/Containers';
 import { colors, interview_duration, interview_status, interview_types } from '../../../tools/global_variables';
 import Calendar_Preview from '../../../components/dashboard/Calendar_Preview';
 import Click_Modal from '../../../components/items/Click_Modal';
@@ -15,7 +14,7 @@ const List = (props) => <div className={styles.list}>{props.children}</div>;
 
 function Interviews (props) {
     const data = props.data;
-    const [selected, set_selected] = useState(null);
+    const [selected, set_selected] = useState(0);
     const interviews = data.interviews;
 
     // const interview_status = ["Cancelled", "Expired", "Pending", "Upcoming", "Finished", "Complete"];
@@ -24,16 +23,19 @@ function Interviews (props) {
         
     }
 
-    const categories = ["Schedueled", "Pending", "Complete", "Cancelled"]
+    const categories = ["Schedueled", "Finished", "Pending", "Complete", "Cancelled"];
+
+    console.log(data)
 
     
     const filter_handler = (selected) => {
         if(selected === null) return interviews
         return interviews.filter(item => {
-            if (selected === 0) return item.status === 3 || item.status === 4;
-            if (selected === 1) return item.status === 2
-            if (selected === 2) return item.status === 6
-            if (selected === 3) return item.status === 0 || item.status === 1
+            if (selected === 0) return item.status === 3;
+            if (selected === 1) return item.status === 4;
+            if (selected === 2) return item.status === 2
+            if (selected === 3) return item.status === 6
+            if (selected === 4) return item.status === 0 || item.status === 1
         })
     }
 
@@ -44,16 +46,10 @@ function Interviews (props) {
                 {categories.map((item, index) => <div className={`${styles.menu__item} ${selected === index ? styles.menu__item__active : null}`} onClick={() => set_selected(index)}><p>{item}</p>{filter_handler(index).length > 0 ? <p className={styles.menu__item__icon}>{filter_handler(index).length}</p> : null }</div>)}
             </section>
             <section className={styles.interviews}>
-                <h2>{selected === null ? "All" : categories[selected]}</h2>
+                <h2 className={styles.interviews__header}>{categories[selected]}</h2>
                 <div className={styles.interviews__list}>
                     {filter_handler(selected).map(item => <Candidate_Preview data={item} applicant={data.candidates.filter(user => user.user_id === item.applicant)[0]} />)}
                 </div>
-            </section>
-            <section className={styles.calender}>
-                <h4 className={styles.calender__header}>Calendar</h4>
-                <List>
-                    {data.interviews.map(item => <Calendar_Preview data={item} applicant={data.candidates.filter(user => user.user_id === item.applicant)[0]} />)}
-                </List>
             </section>
         </main>
     )
@@ -71,9 +67,11 @@ function Candidate_Preview (props) {
     const content = (
         <div className={styles.preview}>
             <span>
-                <div className={styles.preview__image} style={{"backgroundImage": `url(${applicant.user_data.avatar})`, "border": `2px solid ${colors[data.type]}`}}></div>
+                <div className={styles.preview__image} style={{"backgroundImage": `url(${applicant.user_data.avatar})`, "border": `1px solid ${colors[data.type]}`}}></div>
                  <p class="bold">{applicant.user_data.name}</p>
             </span>
+            <small>24 October</small>
+            <small>15:00</small>
             <small>{interview_status[data.status]}</small>
             <small>{interview_types[data.type]}</small>
             <small>{interview_duration[data.duration]}</small>

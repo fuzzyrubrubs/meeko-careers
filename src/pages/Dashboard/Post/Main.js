@@ -10,7 +10,7 @@ import Interviews from './Interviews';
 import Calendar_Preview from '../../../components/dashboard/Calendar_Preview';
 import { calendar } from '../../../tools/DateTime_Methods';
 import Edit_Icon from '../../../components/items/Edit_Icon';
-import Pie_Chart from '../../../components/items/Pie_Chart';
+import Pie_Chart from '../../../components/charts/Pie_Chart';
 import { MenuContext } from '../../../contexts/Menu.context';
 import Edit_Post from './Edit_Post';
 import Header from '../../../components/headers/Header';
@@ -27,7 +27,7 @@ function Main (props) {
     const { set_options, selected, set_selected, set_title } = useContext(MenuContext);
     const data = props.data;
 
-    console.log(data)
+
 
     const analytics_handler = (num, type) => {
         if(type === 0) return data.candidates.filter(item => item.status === num).length
@@ -35,7 +35,6 @@ function Main (props) {
         if(type === 2) return data.candidates.filter(item => item.status === num).length
     };
 
-    console.log(analytics_handler(1))
     return (
         <main className={styles.main}>
         <section className={styles.content}>

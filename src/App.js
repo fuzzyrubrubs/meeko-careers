@@ -6,6 +6,7 @@ import Router from './Router';
 import { AuthProvider } from './contexts/Auth.context';
 import { MenuProvider } from './contexts/Menu.context';
 import { NotificationProvider } from './contexts/Notification.context';
+import { ProfileProvider } from './contexts/Profile.context';
 
 
 function App(){  
@@ -13,13 +14,15 @@ function App(){
     return (
         <>
         <AuthProvider>
-            <MenuProvider>
-                <NotificationProvider>
-                    <BrowserRouter>
-                        <Router />
-                    </BrowserRouter>
-                </NotificationProvider>
-            </MenuProvider>
+            <ProfileProvider>
+                <MenuProvider>
+                    <NotificationProvider>
+                        <BrowserRouter>
+                            <Router />
+                        </BrowserRouter>
+                    </NotificationProvider>
+                </MenuProvider>
+            </ProfileProvider>
         </AuthProvider>
         </>
     );

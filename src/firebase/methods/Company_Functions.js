@@ -29,9 +29,13 @@ const get_company = async (company_id) => {
     const company_data = await db.collection("company").doc(company_id).get().then(doc =>  doc.data());  
     const employees = await get_company_employees(company_id);
     const posts = await get_companies_posts(company_id);
-    return {...company_data, employees, posts};
+    const rota = await get_company_rota(company_id);
+    return {...company_data, employees, posts, rota};
 };
 
+const get_company_rota = async (company_id) => {
+  return await db.collection("company").doc(company_id).collection("rota").get().then(querySnapshot => querySnapshot.docs.map(doc => doc.data()));
+}
 const get_company_tasks = async (company_id) => {
   return await db.collection("company").doc(company_id).collection("task").get().then(querySnapshot => querySnapshot.docs.map(doc => doc.data()));
 }
@@ -64,6 +68,19 @@ const create_company = async (data) => {
       avatar: null,
       industry: data.industry,
       location: data.location,
+      invoices: true,
+      office: true,
+      events: true,
+      contracts: true,
+      address: null,
+      leave: false,
+      equipment: false,
+      invoice_data: null,
+      office_data: null,
+      contract_data: null,
+      event_data: null,
+      equipment_data: null,
+
       timestamp: firebase.firestore.Timestamp.fromDate(new Date())
   }).then(async () => {
       await data.managers.forEach(item => create_company_manager(item.id, data.id, item.level))
@@ -133,9 +150,26 @@ const create_company_message = async (user_id, chat_id, company_id, content) => 
   });
 };
 
+//////////////////////////////////////////////
+
+const add_rota = async (id, employee_id, company_id, time, day) => {
+    return db.collection("company").doc(company_id).collection("rota").doc(id).set({
+      entry_id: id, 
+      employee_id: employee_id,
+      date: time,
+      day: day
+    })
+};
+
+const remove_rota = async (id, company_id) => {
+    return db.collection("company").doc(company_id).collection("rota").doc(id).delete();
+};
 
 export { 
   create_company, get_companies, get_company, update_company,
   get_manager_tasks,
-  get_managements
+  get_managements,
+  add_rota, remove_rota,
+  get_company_tasks, get_company_messages,
+  get_company_rota
 }

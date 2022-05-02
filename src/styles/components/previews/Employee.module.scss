@@ -1,0 +1,51 @@
+
+
+.preview {
+    cursor: pointer;
+    height: 7rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.5fr 1fr 0.5fr;
+    align-items: center;
+    position: relative;
+   
+    &:hover {
+        background-color: var(--background_light);
+    }
+};
+
+.title {
+    font-weight: 600;
+    justify-self: flex-start;
+    line-height: 1;
+};
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    &__name {
+        font-weight: 500;
+        line-height: 1;
+    }
+    &__image {
+        height: 4.5rem;
+        width: 4.5rem;
+        border-radius: 4.5rem;
+        background-position: center;
+        background-size: cover;
+    }
+}
+
+.notification {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    background-color: var(--primary);
+    transform: translateY(-50%);
+}
+
+

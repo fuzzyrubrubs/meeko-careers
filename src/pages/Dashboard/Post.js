@@ -10,7 +10,7 @@ import Interviews from './Post/Interviews';
 import Calendar_Preview from '../../components/dashboard/Calendar_Preview';
 import { calendar } from '../../tools/DateTime_Methods';
 import Edit_Icon from '../../components/items/Edit_Icon';
-import Pie_Chart from '../../components/items/Pie_Chart';
+import Pie_Chart from '../../components/charts/Pie_Chart';
 import { MenuContext } from '../../contexts/Menu.context';
 import Edit_Post from './Post/Edit_Post';
 import Header from '../../components/headers/Header';
