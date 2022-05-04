@@ -8,6 +8,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { convert_name } from "../../tools/global_functions";
 import { MenuContext } from "../../contexts/Menu.context";
 import { NotificationContext } from "../../contexts/Notification.context";
+import { sign_out } from "../../firebase/methods/User_Functions";
 
 
 function Panel (props) {
@@ -26,6 +27,10 @@ function Panel (props) {
     const post_data = props.posts;
     const job_data = props.jobs;
     const application_data = props.applications;
+
+    const sign_out_handler = () => {
+        sign_out()
+    }
 
 
     const list = (
@@ -84,7 +89,7 @@ function Panel (props) {
             </section>
     
             <section className={styles.actions}>
-                <div><IoMdLogOut /></div>
+                <div onClick={sign_out_handler}><IoMdLogOut /></div>
                 <div><FaCog /></div>
             </section>
         </main>

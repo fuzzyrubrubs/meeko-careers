@@ -3,7 +3,7 @@ import styles from '../../styles/components/buttons.module.scss';
 
 
 function Add_Button (props) {
-    
+
     const action_handler = () => {
         if(props.loader) return
         if(props.action) return props.action();

@@ -1,32 +1,33 @@
 .main {
     height: 66vh;
-    display: flex;
-    flex-direction: column;
     margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 3fr minmax(40rem, 1fr);
+    gap: 8%;
+
 };
 
 
 .tasks {
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
     &__list {
         display: flex;
         flex-direction: column;
         gap: 2rem;
     }
-
-    &::-webkit-scrollbar {
-        height: 1px;              /* height of horizontal scrollbar ← You're missing this */
-        width: 1px;               /* width of vertical scrollbar */
-        border-radius: 20px;
-      }
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px var(--text_light);
-        border-radius: 10px;
+    &__analytics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 13rem;
+        gap: 3rem;
+        &__item {
+            background-color: var(--primary);
+            border-radius: 1.5rem;
+        }
     }
-    &::-webkit-scrollbar-thumb {
-        background: var(--text_light_medium);
-        border-radius: 20px;
-      }
 }
 
 
@@ -35,6 +36,7 @@
     border-radius: 1rem;
     padding: 1rem 2rem;
     width: 100%;
+    background-color: var(--background_medium);
     & p {
         font-weight: 600;
         display: flex;
@@ -46,6 +48,26 @@
         background-color: var(--background_light);
     }
 };
+
+
+.today {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background_light);
+    padding: 3rem 2rem;
+    border-radius: 2rem;
+}
+
+.task_min {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 6rem;
+    background-color: var(--white);
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    width: 100%;
+}
 
 
 .add_task {

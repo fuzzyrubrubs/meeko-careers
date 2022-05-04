@@ -40,3 +40,12 @@
         background-color: transparent;
       }
 }
+
+.task {
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+}

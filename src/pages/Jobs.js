@@ -3,12 +3,13 @@ import Check_Box from '../components/inputs/Check_Box';
 import Job_Post from '../components/jobs/Job_Post';
 import Job_Preview from '../components/jobs/Job_Preview';
 import { AuthContext } from '../contexts/Auth.context';
+import { ProfileContext } from '../contexts/Profile.context';
 import { get_posts } from '../firebase/methods/Post_Functions';
 import styles from '../styles/pages/Jobs.module.scss';
 import { job_categories, job_hours, job_remote } from '../tools/global_variables';
 
 function Jobs () {
-    const { applications } = useContext(AuthContext);
+    const { applications } = useContext(ProfileContext);
     const [selected, set_selected] = useState(0);
     const [jobs, set_posts] = useState([]);
     

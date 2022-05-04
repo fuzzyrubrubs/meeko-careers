@@ -3,6 +3,7 @@ import { auth } from '../firebase/Firebase';
 import { get_user_data, get_user_manager, get_user_recruiter } from '../firebase/methods/User_Functions';
 
 export const AuthContext = createContext();
+//
 
 export function AuthProvider(props) {
     const [user, set_user] = useState();
@@ -25,6 +26,7 @@ export function AuthProvider(props) {
             }
     })
     }, []);
+    
 
 
 

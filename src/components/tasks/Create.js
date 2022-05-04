@@ -4,6 +4,7 @@ import { Column, ColumnSpaced, form_header, form_selectable, Modal, Row } from "
 import Text_Input_Alt from '../inputs/Text_Input_Alt';
 import Button_Main from '../items/Button_Main';
 import Add_Button from '../buttons/Add';
+import Check_box from '../inputs/Check_Box';
 
 
 
@@ -45,11 +46,16 @@ function Create_Task (props) {
                 <Column gap={0.5}>
                     {form_selectable(type, 0, "Form", set_type)}
                     {form_selectable(type, 1, "Upload", set_type)}
-                    {form_selectable(type, 2, "Offline", set_type)}
-                    {form_selectable(type, 3, "Signature", set_type)}
+                    {form_selectable(type, 2, "Signature", set_type)}
+                    {form_selectable(type, 2, "Invoice", set_type)}
+                    {form_selectable(type, 4, "Custom/Offline", set_type)}
                 </Column>
                 </div>
             : null }
+            <Column fixed={true} gap={1}>
+                {form_header("Schedule", "Fill in the message for this task.")}
+                <Check_box>Does this task take place on a specific date?</Check_box>
+            </Column>
             
             <Button_Main>Create</Button_Main>
         </Modal>

@@ -73,7 +73,7 @@ export function ProfileProvider(props) {
                 set_companies(data);
             });
         };
-        if(manager_ids) { fetch_data(); }
+        if(manager_ids && manager_ids.length > 0) { fetch_data(); } else { set_companies([]) }
         
     }, [manager_ids]);
     
@@ -94,7 +94,7 @@ export function ProfileProvider(props) {
                 set_posts(data);
             });
         };
-        if(recruiter_ids) { fetch_data(); }
+        if(recruiter_ids && recruiter_ids.length > 0) { fetch_data(); } else { set_posts([]) }
         
     }, [recruiter_ids]);
 
